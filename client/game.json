@@ -1,0 +1,17 @@
+{
+  "description": "星座帝国小游戏配置",
+  "setting": {
+    "subpackages": [],
+    "workers": ""
+  },
+  "deviceOrientation": "portrait",
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "showes6compileoption": false,
+  "subpackages": [],
+  "plugins": {}
+}

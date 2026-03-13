@@ -1,0 +1,2154 @@
+{
+  "63b5c2a9-039c-462c-89ec-bd8751ca2f4e": {
+    "url": "db://assets/audio",
+    "value": {},
+    "versionCode": 1
+  },
+  "cf2bc4e3-9a84-436f-94e3-22c402d058ca": {
+    "url": "db://assets/scenes",
+    "value": {},
+    "versionCode": 1
+  },
+  "6acc62a7-dff2-4074-ad33-c539d81db70f": {
+    "url": "db://assets/scripts",
+    "value": {},
+    "versionCode": 1
+  },
+  "ed8cb6e3-92e1-47d6-8b01-8fb7340b4a2a": {
+    "url": "db://assets/textures",
+    "value": {},
+    "versionCode": 1
+  },
+  "046653db-9adb-4521-8716-89db8e41d500": {
+    "url": "db://assets/audio/bgm",
+    "value": {},
+    "versionCode": 1
+  },
+  "c2681ba6-c597-4263-98b1-4112d5f7bbcb": {
+    "url": "db://assets/audio/sfx",
+    "value": {},
+    "versionCode": 1
+  },
+  "b96c2f43-ace6-47c0-91f5-e47ac22e4b87": {
+    "url": "db://assets/scenes/fonts",
+    "value": {},
+    "versionCode": 1
+  },
+  "68d83020-9e2e-42d6-bfd5-50540098547f": {
+    "url": "db://assets/scripts/components",
+    "value": {},
+    "versionCode": 1
+  },
+  "d5de9e1b-c5ea-4ac8-8902-c2e28532b3ab": {
+    "url": "db://assets/scripts/managers",
+    "value": {},
+    "versionCode": 1
+  },
+  "8c0fd3fb-1e72-4d9a-8e78-4b769076f7ef": {
+    "url": "db://assets/scripts/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "1604ca0a-b953-4541-99d4-bfaac8a41843": {
+    "url": "db://assets/scripts/scenes",
+    "value": {},
+    "versionCode": 1
+  },
+  "a21c21fb-0411-4014-9640-a6350a86b675": {
+    "url": "db://assets/scripts/ui",
+    "value": {},
+    "versionCode": 1
+  },
+  "ed345437-e5de-43d0-97d7-e50bbdb95f70": {
+    "url": "db://assets/scripts/utils",
+    "value": {},
+    "versionCode": 1
+  },
+  "11fb56cc-c5be-427a-a75b-2834311d07d1": {
+    "url": "db://assets/textures/battle",
+    "value": {},
+    "versionCode": 1
+  },
+  "8cf2363a-df3d-43fe-ba19-158e19a6a5de": {
+    "url": "db://assets/textures/buildings",
+    "value": {},
+    "versionCode": 1
+  },
+  "6e346304-34f5-4669-a6b5-992477ff62b2": {
+    "url": "db://assets/textures/effects",
+    "value": {},
+    "versionCode": 1
+  },
+  "13fa97d4-41f3-4497-bb00-841821cd7be6": {
+    "url": "db://assets/textures/equipment",
+    "value": {},
+    "versionCode": 1
+  },
+  "055c28fe-c28b-43e3-b22b-5de54cb94782": {
+    "url": "db://assets/textures/frames",
+    "value": {},
+    "versionCode": 1
+  },
+  "e4560f73-4d23-4d88-ba6f-2062d2ef79c2": {
+    "url": "db://assets/textures/galaxy",
+    "value": {},
+    "versionCode": 1
+  },
+  "c2974d8e-734d-4051-940d-c15186645d37": {
+    "url": "db://assets/textures/icons",
+    "value": {},
+    "versionCode": 1
+  },
+  "82836a07-b790-495b-b65b-890cfb2a564a": {
+    "url": "db://assets/textures/ui",
+    "value": {},
+    "versionCode": 1
+  },
+  "c3434002-3181-4f40-8fc0-8dfa2be49e5c": {
+    "url": "db://assets/textures/battle/icons",
+    "value": {},
+    "versionCode": 1
+  },
+  "e43682a6-8c3e-4601-a344-f807284fb222": {
+    "url": "db://assets/textures/icons/resources",
+    "value": {},
+    "versionCode": 1
+  },
+  "9a7373c0-c31b-456b-931d-9c50529e2ce9": {
+    "url": "db://assets/textures/icons/wuxing",
+    "value": {},
+    "versionCode": 1
+  },
+  "ab4c7564-2d30-4299-844e-6c2172af1c39": {
+    "url": "db://assets/textures/icons/zodiac",
+    "value": {},
+    "versionCode": 1
+  },
+  "c6abd0c7-5914-4760-80df-3d20e20a78ea": {
+    "url": "db://assets/textures/ui/backgrounds",
+    "value": {},
+    "versionCode": 1
+  },
+  "3d63e24e-6f91-405f-bb41-ac65640b9294": {
+    "url": "db://assets/textures/ui/buttons",
+    "value": {},
+    "versionCode": 1
+  },
+  "53d2dd02-27bc-4869-b411-8c0f0894e51f": {
+    "url": "db://assets/textures/ui/login",
+    "value": {},
+    "versionCode": 1
+  },
+  "40b71164-311a-47ec-a001-fd6d89999a76": {
+    "url": "db://assets/textures/ui/main",
+    "value": {},
+    "versionCode": 1
+  },
+  "24ef86c5-f95b-4ad5-9e7a-2395f58cf28e": {
+    "url": "db://assets/textures/ui/panels",
+    "value": {},
+    "versionCode": 1
+  },
+  "0323a428-5541-4e1e-b21e-0ca9bf8093d2": {
+    "url": "db://assets/textures/ui/popups",
+    "value": {},
+    "versionCode": 1
+  },
+  "99f98eab-8509-425a-b760-866302efe550": {
+    "url": "db://assets/textures/ui/tabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "ecb5cc51-a434-412c-a0ec-ccaa924178ba": {
+    "url": "db://assets/scripts/GameEntry.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "ecf4237f-53c0-4cc2-800a-bd43dd242478": {
+    "url": "db://assets/scripts/GameManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "bf96b23f-5e74-474a-acd2-ea7b5944d34f": {
+    "url": "db://assets/scripts/MainGame.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "73f8811c-df95-4c7a-95e5-9a310cee6cb7": {
+    "url": "db://assets/scripts/TestScene.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "be5bfc53-34fc-47df-9c72-f533fb744353": {
+    "url": "db://assets/scripts/managers/ApiClient.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "a9d3c900-457d-4dfe-a70a-682668f1747e": {
+    "url": "db://assets/scripts/pages/BattlePage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "5b7c05a2-fd66-49ca-ad8c-afbc19475ee3": {
+    "url": "db://assets/scripts/pages/GalaxyPage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4fb59e3a-3c95-406f-8565-3e4b3b8774a1": {
+    "url": "db://assets/scripts/pages/HomePage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "bcb5b2ec-c406-40af-9213-627fa3995c15": {
+    "url": "db://assets/scripts/pages/MarketPage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "52b1118f-f3c5-4036-8438-9f1a4e073cbd": {
+    "url": "db://assets/scripts/pages/ProfilePage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "09837b6e-78c8-4921-99d3-e42b22b1058e": {
+    "url": "db://assets/scripts/ui/ResourceBar.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "0af75179-776e-4bee-8365-568cb3b567f8": {
+    "url": "db://assets/scripts/ui/TabBar.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "e66d4f65-1136-4381-a037-2219c7a38fb2": {
+    "url": "db://assets/scripts/ui/UserInfo.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "7f99e56f-d48a-4932-b3d4-8abfe688db51": {
+    "url": "db://assets/scripts/utils/Config.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "377b386e-a4b8-4fae-86a6-feee5425c797": {
+    "url": "db://assets/MainScene.scene",
+    "value": {
+      "depends": [
+        "d032ac98-05e1-4090-88bb-eb640dcb5fc1@b47c0",
+        "6f01cf7f-81bf-4a7e-bd5d-0afc19696480@b47c0"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "a1b2c3d4-5678-90ab-cdef-1234567890ab": {
+    "url": "db://assets/scenes/MainScene.scene",
+    "value": {
+      "depends": [
+        "73f8811c-df95-4c7a-95e5-9a310cee6cb7",
+        "0facd1de-8953-4129-9315-239f9468c9eb@f9941",
+        "8e336091-784f-45f0-ae5a-eb2bf904db77@f9941",
+        "08a8fc79-d846-4b2a-8487-ebf4b83a1676@f9941",
+        "67f09475-1aed-42a3-a4af-03c76af09647@f9941",
+        "425c9031-c476-4c51-8a77-e39e6959132e@f9941",
+        "8e7cd451-884c-4425-95ab-37d8146edd2f@f9941",
+        "a6a67028-eead-4c11-b458-8262a43adc19@f9941",
+        "e48a6f4d-ace5-47bd-bbb2-2773364fae5d@f9941",
+        "d9f8a160-ba01-44c9-851e-ce279bb0ccfa@f9941",
+        "67ed7649-b3f0-4d1a-8308-dbfe715a716f@f9941",
+        "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8@f9941",
+        "9266dca1-6b37-41b1-927f-06b6bb668e12@f9941",
+        "82f4dff2-f71b-441a-91aa-a2ce9a042468@f9941"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "3412ddf5-808c-4017-9032-e0dcb76fa105": {
+    "url": "db://assets/scenes/TestScene.scene",
+    "value": {
+      "depends": [
+        "0facd1de-8953-4129-9315-239f9468c9eb@f9941",
+        "8e336091-784f-45f0-ae5a-eb2bf904db77@f9941",
+        "08a8fc79-d846-4b2a-8487-ebf4b83a1676@f9941",
+        "67f09475-1aed-42a3-a4af-03c76af09647@f9941",
+        "425c9031-c476-4c51-8a77-e39e6959132e@f9941",
+        "8e7cd451-884c-4425-95ab-37d8146edd2f@f9941",
+        "a6a67028-eead-4c11-b458-8262a43adc19@f9941",
+        "e48a6f4d-ace5-47bd-bbb2-2773364fae5d@f9941",
+        "d9f8a160-ba01-44c9-851e-ce279bb0ccfa@f9941",
+        "67ed7649-b3f0-4d1a-8308-dbfe715a716f@f9941",
+        "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8@f9941",
+        "9266dca1-6b37-41b1-927f-06b6bb668e12@f9941",
+        "82f4dff2-f71b-441a-91aa-a2ce9a042468@f9941",
+        "d032ac98-05e1-4090-88bb-eb640dcb5fc1@b47c0",
+        "6f01cf7f-81bf-4a7e-bd5d-0afc19696480@b47c0"
+      ],
+      "dependScripts": [
+        "73f8811c-df95-4c7a-95e5-9a310cee6cb7"
+      ]
+    },
+    "versionCode": 2
+  },
+  "877d61be-5417-4b6b-a290-94120e4abd11": {
+    "url": "db://assets/README.md",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "259f81b8-9759-48b1-8af0-cbc3db5dfc28": {
+    "url": "db://assets/scripts/README.md",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c7a244be-152f-4b4d-9158-9be533123621": {
+    "url": "db://assets/textures/battle/bg_battle.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "9dc20d69-6259-4409-acce-1dc7b75e1ae7": {
+    "url": "db://assets/textures/buildings/building_defense.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c68de1e8-c400-4c9e-9b66-635070328b12": {
+    "url": "db://assets/textures/buildings/building_emotion_factory.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c85e0c8f-553e-4494-bc5d-86c4dca0f5d5": {
+    "url": "db://assets/textures/buildings/building_research.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "530df95b-d2af-49e5-9579-3a50191f3c1b": {
+    "url": "db://assets/textures/buildings/building_time_bank.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "9dc20d69-6259-4409-acce-1dc7b75e1ae7@6c48a": {
+    "url": "db://assets/textures/buildings/building_defense.png@6c48a",
+    "value": {
+      "depends": [
+        "9dc20d69-6259-4409-acce-1dc7b75e1ae7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "63a484ef-316c-4edf-8a32-34763d373430": {
+    "url": "db://assets/textures/buildings/building_warehouse.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c68de1e8-c400-4c9e-9b66-635070328b12@6c48a": {
+    "url": "db://assets/textures/buildings/building_emotion_factory.png@6c48a",
+    "value": {
+      "depends": [
+        "c68de1e8-c400-4c9e-9b66-635070328b12"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f987cccf-96bb-4449-a92a-48fb9e3f6a34": {
+    "url": "db://assets/textures/equipment/equip_accelerator.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c85e0c8f-553e-4494-bc5d-86c4dca0f5d5@6c48a": {
+    "url": "db://assets/textures/buildings/building_research.png@6c48a",
+    "value": {
+      "depends": [
+        "c85e0c8f-553e-4494-bc5d-86c4dca0f5d5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "49d68458-8296-4b03-b74c-057faa321a85": {
+    "url": "db://assets/textures/equipment/equip_armor.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "530df95b-d2af-49e5-9579-3a50191f3c1b@6c48a": {
+    "url": "db://assets/textures/buildings/building_time_bank.png@6c48a",
+    "value": {
+      "depends": [
+        "530df95b-d2af-49e5-9579-3a50191f3c1b"
+      ]
+    },
+    "versionCode": 1
+  },
+  "e8acd752-ff4b-465f-b5d2-1b8126fdff25": {
+    "url": "db://assets/textures/equipment/equip_boots.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c7a244be-152f-4b4d-9158-9be533123621@6c48a": {
+    "url": "db://assets/textures/battle/bg_battle.png@6c48a",
+    "value": {
+      "depends": [
+        "c7a244be-152f-4b4d-9158-9be533123621"
+      ]
+    },
+    "versionCode": 1
+  },
+  "fc269bb5-3581-4942-800b-42e539e2e3b5": {
+    "url": "db://assets/textures/equipment/equip_engine.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "f987cccf-96bb-4449-a92a-48fb9e3f6a34@6c48a": {
+    "url": "db://assets/textures/equipment/equip_accelerator.png@6c48a",
+    "value": {
+      "depends": [
+        "f987cccf-96bb-4449-a92a-48fb9e3f6a34"
+      ]
+    },
+    "versionCode": 1
+  },
+  "2df2dcfd-b1d1-4e68-81f7-4dbb5b8d26b2": {
+    "url": "db://assets/textures/equipment/equip_gloves.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "63a484ef-316c-4edf-8a32-34763d373430@6c48a": {
+    "url": "db://assets/textures/buildings/building_warehouse.png@6c48a",
+    "value": {
+      "depends": [
+        "63a484ef-316c-4edf-8a32-34763d373430"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b91b974a-c6e3-497b-977e-e05b32fa2ba6": {
+    "url": "db://assets/textures/equipment/equip_helmet.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "49d68458-8296-4b03-b74c-057faa321a85@6c48a": {
+    "url": "db://assets/textures/equipment/equip_armor.png@6c48a",
+    "value": {
+      "depends": [
+        "49d68458-8296-4b03-b74c-057faa321a85"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b7d6510f-4a39-4a14-aafe-7e2e2d333387": {
+    "url": "db://assets/textures/equipment/equip_necklace.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "e8acd752-ff4b-465f-b5d2-1b8126fdff25@6c48a": {
+    "url": "db://assets/textures/equipment/equip_boots.png@6c48a",
+    "value": {
+      "depends": [
+        "e8acd752-ff4b-465f-b5d2-1b8126fdff25"
+      ]
+    },
+    "versionCode": 1
+  },
+  "d6f061e4-9ee4-49e2-a18c-8fe201aa79f2": {
+    "url": "db://assets/textures/equipment/equip_ring.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "fc269bb5-3581-4942-800b-42e539e2e3b5@6c48a": {
+    "url": "db://assets/textures/equipment/equip_engine.png@6c48a",
+    "value": {
+      "depends": [
+        "fc269bb5-3581-4942-800b-42e539e2e3b5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "ee814326-ac4b-43d5-b6af-e4d95eb5fcd9": {
+    "url": "db://assets/textures/equipment/equip_shield.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b91b974a-c6e3-497b-977e-e05b32fa2ba6@6c48a": {
+    "url": "db://assets/textures/equipment/equip_helmet.png@6c48a",
+    "value": {
+      "depends": [
+        "b91b974a-c6e3-497b-977e-e05b32fa2ba6"
+      ]
+    },
+    "versionCode": 1
+  },
+  "34642ab9-c3a3-4b16-9d39-61aa082a499d": {
+    "url": "db://assets/textures/equipment/equip_slot_empty.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "2df2dcfd-b1d1-4e68-81f7-4dbb5b8d26b2@6c48a": {
+    "url": "db://assets/textures/equipment/equip_gloves.png@6c48a",
+    "value": {
+      "depends": [
+        "2df2dcfd-b1d1-4e68-81f7-4dbb5b8d26b2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "5df5dbee-9283-49eb-9d8e-1e36671e44d7": {
+    "url": "db://assets/textures/equipment/equip_weapon.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b7d6510f-4a39-4a14-aafe-7e2e2d333387@6c48a": {
+    "url": "db://assets/textures/equipment/equip_necklace.png@6c48a",
+    "value": {
+      "depends": [
+        "b7d6510f-4a39-4a14-aafe-7e2e2d333387"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a3ae6bfb-2c83-4a69-b195-cb513cab741f": {
+    "url": "db://assets/textures/frames/frame_common.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d6f061e4-9ee4-49e2-a18c-8fe201aa79f2@6c48a": {
+    "url": "db://assets/textures/equipment/equip_ring.png@6c48a",
+    "value": {
+      "depends": [
+        "d6f061e4-9ee4-49e2-a18c-8fe201aa79f2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "262c14b1-cf20-4ffb-a7e2-4b34e40a6144": {
+    "url": "db://assets/textures/frames/frame_epic.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "ee814326-ac4b-43d5-b6af-e4d95eb5fcd9@6c48a": {
+    "url": "db://assets/textures/equipment/equip_shield.png@6c48a",
+    "value": {
+      "depends": [
+        "ee814326-ac4b-43d5-b6af-e4d95eb5fcd9"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a14c2fa5-96e8-49c8-9254-7b9ccb0ff53b": {
+    "url": "db://assets/textures/frames/frame_legendary.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "5df5dbee-9283-49eb-9d8e-1e36671e44d7@6c48a": {
+    "url": "db://assets/textures/equipment/equip_weapon.png@6c48a",
+    "value": {
+      "depends": [
+        "5df5dbee-9283-49eb-9d8e-1e36671e44d7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c0e13697-6c5c-41f1-8cdd-d44978a2778d": {
+    "url": "db://assets/textures/frames/frame_rare.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "34642ab9-c3a3-4b16-9d39-61aa082a499d@6c48a": {
+    "url": "db://assets/textures/equipment/equip_slot_empty.png@6c48a",
+    "value": {
+      "depends": [
+        "34642ab9-c3a3-4b16-9d39-61aa082a499d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "1bdca99a-b28a-4366-9863-6656bd4d7fa8": {
+    "url": "db://assets/textures/galaxy/galaxy_binary.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a3ae6bfb-2c83-4a69-b195-cb513cab741f@6c48a": {
+    "url": "db://assets/textures/frames/frame_common.png@6c48a",
+    "value": {
+      "depends": [
+        "a3ae6bfb-2c83-4a69-b195-cb513cab741f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "18c3bb0e-ca5b-4d42-8fe5-4b0170bcf3b5": {
+    "url": "db://assets/textures/galaxy/galaxy_blackhole.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c0e13697-6c5c-41f1-8cdd-d44978a2778d@6c48a": {
+    "url": "db://assets/textures/frames/frame_rare.png@6c48a",
+    "value": {
+      "depends": [
+        "c0e13697-6c5c-41f1-8cdd-d44978a2778d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "99a470f8-8d73-4c94-8de0-1178e5f0cf4d": {
+    "url": "db://assets/textures/galaxy/galaxy_cluster.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a14c2fa5-96e8-49c8-9254-7b9ccb0ff53b@6c48a": {
+    "url": "db://assets/textures/frames/frame_legendary.png@6c48a",
+    "value": {
+      "depends": [
+        "a14c2fa5-96e8-49c8-9254-7b9ccb0ff53b"
+      ]
+    },
+    "versionCode": 1
+  },
+  "480b3a0f-058f-461d-8baa-1ba4c8de02b9": {
+    "url": "db://assets/textures/galaxy/galaxy_nebula.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "262c14b1-cf20-4ffb-a7e2-4b34e40a6144@6c48a": {
+    "url": "db://assets/textures/frames/frame_epic.png@6c48a",
+    "value": {
+      "depends": [
+        "262c14b1-cf20-4ffb-a7e2-4b34e40a6144"
+      ]
+    },
+    "versionCode": 1
+  },
+  "30823e22-6e2e-4e45-b749-a33296930395": {
+    "url": "db://assets/textures/galaxy/galaxy_normal.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1bdca99a-b28a-4366-9863-6656bd4d7fa8@6c48a": {
+    "url": "db://assets/textures/galaxy/galaxy_binary.png@6c48a",
+    "value": {
+      "depends": [
+        "1bdca99a-b28a-4366-9863-6656bd4d7fa8"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f749e606-b52d-4e8e-aa3d-c0ced04892ad": {
+    "url": "db://assets/textures/icons/icon_add.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "99a470f8-8d73-4c94-8de0-1178e5f0cf4d@6c48a": {
+    "url": "db://assets/textures/galaxy/galaxy_cluster.png@6c48a",
+    "value": {
+      "depends": [
+        "99a470f8-8d73-4c94-8de0-1178e5f0cf4d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f7f33332-1a67-4722-97b0-9d90d26e9f93": {
+    "url": "db://assets/textures/ui/bg_splash.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "18c3bb0e-ca5b-4d42-8fe5-4b0170bcf3b5@6c48a": {
+    "url": "db://assets/textures/galaxy/galaxy_blackhole.png@6c48a",
+    "value": {
+      "depends": [
+        "18c3bb0e-ca5b-4d42-8fe5-4b0170bcf3b5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "e29509d5-3c5b-42ff-9555-f0482c8d481e": {
+    "url": "db://assets/textures/ui/logo.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "f749e606-b52d-4e8e-aa3d-c0ced04892ad@6c48a": {
+    "url": "db://assets/textures/icons/icon_add.png@6c48a",
+    "value": {
+      "depends": [
+        "f749e606-b52d-4e8e-aa3d-c0ced04892ad"
+      ]
+    },
+    "versionCode": 1
+  },
+  "756d4399-64af-4873-b7ec-d1275b5a727e": {
+    "url": "db://assets/textures/battle/icons/icon_defeat.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "480b3a0f-058f-461d-8baa-1ba4c8de02b9@6c48a": {
+    "url": "db://assets/textures/galaxy/galaxy_nebula.png@6c48a",
+    "value": {
+      "depends": [
+        "480b3a0f-058f-461d-8baa-1ba4c8de02b9"
+      ]
+    },
+    "versionCode": 1
+  },
+  "3dce6da6-700a-4878-8220-de17e8cbdaca": {
+    "url": "db://assets/textures/battle/icons/icon_shield.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "30823e22-6e2e-4e45-b749-a33296930395@6c48a": {
+    "url": "db://assets/textures/galaxy/galaxy_normal.png@6c48a",
+    "value": {
+      "depends": [
+        "30823e22-6e2e-4e45-b749-a33296930395"
+      ]
+    },
+    "versionCode": 1
+  },
+  "096f9850-e361-49f3-98d3-47ab3e954e2e": {
+    "url": "db://assets/textures/battle/icons/icon_sword.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "f7f33332-1a67-4722-97b0-9d90d26e9f93@6c48a": {
+    "url": "db://assets/textures/ui/bg_splash.png@6c48a",
+    "value": {
+      "depends": [
+        "f7f33332-1a67-4722-97b0-9d90d26e9f93"
+      ]
+    },
+    "versionCode": 1
+  },
+  "bb102b9d-65ef-499e-8867-77c7ce0f9251": {
+    "url": "db://assets/textures/battle/icons/icon_type_emotion.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "756d4399-64af-4873-b7ec-d1275b5a727e@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_defeat.png@6c48a",
+    "value": {
+      "depends": [
+        "756d4399-64af-4873-b7ec-d1275b5a727e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "096f9850-e361-49f3-98d3-47ab3e954e2e@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_sword.png@6c48a",
+    "value": {
+      "depends": [
+        "096f9850-e361-49f3-98d3-47ab3e954e2e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "6dc93856-f3bf-465a-88f2-3ada94d1d895": {
+    "url": "db://assets/textures/battle/icons/icon_type_revenge.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "14129670-76b3-48ad-b0d8-a8ca7fb73d47": {
+    "url": "db://assets/textures/battle/icons/icon_type_war.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3dce6da6-700a-4878-8220-de17e8cbdaca@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_shield.png@6c48a",
+    "value": {
+      "depends": [
+        "3dce6da6-700a-4878-8220-de17e8cbdaca"
+      ]
+    },
+    "versionCode": 1
+  },
+  "e29509d5-3c5b-42ff-9555-f0482c8d481e@6c48a": {
+    "url": "db://assets/textures/ui/logo.png@6c48a",
+    "value": {
+      "depends": [
+        "e29509d5-3c5b-42ff-9555-f0482c8d481e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a5b173e5-574d-4316-94de-77fdc6f0b49f": {
+    "url": "db://assets/textures/battle/icons/icon_victory.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1": {
+    "url": "db://assets/textures/icons/resources/icon_anger.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "bb102b9d-65ef-499e-8867-77c7ce0f9251@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_type_emotion.png@6c48a",
+    "value": {
+      "depends": [
+        "bb102b9d-65ef-499e-8867-77c7ce0f9251"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c36ca971-7094-4612-8f3e-c39bcbb7aff9": {
+    "url": "db://assets/textures/icons/resources/icon_calm.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "6dc93856-f3bf-465a-88f2-3ada94d1d895@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_type_revenge.png@6c48a",
+    "value": {
+      "depends": [
+        "6dc93856-f3bf-465a-88f2-3ada94d1d895"
+      ]
+    },
+    "versionCode": 1
+  },
+  "8e336091-784f-45f0-ae5a-eb2bf904db77": {
+    "url": "db://assets/textures/icons/resources/icon_diamond.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "14129670-76b3-48ad-b0d8-a8ca7fb73d47@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_type_war.png@6c48a",
+    "value": {
+      "depends": [
+        "14129670-76b3-48ad-b0d8-a8ca7fb73d47"
+      ]
+    },
+    "versionCode": 1
+  },
+  "0facd1de-8953-4129-9315-239f9468c9eb": {
+    "url": "db://assets/textures/icons/resources/icon_gold.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a5b173e5-574d-4316-94de-77fdc6f0b49f@6c48a": {
+    "url": "db://assets/textures/battle/icons/icon_victory.png@6c48a",
+    "value": {
+      "depends": [
+        "a5b173e5-574d-4316-94de-77fdc6f0b49f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "254dd242-2926-449a-bd3b-80bfce58ae03": {
+    "url": "db://assets/textures/icons/resources/icon_happy.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_anger.png@6c48a",
+    "value": {
+      "depends": [
+        "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c36ca971-7094-4612-8f3e-c39bcbb7aff9@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_calm.png@6c48a",
+    "value": {
+      "depends": [
+        "c36ca971-7094-4612-8f3e-c39bcbb7aff9"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_anger.png@f9941",
+    "value": {
+      "depends": [
+        "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "37b42543-543c-4fb4-bb44-e1d789e71078": {
+    "url": "db://assets/textures/icons/resources/icon_passion.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "8e336091-784f-45f0-ae5a-eb2bf904db77@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_diamond.png@6c48a",
+    "value": {
+      "depends": [
+        "8e336091-784f-45f0-ae5a-eb2bf904db77"
+      ]
+    },
+    "versionCode": 1
+  },
+  "0facd1de-8953-4129-9315-239f9468c9eb@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_gold.png@6c48a",
+    "value": {
+      "depends": [
+        "0facd1de-8953-4129-9315-239f9468c9eb"
+      ]
+    },
+    "versionCode": 1
+  },
+  "254dd242-2926-449a-bd3b-80bfce58ae03@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_happy.png@6c48a",
+    "value": {
+      "depends": [
+        "254dd242-2926-449a-bd3b-80bfce58ae03"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c36ca971-7094-4612-8f3e-c39bcbb7aff9@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_calm.png@f9941",
+    "value": {
+      "depends": [
+        "c36ca971-7094-4612-8f3e-c39bcbb7aff9@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "08a8fc79-d846-4b2a-8487-ebf4b83a1676": {
+    "url": "db://assets/textures/icons/resources/icon_timecoin.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "8e336091-784f-45f0-ae5a-eb2bf904db77@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_diamond.png@f9941",
+    "value": {
+      "depends": [
+        "8e336091-784f-45f0-ae5a-eb2bf904db77@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "cad48cd0-67be-4843-a53b-50d7cc6da5da": {
+    "url": "db://assets/textures/icons/resources/icon_wisdom.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "0facd1de-8953-4129-9315-239f9468c9eb@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_gold.png@f9941",
+    "value": {
+      "depends": [
+        "0facd1de-8953-4129-9315-239f9468c9eb@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "254dd242-2926-449a-bd3b-80bfce58ae03@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_happy.png@f9941",
+    "value": {
+      "depends": [
+        "254dd242-2926-449a-bd3b-80bfce58ae03@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "3245252a-76dd-412a-bcfe-579a27714ffb": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_earth.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1c95d96c-27aa-4463-a3cd-4ec56546f93e": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_fire.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "37b42543-543c-4fb4-bb44-e1d789e71078@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_passion.png@6c48a",
+    "value": {
+      "depends": [
+        "37b42543-543c-4fb4-bb44-e1d789e71078"
+      ]
+    },
+    "versionCode": 1
+  },
+  "08a8fc79-d846-4b2a-8487-ebf4b83a1676@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_timecoin.png@6c48a",
+    "value": {
+      "depends": [
+        "08a8fc79-d846-4b2a-8487-ebf4b83a1676"
+      ]
+    },
+    "versionCode": 1
+  },
+  "cad48cd0-67be-4843-a53b-50d7cc6da5da@6c48a": {
+    "url": "db://assets/textures/icons/resources/icon_wisdom.png@6c48a",
+    "value": {
+      "depends": [
+        "cad48cd0-67be-4843-a53b-50d7cc6da5da"
+      ]
+    },
+    "versionCode": 1
+  },
+  "37b42543-543c-4fb4-bb44-e1d789e71078@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_passion.png@f9941",
+    "value": {
+      "depends": [
+        "37b42543-543c-4fb4-bb44-e1d789e71078@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c6516281-8a94-482a-9d69-796da2b1fdf4": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_metal.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "08a8fc79-d846-4b2a-8487-ebf4b83a1676@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_timecoin.png@f9941",
+    "value": {
+      "depends": [
+        "08a8fc79-d846-4b2a-8487-ebf4b83a1676@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f9f556d8-9804-456a-90b1-b378e8d9e143": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_water.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "cad48cd0-67be-4843-a53b-50d7cc6da5da@f9941": {
+    "url": "db://assets/textures/icons/resources/icon_wisdom.png@f9941",
+    "value": {
+      "depends": [
+        "cad48cd0-67be-4843-a53b-50d7cc6da5da@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "fd78aabd-b29f-4e5c-95db-9b62ef60aa4b": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_wood.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3245252a-76dd-412a-bcfe-579a27714ffb@6c48a": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_earth.png@6c48a",
+    "value": {
+      "depends": [
+        "3245252a-76dd-412a-bcfe-579a27714ffb"
+      ]
+    },
+    "versionCode": 1
+  },
+  "57098767-88d1-4e65-a0a1-cd014ffe3eff": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_aquarius.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1c95d96c-27aa-4463-a3cd-4ec56546f93e@6c48a": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_fire.png@6c48a",
+    "value": {
+      "depends": [
+        "1c95d96c-27aa-4463-a3cd-4ec56546f93e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "4fb7a048-b7c3-4488-8eca-173c38c6e8f1": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_aries.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c6516281-8a94-482a-9d69-796da2b1fdf4@6c48a": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_metal.png@6c48a",
+    "value": {
+      "depends": [
+        "c6516281-8a94-482a-9d69-796da2b1fdf4"
+      ]
+    },
+    "versionCode": 1
+  },
+  "812adee8-337f-46fa-bcb6-0d055eeee3d5": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_cancer.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "fd78aabd-b29f-4e5c-95db-9b62ef60aa4b@6c48a": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_wood.png@6c48a",
+    "value": {
+      "depends": [
+        "fd78aabd-b29f-4e5c-95db-9b62ef60aa4b"
+      ]
+    },
+    "versionCode": 1
+  },
+  "95ea2980-3001-4c90-9c2f-bef66d4dce44": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_capricorn.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "4fb7a048-b7c3-4488-8eca-173c38c6e8f1@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_aries.png@6c48a",
+    "value": {
+      "depends": [
+        "4fb7a048-b7c3-4488-8eca-173c38c6e8f1"
+      ]
+    },
+    "versionCode": 1
+  },
+  "67f59a62-30bf-4011-8e6f-8e251415c956": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_gemini.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "57098767-88d1-4e65-a0a1-cd014ffe3eff@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_aquarius.png@6c48a",
+    "value": {
+      "depends": [
+        "57098767-88d1-4e65-a0a1-cd014ffe3eff"
+      ]
+    },
+    "versionCode": 1
+  },
+  "1734613c-699c-4e9c-b582-59e34cf8b516": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_leo.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "f9f556d8-9804-456a-90b1-b378e8d9e143@6c48a": {
+    "url": "db://assets/textures/icons/wuxing/icon_wuxing_water.png@6c48a",
+    "value": {
+      "depends": [
+        "f9f556d8-9804-456a-90b1-b378e8d9e143"
+      ]
+    },
+    "versionCode": 1
+  },
+  "786fd513-6a3e-40bc-a1e6-59c2a69e57a8": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_libra.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "812adee8-337f-46fa-bcb6-0d055eeee3d5@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_cancer.png@6c48a",
+    "value": {
+      "depends": [
+        "812adee8-337f-46fa-bcb6-0d055eeee3d5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "33d67c15-9fd5-4982-9be9-f520893da0ff": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_pisces.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "95ea2980-3001-4c90-9c2f-bef66d4dce44@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_capricorn.png@6c48a",
+    "value": {
+      "depends": [
+        "95ea2980-3001-4c90-9c2f-bef66d4dce44"
+      ]
+    },
+    "versionCode": 1
+  },
+  "3ab04faa-ac17-4e7b-9223-ada233072bfc": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_sagittarius.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "67f59a62-30bf-4011-8e6f-8e251415c956@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_gemini.png@6c48a",
+    "value": {
+      "depends": [
+        "67f59a62-30bf-4011-8e6f-8e251415c956"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b6468382-4e04-4ff2-bf91-f2a13daaa49e": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_scorpio.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1734613c-699c-4e9c-b582-59e34cf8b516@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_leo.png@6c48a",
+    "value": {
+      "depends": [
+        "1734613c-699c-4e9c-b582-59e34cf8b516"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c3149033-7f28-4e9a-858f-1cbe02317576": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_taurus.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "786fd513-6a3e-40bc-a1e6-59c2a69e57a8@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_libra.png@6c48a",
+    "value": {
+      "depends": [
+        "786fd513-6a3e-40bc-a1e6-59c2a69e57a8"
+      ]
+    },
+    "versionCode": 1
+  },
+  "4cc0cb7a-21a1-4483-afb2-e08c5cfa1822": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_virgo.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "33d67c15-9fd5-4982-9be9-f520893da0ff@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_pisces.png@6c48a",
+    "value": {
+      "depends": [
+        "33d67c15-9fd5-4982-9be9-f520893da0ff"
+      ]
+    },
+    "versionCode": 1
+  },
+  "082155ec-8ebc-4af1-a919-234233ec0c93": {
+    "url": "db://assets/textures/ui/backgrounds/bg_card.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3ab04faa-ac17-4e7b-9223-ada233072bfc@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_sagittarius.png@6c48a",
+    "value": {
+      "depends": [
+        "3ab04faa-ac17-4e7b-9223-ada233072bfc"
+      ]
+    },
+    "versionCode": 1
+  },
+  "d7872c78-b8cb-485e-a38d-523d65a80910": {
+    "url": "db://assets/textures/ui/backgrounds/bg_list_item.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "082155ec-8ebc-4af1-a919-234233ec0c93@6c48a": {
+    "url": "db://assets/textures/ui/backgrounds/bg_card.png@6c48a",
+    "value": {
+      "depends": [
+        "082155ec-8ebc-4af1-a919-234233ec0c93"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b7478325-f49f-4bdc-9b4c-466a678d2a7c": {
+    "url": "db://assets/textures/ui/backgrounds/bg_modal.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b6468382-4e04-4ff2-bf91-f2a13daaa49e@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_scorpio.png@6c48a",
+    "value": {
+      "depends": [
+        "b6468382-4e04-4ff2-bf91-f2a13daaa49e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "978afc21-122e-4c2c-8c10-98c906033049": {
+    "url": "db://assets/textures/ui/buttons/btn_disabled.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c3149033-7f28-4e9a-858f-1cbe02317576@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_taurus.png@6c48a",
+    "value": {
+      "depends": [
+        "c3149033-7f28-4e9a-858f-1cbe02317576"
+      ]
+    },
+    "versionCode": 1
+  },
+  "4cc0cb7a-21a1-4483-afb2-e08c5cfa1822@6c48a": {
+    "url": "db://assets/textures/icons/zodiac/icon_zodiac_virgo.png@6c48a",
+    "value": {
+      "depends": [
+        "4cc0cb7a-21a1-4483-afb2-e08c5cfa1822"
+      ]
+    },
+    "versionCode": 1
+  },
+  "41ad99a8-c55e-439d-9573-8ab8600c869b": {
+    "url": "db://assets/textures/ui/buttons/btn_primary.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c0106786-d382-4ac0-a187-4206f644bf69": {
+    "url": "db://assets/textures/ui/buttons/btn_primary_pressed.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d7872c78-b8cb-485e-a38d-523d65a80910@6c48a": {
+    "url": "db://assets/textures/ui/backgrounds/bg_list_item.png@6c48a",
+    "value": {
+      "depends": [
+        "d7872c78-b8cb-485e-a38d-523d65a80910"
+      ]
+    },
+    "versionCode": 1
+  },
+  "ea9ea76e-e472-4026-8719-c2da3c08ddca": {
+    "url": "db://assets/textures/ui/buttons/btn_secondary.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b7478325-f49f-4bdc-9b4c-466a678d2a7c@6c48a": {
+    "url": "db://assets/textures/ui/backgrounds/bg_modal.png@6c48a",
+    "value": {
+      "depends": [
+        "b7478325-f49f-4bdc-9b4c-466a678d2a7c"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9433c556-2ee7-4ce8-a1d7-57a74cdff111": {
+    "url": "db://assets/textures/ui/buttons/btn_secondary_pressed.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "978afc21-122e-4c2c-8c10-98c906033049@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_disabled.png@6c48a",
+    "value": {
+      "depends": [
+        "978afc21-122e-4c2c-8c10-98c906033049"
+      ]
+    },
+    "versionCode": 1
+  },
+  "189d7d6d-e918-4b21-80c2-4e9617ec4399": {
+    "url": "db://assets/textures/ui/buttons/btn_small.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "41ad99a8-c55e-439d-9573-8ab8600c869b@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_primary.png@6c48a",
+    "value": {
+      "depends": [
+        "41ad99a8-c55e-439d-9573-8ab8600c869b"
+      ]
+    },
+    "versionCode": 1
+  },
+  "1bbb3441-ea2b-4fa5-acc8-c2fc4d562d61": {
+    "url": "db://assets/textures/ui/buttons/btn_wechat_login.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c0106786-d382-4ac0-a187-4206f644bf69@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_primary_pressed.png@6c48a",
+    "value": {
+      "depends": [
+        "c0106786-d382-4ac0-a187-4206f644bf69"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f7e2b171-92f0-4cae-adb5-24f9504d6ee9": {
+    "url": "db://assets/textures/ui/login/bg_login.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "ea9ea76e-e472-4026-8719-c2da3c08ddca@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_secondary.png@6c48a",
+    "value": {
+      "depends": [
+        "ea9ea76e-e472-4026-8719-c2da3c08ddca"
+      ]
+    },
+    "versionCode": 1
+  },
+  "eec8ef2a-f4e5-4082-81b1-0cbb3c613be2": {
+    "url": "db://assets/textures/ui/panels/panel_large.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "9433c556-2ee7-4ce8-a1d7-57a74cdff111@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_secondary_pressed.png@6c48a",
+    "value": {
+      "depends": [
+        "9433c556-2ee7-4ce8-a1d7-57a74cdff111"
+      ]
+    },
+    "versionCode": 1
+  },
+  "73418a9a-468d-4cc8-a170-5d121c0c938d": {
+    "url": "db://assets/textures/ui/panels/panel_medium.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "189d7d6d-e918-4b21-80c2-4e9617ec4399@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_small.png@6c48a",
+    "value": {
+      "depends": [
+        "189d7d6d-e918-4b21-80c2-4e9617ec4399"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f8e76d61-d75e-4192-b0b0-0962ff8e29a2": {
+    "url": "db://assets/textures/ui/panels/panel_small.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1bbb3441-ea2b-4fa5-acc8-c2fc4d562d61@6c48a": {
+    "url": "db://assets/textures/ui/buttons/btn_wechat_login.png@6c48a",
+    "value": {
+      "depends": [
+        "1bbb3441-ea2b-4fa5-acc8-c2fc4d562d61"
+      ]
+    },
+    "versionCode": 1
+  },
+  "e48a6f4d-ace5-47bd-bbb2-2773364fae5d": {
+    "url": "db://assets/textures/ui/tabs/tab_battle.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "f7e2b171-92f0-4cae-adb5-24f9504d6ee9@6c48a": {
+    "url": "db://assets/textures/ui/login/bg_login.png@6c48a",
+    "value": {
+      "depends": [
+        "f7e2b171-92f0-4cae-adb5-24f9504d6ee9"
+      ]
+    },
+    "versionCode": 1
+  },
+  "d9f8a160-ba01-44c9-851e-ce279bb0ccfa": {
+    "url": "db://assets/textures/ui/tabs/tab_battle_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "e48a6f4d-ace5-47bd-bbb2-2773364fae5d@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_battle.png@6c48a",
+    "value": {
+      "depends": [
+        "e48a6f4d-ace5-47bd-bbb2-2773364fae5d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "73418a9a-468d-4cc8-a170-5d121c0c938d@6c48a": {
+    "url": "db://assets/textures/ui/panels/panel_medium.png@6c48a",
+    "value": {
+      "depends": [
+        "73418a9a-468d-4cc8-a170-5d121c0c938d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "8e7cd451-884c-4425-95ab-37d8146edd2f": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "eec8ef2a-f4e5-4082-81b1-0cbb3c613be2@6c48a": {
+    "url": "db://assets/textures/ui/panels/panel_large.png@6c48a",
+    "value": {
+      "depends": [
+        "eec8ef2a-f4e5-4082-81b1-0cbb3c613be2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a6a67028-eead-4c11-b458-8262a43adc19": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "e48a6f4d-ace5-47bd-bbb2-2773364fae5d@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_battle.png@f9941",
+    "value": {
+      "depends": [
+        "e48a6f4d-ace5-47bd-bbb2-2773364fae5d@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "67f09475-1aed-42a3-a4af-03c76af09647": {
+    "url": "db://assets/textures/ui/tabs/tab_home.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d9f8a160-ba01-44c9-851e-ce279bb0ccfa@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_battle_active.png@6c48a",
+    "value": {
+      "depends": [
+        "d9f8a160-ba01-44c9-851e-ce279bb0ccfa"
+      ]
+    },
+    "versionCode": 1
+  },
+  "f8e76d61-d75e-4192-b0b0-0962ff8e29a2@6c48a": {
+    "url": "db://assets/textures/ui/panels/panel_small.png@6c48a",
+    "value": {
+      "depends": [
+        "f8e76d61-d75e-4192-b0b0-0962ff8e29a2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "425c9031-c476-4c51-8a77-e39e6959132e": {
+    "url": "db://assets/textures/ui/tabs/tab_home_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "8e7cd451-884c-4425-95ab-37d8146edd2f@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy.png@6c48a",
+    "value": {
+      "depends": [
+        "8e7cd451-884c-4425-95ab-37d8146edd2f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "d9f8a160-ba01-44c9-851e-ce279bb0ccfa@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_battle_active.png@f9941",
+    "value": {
+      "depends": [
+        "d9f8a160-ba01-44c9-851e-ce279bb0ccfa@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "67ed7649-b3f0-4d1a-8308-dbfe715a716f": {
+    "url": "db://assets/textures/ui/tabs/tab_market.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "67f09475-1aed-42a3-a4af-03c76af09647@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_home.png@6c48a",
+    "value": {
+      "depends": [
+        "67f09475-1aed-42a3-a4af-03c76af09647"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a6a67028-eead-4c11-b458-8262a43adc19@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy_active.png@6c48a",
+    "value": {
+      "depends": [
+        "a6a67028-eead-4c11-b458-8262a43adc19"
+      ]
+    },
+    "versionCode": 1
+  },
+  "425c9031-c476-4c51-8a77-e39e6959132e@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_home_active.png@6c48a",
+    "value": {
+      "depends": [
+        "425c9031-c476-4c51-8a77-e39e6959132e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "8e7cd451-884c-4425-95ab-37d8146edd2f@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy.png@f9941",
+    "value": {
+      "depends": [
+        "8e7cd451-884c-4425-95ab-37d8146edd2f@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8": {
+    "url": "db://assets/textures/ui/tabs/tab_market_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "67f09475-1aed-42a3-a4af-03c76af09647@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_home.png@f9941",
+    "value": {
+      "depends": [
+        "67f09475-1aed-42a3-a4af-03c76af09647@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9266dca1-6b37-41b1-927f-06b6bb668e12": {
+    "url": "db://assets/textures/ui/tabs/tab_profile.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "67ed7649-b3f0-4d1a-8308-dbfe715a716f@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_market.png@6c48a",
+    "value": {
+      "depends": [
+        "67ed7649-b3f0-4d1a-8308-dbfe715a716f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a6a67028-eead-4c11-b458-8262a43adc19@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_galaxy_active.png@f9941",
+    "value": {
+      "depends": [
+        "a6a67028-eead-4c11-b458-8262a43adc19@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "82f4dff2-f71b-441a-91aa-a2ce9a042468": {
+    "url": "db://assets/textures/ui/tabs/tab_profile_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "425c9031-c476-4c51-8a77-e39e6959132e@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_home_active.png@f9941",
+    "value": {
+      "depends": [
+        "425c9031-c476-4c51-8a77-e39e6959132e@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "67ed7649-b3f0-4d1a-8308-dbfe715a716f@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_market.png@f9941",
+    "value": {
+      "depends": [
+        "67ed7649-b3f0-4d1a-8308-dbfe715a716f@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_market_active.png@6c48a",
+    "value": {
+      "depends": [
+        "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9266dca1-6b37-41b1-927f-06b6bb668e12@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_profile.png@6c48a",
+    "value": {
+      "depends": [
+        "9266dca1-6b37-41b1-927f-06b6bb668e12"
+      ]
+    },
+    "versionCode": 1
+  },
+  "82f4dff2-f71b-441a-91aa-a2ce9a042468@6c48a": {
+    "url": "db://assets/textures/ui/tabs/tab_profile_active.png@6c48a",
+    "value": {
+      "depends": [
+        "82f4dff2-f71b-441a-91aa-a2ce9a042468"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_market_active.png@f9941",
+    "value": {
+      "depends": [
+        "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9266dca1-6b37-41b1-927f-06b6bb668e12@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_profile.png@f9941",
+    "value": {
+      "depends": [
+        "9266dca1-6b37-41b1-927f-06b6bb668e12@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "82f4dff2-f71b-441a-91aa-a2ce9a042468@f9941": {
+    "url": "db://assets/textures/ui/tabs/tab_profile_active.png@f9941",
+    "value": {
+      "depends": [
+        "82f4dff2-f71b-441a-91aa-a2ce9a042468@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "6790ec1e-c580-479a-a7d1-22b2cce77085": {
+    "url": "db://assets/resources",
+    "value": {},
+    "versionCode": 1
+  },
+  "6a233796-5c70-4968-b457-5393167398a6": {
+    "url": "db://assets/resources/icons",
+    "value": {},
+    "versionCode": 1
+  },
+  "df96547c-d64b-45f7-adca-999a8f630ddd": {
+    "url": "db://assets/resources/tabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "e5d659d1-92a3-448d-ad24-28ede94db85b": {
+    "url": "db://assets/resources/icons/icon_anger.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "80e11a4c-01a6-4c03-bf09-6f45ffcdad2e": {
+    "url": "db://assets/resources/icons/icon_calm.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "244df03e-638b-489d-952f-0d27696f89ff": {
+    "url": "db://assets/resources/icons/icon_diamond.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "92c81428-4123-4386-ad2c-8c3a857a561f": {
+    "url": "db://assets/resources/icons/icon_gold.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "dbba90d1-3f6c-4b1a-9187-6bee21a5eeaf": {
+    "url": "db://assets/resources/icons/icon_happy.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "80e11a4c-01a6-4c03-bf09-6f45ffcdad2e@6c48a": {
+    "url": "db://assets/resources/icons/icon_calm.png@6c48a",
+    "value": {
+      "depends": [
+        "80e11a4c-01a6-4c03-bf09-6f45ffcdad2e"
+      ]
+    },
+    "versionCode": 1
+  },
+  "e5d659d1-92a3-448d-ad24-28ede94db85b@6c48a": {
+    "url": "db://assets/resources/icons/icon_anger.png@6c48a",
+    "value": {
+      "depends": [
+        "e5d659d1-92a3-448d-ad24-28ede94db85b"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a074e0d9-7c9c-4cf0-b56f-d64797d95671": {
+    "url": "db://assets/resources/icons/icon_passion.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "ca27e4ed-6107-4f40-b430-3731dc671ab4": {
+    "url": "db://assets/resources/icons/icon_timecoin.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "92c81428-4123-4386-ad2c-8c3a857a561f@6c48a": {
+    "url": "db://assets/resources/icons/icon_gold.png@6c48a",
+    "value": {
+      "depends": [
+        "92c81428-4123-4386-ad2c-8c3a857a561f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b41f4f44-9a81-497b-ac19-2da57df712e4": {
+    "url": "db://assets/resources/icons/icon_wisdom.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "244df03e-638b-489d-952f-0d27696f89ff@6c48a": {
+    "url": "db://assets/resources/icons/icon_diamond.png@6c48a",
+    "value": {
+      "depends": [
+        "244df03e-638b-489d-952f-0d27696f89ff"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c9e7f1ae-f195-4c53-9aa6-7ee3c5a97c18": {
+    "url": "db://assets/resources/tabs/tab_battle.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "dbba90d1-3f6c-4b1a-9187-6bee21a5eeaf@6c48a": {
+    "url": "db://assets/resources/icons/icon_happy.png@6c48a",
+    "value": {
+      "depends": [
+        "dbba90d1-3f6c-4b1a-9187-6bee21a5eeaf"
+      ]
+    },
+    "versionCode": 1
+  },
+  "dfd849eb-d292-4fc6-af6d-7f70d73831ec": {
+    "url": "db://assets/resources/tabs/tab_battle_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "dfd849eb-d292-4fc6-af6d-7f70d73831ec@6c48a": {
+    "url": "db://assets/resources/tabs/tab_battle_active.png@6c48a",
+    "value": {
+      "depends": [
+        "dfd849eb-d292-4fc6-af6d-7f70d73831ec"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9fc52c60-5706-4a9a-aaab-dfd678b31e89": {
+    "url": "db://assets/resources/tabs/tab_galaxy.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a074e0d9-7c9c-4cf0-b56f-d64797d95671@6c48a": {
+    "url": "db://assets/resources/icons/icon_passion.png@6c48a",
+    "value": {
+      "depends": [
+        "a074e0d9-7c9c-4cf0-b56f-d64797d95671"
+      ]
+    },
+    "versionCode": 1
+  },
+  "87ec6a7d-5f55-46cf-8258-c1ec954786bf": {
+    "url": "db://assets/resources/tabs/tab_galaxy_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "ca27e4ed-6107-4f40-b430-3731dc671ab4@6c48a": {
+    "url": "db://assets/resources/icons/icon_timecoin.png@6c48a",
+    "value": {
+      "depends": [
+        "ca27e4ed-6107-4f40-b430-3731dc671ab4"
+      ]
+    },
+    "versionCode": 1
+  },
+  "287a7a29-8321-4993-b55f-c1baff69f98a": {
+    "url": "db://assets/resources/tabs/tab_home.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b41f4f44-9a81-497b-ac19-2da57df712e4@6c48a": {
+    "url": "db://assets/resources/icons/icon_wisdom.png@6c48a",
+    "value": {
+      "depends": [
+        "b41f4f44-9a81-497b-ac19-2da57df712e4"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c9e7f1ae-f195-4c53-9aa6-7ee3c5a97c18@6c48a": {
+    "url": "db://assets/resources/tabs/tab_battle.png@6c48a",
+    "value": {
+      "depends": [
+        "c9e7f1ae-f195-4c53-9aa6-7ee3c5a97c18"
+      ]
+    },
+    "versionCode": 1
+  },
+  "68a5835c-6f11-41e1-b59d-d998a26f48a7": {
+    "url": "db://assets/resources/tabs/tab_home_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "2b8c6368-06b5-4db5-91c3-32857010e6f7": {
+    "url": "db://assets/resources/tabs/tab_market.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "287a7a29-8321-4993-b55f-c1baff69f98a@6c48a": {
+    "url": "db://assets/resources/tabs/tab_home.png@6c48a",
+    "value": {
+      "depends": [
+        "287a7a29-8321-4993-b55f-c1baff69f98a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "0f9a7039-8de9-4217-b6c7-f2f50f847033": {
+    "url": "db://assets/resources/tabs/tab_market_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "2b8c6368-06b5-4db5-91c3-32857010e6f7@6c48a": {
+    "url": "db://assets/resources/tabs/tab_market.png@6c48a",
+    "value": {
+      "depends": [
+        "2b8c6368-06b5-4db5-91c3-32857010e6f7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "68a5835c-6f11-41e1-b59d-d998a26f48a7@6c48a": {
+    "url": "db://assets/resources/tabs/tab_home_active.png@6c48a",
+    "value": {
+      "depends": [
+        "68a5835c-6f11-41e1-b59d-d998a26f48a7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "6008194c-e984-4b13-96f8-a23f2847963d": {
+    "url": "db://assets/resources/tabs/tab_profile.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "2847bfed-027c-4c75-a3fc-0a858f365d05": {
+    "url": "db://assets/resources/tabs/tab_profile_active.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "87ec6a7d-5f55-46cf-8258-c1ec954786bf@6c48a": {
+    "url": "db://assets/resources/tabs/tab_galaxy_active.png@6c48a",
+    "value": {
+      "depends": [
+        "87ec6a7d-5f55-46cf-8258-c1ec954786bf"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9fc52c60-5706-4a9a-aaab-dfd678b31e89@6c48a": {
+    "url": "db://assets/resources/tabs/tab_galaxy.png@6c48a",
+    "value": {
+      "depends": [
+        "9fc52c60-5706-4a9a-aaab-dfd678b31e89"
+      ]
+    },
+    "versionCode": 1
+  },
+  "2847bfed-027c-4c75-a3fc-0a858f365d05@6c48a": {
+    "url": "db://assets/resources/tabs/tab_profile_active.png@6c48a",
+    "value": {
+      "depends": [
+        "2847bfed-027c-4c75-a3fc-0a858f365d05"
+      ]
+    },
+    "versionCode": 1
+  },
+  "0f9a7039-8de9-4217-b6c7-f2f50f847033@6c48a": {
+    "url": "db://assets/resources/tabs/tab_market_active.png@6c48a",
+    "value": {
+      "depends": [
+        "0f9a7039-8de9-4217-b6c7-f2f50f847033"
+      ]
+    },
+    "versionCode": 1
+  },
+  "6008194c-e984-4b13-96f8-a23f2847963d@6c48a": {
+    "url": "db://assets/resources/tabs/tab_profile.png@6c48a",
+    "value": {
+      "depends": [
+        "6008194c-e984-4b13-96f8-a23f2847963d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "3d42dd43-6656-4c39-b7a9-a161638b7635": {
+    "url": "db://assets/scripts/GameTester.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "5108325e-f17a-444f-93f4-5cf24e3eb21f": {
+    "url": "db://assets/scripts/pages/LoginPage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "0a2deaa3-f29c-4caa-9eee-24dad1239826": {
+    "url": "db://assets/scripts/pages/MainPage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "f634bf49-ff10-43ad-8e1e-69736018c138": {
+    "url": "db://assets/scenes/LoginScene.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  }
+}

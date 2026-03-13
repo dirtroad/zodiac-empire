@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星座帝国 - 登录测试</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            font-size: 14px;
+            min-height: 50px;
+        }
+        .status.success { border-left: 3px solid #4CAF50; }
+        .status.error { border-left: 3px solid #f44336; }
+        .status.loading { border-left: 3px solid #2196F3; }
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #6B5BFF, #FF6B9D);
+            color: white;
+        }
+        .btn-primary:hover { transform: scale(1.05); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .user-info {
+            text-align: left;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            display: none;
+        }
+        .user-info.show { display: block; }
+        .user-info p { margin: 8px 0; }
+        .label { color: #888; }
+        .value { color: #FFD700; font-weight: bold; }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .api-test {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .api-test button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: 1px solid #666;
+            background: transparent;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .api-test button:hover { background: rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌌 星座帝国</h1>
+        <p class="subtitle">你的情绪，你的时间，你的宇宙</p>
+        
+        <div id="status" class="status">
+            点击下方按钮开始测试
+        </div>
+        
+        <button id="loginBtn" class="btn btn-primary" onclick="testLogin()">
+            🔐 微信登录测试
+        </button>
+        
+        <div id="userInfo" class="user-info">
+            <p><span class="label">昵称：</span><span id="nickname" class="value">-</span></p>
+            <p><span class="label">等级：</span><span id="level" class="value">-</span></p>
+            <p><span class="label">战力：</span><span id="power" class="value">-</span></p>
+            <p><span class="label">金币：</span><span id="gold" class="value">-</span></p>
+            <p><span class="label">时间币：</span><span id="timeCoin" class="value">-</span></p>
+        </div>
+        
+        <div class="api-test">
+            <p style="margin-bottom:10px;color:#888;">API测试：</p>
+            <button onclick="testEmotion()">情绪资源</button>
+            <button onclick="testGalaxies()">我的星系</button>
+            <button onclick="testHeartbeat()">心跳</button>
+            <button onclick="testMap()">地图</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://192.168.6.238:3000/v1';
+        let token = localStorage.getItem('zodiac_token') || '';
+        let userData = null;
+
+        function setStatus(msg, type = '') {
+            const status = document.getElementById('status');
+            status.innerHTML = msg;
+            status.className = 'status ' + type;
+        }
+
+        async function api(method, path, data = null) {
+            const url = API_BASE + path;
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+            
+            const options = { method, headers };
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+            
+            const res = await fetch(url, options);
+            const json = await res.json();
+            
+            if (json.code !== 0) {
+                throw new Error(json.message || 'API Error');
+            }
+            return json.data;
+        }
+
+        async function testLogin() {
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            setStatus('<span class="loading-spinner"></span>正在登录...', 'loading');
+            
+            try {
+                // 模拟微信登录（开发环境）
+                const result = await api('POST', '/auth/wechat/login', {
+                    code: 'dev_test_' + Date.now()
+                });
+                
+                token = result.access_token;
+                userData = result.user;
+                localStorage.setItem('zodiac_token', token);
+                
+                setStatus(`✅ 登录成功！欢迎，${userData.nickname}`, 'success');
+                updateUserInfo(userData);
+                
+            } catch (e) {
+                setStatus('❌ 登录失败: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function updateUserInfo(user) {
+            document.getElementById('userInfo').classList.add('show');
+            document.getElementById('nickname').textContent = user.nickname;
+            document.getElementById('level').textContent = user.level;
+            document.getElementById('power').textContent = user.power;
+            document.getElementById('gold').textContent = user.gold;
+            document.getElementById('timeCoin').textContent = user.timeCoin || 0;
+        }
+
+        async function testEmotion() {
+            if (!token) { setStatus('请先登录', 'error'); return; }
+            try {
+                const data = await api('GET', '/emotion/resources');
+                console.log('情绪资源:', data);
+                let html = '情绪资源：<br>';
+                data.forEach(e => {
+                    html += `${e.emotionName}: ${e.amount} (+${e.dailyProduction}/天)<br>`;
+                });
+                setStatus(html, 'success');
+            } catch (e) {
+                setStatus('❌ ' + e.message, 'error');
+            }
+        }
+
+        async function testGalaxies() {
+            if (!token) { setStatus('请先登录', 'error'); return; }
+            try {
+                const data = await api('GET', '/galaxies');
+                console.log('星系:', data);
+                if (data.length === 0) {
+                    // 创建一个星系
+                    const newGalaxy = await api('POST', '/galaxies', { name: '烈焰主星', type: 1 });
+                    setStatus(`✨ 创建星系成功: ${newGalaxy.name}`, 'success');
+                } else {
+                    let html = '我的星系：<br>';
+                    data.forEach(g => {
+                        html += `${g.name} Lv.${g.level}<br>`;
+                    });
+                    setStatus(html, 'success');
+                }
+            } catch (e) {
+                setStatus('❌ ' + e.message, 'error');
+            }
+        }
+
+        async function testHeartbeat() {
+            if (!token) { setStatus('请先登录', 'error'); return; }
+            try {
+                const data = await api('POST', '/users/heartbeat');
+                setStatus(`💓 心跳成功！在线 ${data.onlineMinutes} 分钟，下个时间币还需 ${data.nextCoinIn} 分钟`, 'success');
+            } catch (e) {
+                setStatus('❌ ' + e.message, 'error');
+            }
+        }
+
+        async function testMap() {
+            if (!token) { setStatus('请先登录', 'error'); return; }
+            try {
+                const data = await api('GET', '/map/local?lat=39.9&lng=116.4');
+                setStatus(`📍 附近玩家: ${data.players?.length || 0} 个`, 'success');
+            } catch (e) {
+                setStatus('❌ ' + e.message, 'error');
+            }
+        }
+
+        // 自动尝试登录
+        window.onload = async () => {
+            if (token) {
+                try {
+                    const user = await api('GET', '/users/me');
+                    userData = user;
+                    setStatus(`已登录: ${user.nickname}`, 'success');
+                    updateUserInfo(user);
+                } catch (e) {
+                    localStorage.removeItem('zodiac_token');
+                    token = '';
+                }
+            }
+        };
+    </script>
+</body>
+</html>

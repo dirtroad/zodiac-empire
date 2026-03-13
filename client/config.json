@@ -1,0 +1,14 @@
+{
+  "server": {
+    "base_url": "http://localhost:3000/v1",
+    "production_url": "https://your-domain.com/v1"
+  },
+  "wechat": {
+    "appid": "your-wechat-appid",
+    "secret": "your-wechat-secret"
+  },
+  "game": {
+    "name": "星座帝国",
+    "version": "1.0.0"
+  }
+}

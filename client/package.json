@@ -1,0 +1,11 @@
+{
+  "name": "zodiac-empire",
+  "uuid": "zodiac-empire-game",
+  "version": "1.0.0",
+  "description": "星座帝国 - 微信小游戏",
+  "author": "小科",
+  "main": "./project.json",
+  "creator": {
+    "version": "3.8.8"
+  }
+}

@@ -1,0 +1,1133 @@
+{
+  "version": "1.0.1",
+  "map": {
+    "audio": {
+      "time": 1773122709970.9956,
+      "uuid": "63b5c2a9-039c-462c-89ec-bd8751ca2f4e"
+    },
+    "scenes": {
+      "time": 1773230156487.886,
+      "uuid": "cf2bc4e3-9a84-436f-94e3-22c402d058ca"
+    },
+    "scripts": {
+      "time": 1773204758588.1636,
+      "uuid": "6acc62a7-dff2-4074-ad33-c539d81db70f"
+    },
+    "textures": {
+      "time": 1773122709971.7861,
+      "uuid": "ed8cb6e3-92e1-47d6-8b01-8fb7340b4a2a"
+    },
+    "audio/bgm": {
+      "time": 1773049851531.6733,
+      "uuid": "046653db-9adb-4521-8716-89db8e41d500"
+    },
+    "audio/sfx": {
+      "time": 1773049851531.7297,
+      "uuid": "c2681ba6-c597-4263-98b1-4112d5f7bbcb"
+    },
+    "scenes/fonts": {
+      "time": 1773049851531.783,
+      "uuid": "b96c2f43-ace6-47c0-91f5-e47ac22e4b87"
+    },
+    "scripts/components": {
+      "time": 1773143313353.524,
+      "uuid": "68d83020-9e2e-42d6-bfd5-50540098547f"
+    },
+    "scripts/managers": {
+      "time": 1773143474511.7576,
+      "uuid": "d5de9e1b-c5ea-4ac8-8902-c2e28532b3ab"
+    },
+    "scripts/pages": {
+      "time": 1773240280047.5251,
+      "uuid": "8c0fd3fb-1e72-4d9a-8e78-4b769076f7ef"
+    },
+    "scripts/scenes": {
+      "time": 1773142900974.9404,
+      "uuid": "1604ca0a-b953-4541-99d4-bfaac8a41843"
+    },
+    "scripts/ui": {
+      "time": 1773155087248.3875,
+      "uuid": "a21c21fb-0411-4014-9640-a6350a86b675"
+    },
+    "scripts/utils": {
+      "time": 1773122709973.2354,
+      "uuid": "ed345437-e5de-43d0-97d7-e50bbdb95f70"
+    },
+    "textures/battle": {
+      "time": 1773122711501.401,
+      "uuid": "11fb56cc-c5be-427a-a75b-2834311d07d1"
+    },
+    "textures/buildings": {
+      "time": 1773122711501.7861,
+      "uuid": "8cf2363a-df3d-43fe-ba19-158e19a6a5de"
+    },
+    "textures/effects": {
+      "time": 1773049851531.5115,
+      "uuid": "6e346304-34f5-4669-a6b5-992477ff62b2"
+    },
+    "textures/equipment": {
+      "time": 1773122711502.4883,
+      "uuid": "13fa97d4-41f3-4497-bb00-841821cd7be6"
+    },
+    "textures/frames": {
+      "time": 1773122711502.7622,
+      "uuid": "055c28fe-c28b-43e3-b22b-5de54cb94782"
+    },
+    "textures/galaxy": {
+      "time": 1773122711503.1106,
+      "uuid": "e4560f73-4d23-4d88-ba6f-2062d2ef79c2"
+    },
+    "textures/icons": {
+      "time": 1773122711503.1711,
+      "uuid": "c2974d8e-734d-4051-940d-c15186645d37"
+    },
+    "textures/ui": {
+      "time": 1773122711503.3137,
+      "uuid": "82836a07-b790-495b-b65b-890cfb2a564a"
+    },
+    "textures/battle/icons": {
+      "time": 1773122711503.8408,
+      "uuid": "c3434002-3181-4f40-8fc0-8dfa2be49e5c"
+    },
+    "textures/icons/resources": {
+      "time": 1773122711504.4258,
+      "uuid": "e43682a6-8c3e-4601-a344-f807284fb222"
+    },
+    "textures/icons/wuxing": {
+      "time": 1773122711504.8245,
+      "uuid": "9a7373c0-c31b-456b-931d-9c50529e2ce9"
+    },
+    "textures/icons/zodiac": {
+      "time": 1773122711505.614,
+      "uuid": "ab4c7564-2d30-4299-844e-6c2172af1c39"
+    },
+    "textures/ui/backgrounds": {
+      "time": 1773122711505.8062,
+      "uuid": "c6abd0c7-5914-4760-80df-3d20e20a78ea"
+    },
+    "textures/ui/buttons": {
+      "time": 1773122711506.2393,
+      "uuid": "3d63e24e-6f91-405f-bb41-ac65640b9294"
+    },
+    "textures/ui/login": {
+      "time": 1773122711506.3071,
+      "uuid": "53d2dd02-27bc-4869-b411-8c0f0894e51f"
+    },
+    "textures/ui/main": {
+      "time": 1773049851534.4084,
+      "uuid": "40b71164-311a-47ec-a001-fd6d89999a76"
+    },
+    "textures/ui/panels": {
+      "time": 1773122711506.4878,
+      "uuid": "24ef86c5-f95b-4ad5-9e7a-2395f58cf28e"
+    },
+    "textures/ui/popups": {
+      "time": 1773049851534.4712,
+      "uuid": "0323a428-5541-4e1e-b21e-0ca9bf8093d2"
+    },
+    "textures/ui/tabs": {
+      "time": 1773122711507.2756,
+      "uuid": "99f98eab-8509-425a-b760-866302efe550"
+    },
+    "scripts/GameEntry.ts": {
+      "time": 1773229870471.668,
+      "uuid": "ecb5cc51-a434-412c-a0ec-ccaa924178ba"
+    },
+    "scripts/GameManager.ts": {
+      "time": 1773190488728.2957,
+      "uuid": "ecf4237f-53c0-4cc2-800a-bd43dd242478"
+    },
+    "scripts/MainGame.ts": {
+      "time": 1773149811999.296,
+      "uuid": "bf96b23f-5e74-474a-acd2-ea7b5944d34f"
+    },
+    "scripts/TestScene.ts": {
+      "time": 1773210157190.4111,
+      "uuid": "73f8811c-df95-4c7a-95e5-9a310cee6cb7"
+    },
+    "scripts/managers/ApiClient.ts": {
+      "time": 1773229788559.3367,
+      "uuid": "be5bfc53-34fc-47df-9c72-f533fb744353"
+    },
+    "scripts/pages/BattlePage.ts": {
+      "time": 1773190630770.4075,
+      "uuid": "a9d3c900-457d-4dfe-a70a-682668f1747e"
+    },
+    "scripts/pages/GalaxyPage.ts": {
+      "time": 1773190593615.4902,
+      "uuid": "5b7c05a2-fd66-49ca-ad8c-afbc19475ee3"
+    },
+    "scripts/pages/HomePage.ts": {
+      "time": 1773190549134.4207,
+      "uuid": "4fb59e3a-3c95-406f-8565-3e4b3b8774a1"
+    },
+    "scripts/pages/MarketPage.ts": {
+      "time": 1773190672708.8433,
+      "uuid": "bcb5b2ec-c406-40af-9213-627fa3995c15"
+    },
+    "scripts/pages/ProfilePage.ts": {
+      "time": 1773190708885.081,
+      "uuid": "52b1118f-f3c5-4036-8438-9f1a4e073cbd"
+    },
+    "scripts/ui/ResourceBar.ts": {
+      "time": 1773189493390.9607,
+      "uuid": "09837b6e-78c8-4921-99d3-e42b22b1058e"
+    },
+    "scripts/ui/TabBar.ts": {
+      "time": 1773189514685.6968,
+      "uuid": "0af75179-776e-4bee-8365-568cb3b567f8"
+    },
+    "scripts/ui/UserInfo.ts": {
+      "time": 1773189532500.0967,
+      "uuid": "e66d4f65-1136-4381-a037-2219c7a38fb2"
+    },
+    "scripts/utils/Config.ts": {
+      "time": 1773040871545.6238,
+      "uuid": "7f99e56f-d48a-4932-b3d4-8abfe688db51"
+    },
+    "audio.meta": {
+      "time": 1773198363807.091
+    },
+    "scenes.meta": {
+      "time": 1773198363807.1704
+    },
+    "scripts.meta": {
+      "time": 1773198363807.239
+    },
+    "textures.meta": {
+      "time": 1773198363807.2917
+    },
+    "audio/bgm.meta": {
+      "time": 1773198363807.3396
+    },
+    "audio/sfx.meta": {
+      "time": 1773198363807.4993
+    },
+    "scenes/fonts.meta": {
+      "time": 1773198363807.6008
+    },
+    "scripts/components.meta": {
+      "time": 1773198363807.6877
+    },
+    "scripts/managers.meta": {
+      "time": 1773198363807.78
+    },
+    "scripts/pages.meta": {
+      "time": 1773198363807.8894
+    },
+    "scripts/scenes.meta": {
+      "time": 1773198363808.08
+    },
+    "scripts/ui.meta": {
+      "time": 1773198363808.1904
+    },
+    "scripts/utils.meta": {
+      "time": 1773198363808.282
+    },
+    "textures/battle.meta": {
+      "time": 1773198363808.3687
+    },
+    "textures/buildings.meta": {
+      "time": 1773198363808.4456
+    },
+    "textures/effects.meta": {
+      "time": 1773198363808.6035
+    },
+    "textures/equipment.meta": {
+      "time": 1773198363808.6995
+    },
+    "textures/frames.meta": {
+      "time": 1773198363808.7756
+    },
+    "textures/galaxy.meta": {
+      "time": 1773198363808.847
+    },
+    "textures/icons.meta": {
+      "time": 1773198363808.9175
+    },
+    "textures/ui.meta": {
+      "time": 1773198363809.0554
+    },
+    "textures/battle/icons.meta": {
+      "time": 1773198363809.1672
+    },
+    "textures/icons/resources.meta": {
+      "time": 1773198363809.2734
+    },
+    "textures/icons/wuxing.meta": {
+      "time": 1773198363809.3635
+    },
+    "textures/icons/zodiac.meta": {
+      "time": 1773198363809.4407
+    },
+    "textures/ui/backgrounds.meta": {
+      "time": 1773198363809.5454
+    },
+    "textures/ui/buttons.meta": {
+      "time": 1773198363809.6184
+    },
+    "textures/ui/login.meta": {
+      "time": 1773198363809.691
+    },
+    "textures/ui/main.meta": {
+      "time": 1773198363809.8577
+    },
+    "textures/ui/panels.meta": {
+      "time": 1773198363809.937
+    },
+    "textures/ui/popups.meta": {
+      "time": 1773198363810.0505
+    },
+    "textures/ui/tabs.meta": {
+      "time": 1773198363810.1248
+    },
+    "scripts/GameEntry.ts.meta": {
+      "time": 1773198363812.2307
+    },
+    "scripts/GameManager.ts.meta": {
+      "time": 1773198363812.288
+    },
+    "scripts/MainGame.ts.meta": {
+      "time": 1773198363812.3796
+    },
+    "scripts/TestScene.ts.meta": {
+      "time": 1773198363812.6196
+    },
+    "scripts/managers/ApiClient.ts.meta": {
+      "time": 1773198363812.473
+    },
+    "scripts/pages/BattlePage.ts.meta": {
+      "time": 1773198363814.6953
+    },
+    "scripts/pages/GalaxyPage.ts.meta": {
+      "time": 1773198363814.7551
+    },
+    "scripts/pages/HomePage.ts.meta": {
+      "time": 1773198363814.8062
+    },
+    "scripts/pages/MarketPage.ts.meta": {
+      "time": 1773198363814.8599
+    },
+    "scripts/pages/ProfilePage.ts.meta": {
+      "time": 1773198363814.973
+    },
+    "scripts/ui/ResourceBar.ts.meta": {
+      "time": 1773198363816.784
+    },
+    "scripts/ui/TabBar.ts.meta": {
+      "time": 1773198363816.8945
+    },
+    "scripts/ui/UserInfo.ts.meta": {
+      "time": 1773198363816.9463
+    },
+    "scripts/utils/Config.ts.meta": {
+      "time": 1773198363816.8447
+    },
+    "MainScene.scene": {
+      "time": 1773126669462.0964,
+      "uuid": "377b386e-a4b8-4fae-86a6-feee5425c797"
+    },
+    "README.md": {
+      "time": 1773049892657.9128,
+      "uuid": "877d61be-5417-4b6b-a290-94120e4abd11"
+    },
+    "scenes/MainScene.scene": {
+      "time": 1773196441878.99,
+      "uuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+    },
+    "scenes/TestScene.scene": {
+      "time": 1773201623996.861,
+      "uuid": "3412ddf5-808c-4017-9032-e0dcb76fa105"
+    },
+    "scripts/README.md": {
+      "time": 1773149889583.2542,
+      "uuid": "259f81b8-9759-48b1-8af0-cbc3db5dfc28"
+    },
+    "textures/battle/bg_battle.png": {
+      "time": 1773101359693.4888,
+      "uuid": "c7a244be-152f-4b4d-9158-9be533123621"
+    },
+    "textures/buildings/building_defense.png": {
+      "time": 1773119891362.653,
+      "uuid": "9dc20d69-6259-4409-acce-1dc7b75e1ae7"
+    },
+    "textures/buildings/building_emotion_factory.png": {
+      "time": 1773119891362.247,
+      "uuid": "c68de1e8-c400-4c9e-9b66-635070328b12"
+    },
+    "textures/buildings/building_research.png": {
+      "time": 1773119891362.8047,
+      "uuid": "c85e0c8f-553e-4494-bc5d-86c4dca0f5d5"
+    },
+    "textures/buildings/building_time_bank.png": {
+      "time": 1773119891362.4854,
+      "uuid": "530df95b-d2af-49e5-9579-3a50191f3c1b"
+    },
+    "textures/buildings/building_warehouse.png": {
+      "time": 1773119891362.9507,
+      "uuid": "63a484ef-316c-4edf-8a32-34763d373430"
+    },
+    "textures/equipment/equip_accelerator.png": {
+      "time": 1773119891364.568,
+      "uuid": "f987cccf-96bb-4449-a92a-48fb9e3f6a34"
+    },
+    "textures/equipment/equip_armor.png": {
+      "time": 1773119891364.9895,
+      "uuid": "49d68458-8296-4b03-b74c-057faa321a85"
+    },
+    "textures/equipment/equip_boots.png": {
+      "time": 1773119891365.783,
+      "uuid": "e8acd752-ff4b-465f-b5d2-1b8126fdff25"
+    },
+    "textures/equipment/equip_engine.png": {
+      "time": 1773119891364.3472,
+      "uuid": "fc269bb5-3581-4942-800b-42e539e2e3b5"
+    },
+    "textures/equipment/equip_gloves.png": {
+      "time": 1773119891366.1882,
+      "uuid": "2df2dcfd-b1d1-4e68-81f7-4dbb5b8d26b2"
+    },
+    "textures/equipment/equip_helmet.png": {
+      "time": 1773119891365.977,
+      "uuid": "b91b974a-c6e3-497b-977e-e05b32fa2ba6"
+    },
+    "textures/equipment/equip_necklace.png": {
+      "time": 1773119891365.5884,
+      "uuid": "b7d6510f-4a39-4a14-aafe-7e2e2d333387"
+    },
+    "textures/equipment/equip_ring.png": {
+      "time": 1773119891365.3904,
+      "uuid": "d6f061e4-9ee4-49e2-a18c-8fe201aa79f2"
+    },
+    "textures/equipment/equip_shield.png": {
+      "time": 1773119891365.194,
+      "uuid": "ee814326-ac4b-43d5-b6af-e4d95eb5fcd9"
+    },
+    "textures/equipment/equip_slot_empty.png": {
+      "time": 1773119891366.341,
+      "uuid": "34642ab9-c3a3-4b16-9d39-61aa082a499d"
+    },
+    "textures/equipment/equip_weapon.png": {
+      "time": 1773119891364.7798,
+      "uuid": "5df5dbee-9283-49eb-9d8e-1e36671e44d7"
+    },
+    "textures/frames/frame_common.png": {
+      "time": 1773101186921.377,
+      "uuid": "a3ae6bfb-2c83-4a69-b195-cb513cab741f"
+    },
+    "textures/frames/frame_epic.png": {
+      "time": 1773101208385.3894,
+      "uuid": "262c14b1-cf20-4ffb-a7e2-4b34e40a6144"
+    },
+    "textures/frames/frame_legendary.png": {
+      "time": 1773101219602.0007,
+      "uuid": "a14c2fa5-96e8-49c8-9254-7b9ccb0ff53b"
+    },
+    "textures/frames/frame_rare.png": {
+      "time": 1773101196920.4902,
+      "uuid": "c0e13697-6c5c-41f1-8cdd-d44978a2778d"
+    },
+    "textures/galaxy/galaxy_binary.png": {
+      "time": 1773101252950.9175,
+      "uuid": "1bdca99a-b28a-4366-9863-6656bd4d7fa8"
+    },
+    "textures/galaxy/galaxy_blackhole.png": {
+      "time": 1773101294688.914,
+      "uuid": "18c3bb0e-ca5b-4d42-8fe5-4b0170bcf3b5"
+    },
+    "textures/galaxy/galaxy_cluster.png": {
+      "time": 1773101266476.6638,
+      "uuid": "99a470f8-8d73-4c94-8de0-1178e5f0cf4d"
+    },
+    "textures/galaxy/galaxy_nebula.png": {
+      "time": 1773101283973.4377,
+      "uuid": "480b3a0f-058f-461d-8baa-1ba4c8de02b9"
+    },
+    "textures/galaxy/galaxy_normal.png": {
+      "time": 1773101236290.6924,
+      "uuid": "30823e22-6e2e-4e45-b749-a33296930395"
+    },
+    "textures/icons/icon_add.png": {
+      "time": 1773119891366.4573,
+      "uuid": "f749e606-b52d-4e8e-aa3d-c0ced04892ad"
+    },
+    "textures/ui/bg_splash.png": {
+      "time": 1773119796527.1375,
+      "uuid": "f7f33332-1a67-4722-97b0-9d90d26e9f93"
+    },
+    "textures/ui/logo.png": {
+      "time": 1773100899188.7695,
+      "uuid": "e29509d5-3c5b-42ff-9555-f0482c8d481e"
+    },
+    "textures/battle/icons/icon_defeat.png": {
+      "time": 1773119891363.8655,
+      "uuid": "756d4399-64af-4873-b7ec-d1275b5a727e"
+    },
+    "textures/battle/icons/icon_shield.png": {
+      "time": 1773119891363.9968,
+      "uuid": "3dce6da6-700a-4878-8220-de17e8cbdaca"
+    },
+    "textures/battle/icons/icon_sword.png": {
+      "time": 1773119891364.1113,
+      "uuid": "096f9850-e361-49f3-98d3-47ab3e954e2e"
+    },
+    "textures/battle/icons/icon_type_emotion.png": {
+      "time": 1773119891363.3098,
+      "uuid": "bb102b9d-65ef-499e-8867-77c7ce0f9251"
+    },
+    "textures/battle/icons/icon_type_revenge.png": {
+      "time": 1773119891363.4849,
+      "uuid": "6dc93856-f3bf-465a-88f2-3ada94d1d895"
+    },
+    "textures/battle/icons/icon_type_war.png": {
+      "time": 1773119891363.1375,
+      "uuid": "14129670-76b3-48ad-b0d8-a8ca7fb73d47"
+    },
+    "textures/battle/icons/icon_victory.png": {
+      "time": 1773119891363.6687,
+      "uuid": "a5b173e5-574d-4316-94de-77fdc6f0b49f"
+    },
+    "textures/icons/resources/icon_anger.png": {
+      "time": 1773119796497.9146,
+      "uuid": "b7b6d97c-1da8-4f0f-8059-6d855b7b1ca1"
+    },
+    "textures/icons/resources/icon_calm.png": {
+      "time": 1773119796497.1355,
+      "uuid": "c36ca971-7094-4612-8f3e-c39bcbb7aff9"
+    },
+    "textures/icons/resources/icon_diamond.png": {
+      "time": 1773119796495.548,
+      "uuid": "8e336091-784f-45f0-ae5a-eb2bf904db77"
+    },
+    "textures/icons/resources/icon_gold.png": {
+      "time": 1773119796495.128,
+      "uuid": "0facd1de-8953-4129-9315-239f9468c9eb"
+    },
+    "textures/icons/resources/icon_happy.png": {
+      "time": 1773119796496.7495,
+      "uuid": "254dd242-2926-449a-bd3b-80bfce58ae03"
+    },
+    "textures/icons/resources/icon_passion.png": {
+      "time": 1773119796496.3538,
+      "uuid": "37b42543-543c-4fb4-bb44-e1d789e71078"
+    },
+    "textures/icons/resources/icon_timecoin.png": {
+      "time": 1773119796495.9622,
+      "uuid": "08a8fc79-d846-4b2a-8487-ebf4b83a1676"
+    },
+    "textures/icons/resources/icon_wisdom.png": {
+      "time": 1773119796497.5342,
+      "uuid": "cad48cd0-67be-4843-a53b-50d7cc6da5da"
+    },
+    "textures/icons/wuxing/icon_wuxing_earth.png": {
+      "time": 1773101172736.3752,
+      "uuid": "3245252a-76dd-412a-bcfe-579a27714ffb"
+    },
+    "textures/icons/wuxing/icon_wuxing_fire.png": {
+      "time": 1773101162789.982,
+      "uuid": "1c95d96c-27aa-4463-a3cd-4ec56546f93e"
+    },
+    "textures/icons/wuxing/icon_wuxing_metal.png": {
+      "time": 1773101132105.143,
+      "uuid": "c6516281-8a94-482a-9d69-796da2b1fdf4"
+    },
+    "textures/icons/wuxing/icon_wuxing_water.png": {
+      "time": 1773101152806.513,
+      "uuid": "f9f556d8-9804-456a-90b1-b378e8d9e143"
+    },
+    "textures/icons/wuxing/icon_wuxing_wood.png": {
+      "time": 1773101142318.6748,
+      "uuid": "fd78aabd-b29f-4e5c-95db-9b62ef60aa4b"
+    },
+    "textures/icons/zodiac/icon_zodiac_aquarius.png": {
+      "time": 1773100980850.6409,
+      "uuid": "57098767-88d1-4e65-a0a1-cd014ffe3eff"
+    },
+    "textures/icons/zodiac/icon_zodiac_aries.png": {
+      "time": 1773100906147.2253,
+      "uuid": "4fb7a048-b7c3-4488-8eca-173c38c6e8f1"
+    },
+    "textures/icons/zodiac/icon_zodiac_cancer.png": {
+      "time": 1773100924163.368,
+      "uuid": "812adee8-337f-46fa-bcb6-0d055eeee3d5"
+    },
+    "textures/icons/zodiac/icon_zodiac_capricorn.png": {
+      "time": 1773100972867.8042,
+      "uuid": "95ea2980-3001-4c90-9c2f-bef66d4dce44"
+    },
+    "textures/icons/zodiac/icon_zodiac_gemini.png": {
+      "time": 1773100919543.771,
+      "uuid": "67f59a62-30bf-4011-8e6f-8e251415c956"
+    },
+    "textures/icons/zodiac/icon_zodiac_leo.png": {
+      "time": 1773100931987.2266,
+      "uuid": "1734613c-699c-4e9c-b582-59e34cf8b516"
+    },
+    "textures/icons/zodiac/icon_zodiac_libra.png": {
+      "time": 1773100947875.1245,
+      "uuid": "786fd513-6a3e-40bc-a1e6-59c2a69e57a8"
+    },
+    "textures/icons/zodiac/icon_zodiac_pisces.png": {
+      "time": 1773100988880.3262,
+      "uuid": "33d67c15-9fd5-4982-9be9-f520893da0ff"
+    },
+    "textures/icons/zodiac/icon_zodiac_sagittarius.png": {
+      "time": 1773100964882.8567,
+      "uuid": "3ab04faa-ac17-4e7b-9223-ada233072bfc"
+    },
+    "textures/icons/zodiac/icon_zodiac_scorpio.png": {
+      "time": 1773100956742.3918,
+      "uuid": "b6468382-4e04-4ff2-bf91-f2a13daaa49e"
+    },
+    "textures/icons/zodiac/icon_zodiac_taurus.png": {
+      "time": 1773100913944.2097,
+      "uuid": "c3149033-7f28-4e9a-858f-1cbe02317576"
+    },
+    "textures/icons/zodiac/icon_zodiac_virgo.png": {
+      "time": 1773100940099.8247,
+      "uuid": "4cc0cb7a-21a1-4483-afb2-e08c5cfa1822"
+    },
+    "textures/ui/backgrounds/bg_card.png": {
+      "time": 1773119796510.937,
+      "uuid": "082155ec-8ebc-4af1-a919-234233ec0c93"
+    },
+    "textures/ui/backgrounds/bg_list_item.png": {
+      "time": 1773119796511.8992,
+      "uuid": "d7872c78-b8cb-485e-a38d-523d65a80910"
+    },
+    "textures/ui/backgrounds/bg_modal.png": {
+      "time": 1773119796510.2056,
+      "uuid": "b7478325-f49f-4bdc-9b4c-466a678d2a7c"
+    },
+    "textures/ui/buttons/btn_disabled.png": {
+      "time": 1773119796505.2952,
+      "uuid": "978afc21-122e-4c2c-8c10-98c906033049"
+    },
+    "textures/ui/buttons/btn_primary.png": {
+      "time": 1773119796499.949,
+      "uuid": "41ad99a8-c55e-439d-9573-8ab8600c869b"
+    },
+    "textures/ui/buttons/btn_primary_pressed.png": {
+      "time": 1773119796501.8628,
+      "uuid": "c0106786-d382-4ac0-a187-4206f644bf69"
+    },
+    "textures/ui/buttons/btn_secondary.png": {
+      "time": 1773119796503.121,
+      "uuid": "ea9ea76e-e472-4026-8719-c2da3c08ddca"
+    },
+    "textures/ui/buttons/btn_secondary_pressed.png": {
+      "time": 1773119796504.2756,
+      "uuid": "9433c556-2ee7-4ce8-a1d7-57a74cdff111"
+    },
+    "textures/ui/buttons/btn_small.png": {
+      "time": 1773119796505.7998,
+      "uuid": "189d7d6d-e918-4b21-80c2-4e9617ec4399"
+    },
+    "textures/ui/buttons/btn_wechat_login.png": {
+      "time": 1773119796491.128,
+      "uuid": "1bbb3441-ea2b-4fa5-acc8-c2fc4d562d61"
+    },
+    "textures/ui/login/bg_login.png": {
+      "time": 1773100890369.2761,
+      "uuid": "f7e2b171-92f0-4cae-adb5-24f9504d6ee9"
+    },
+    "textures/ui/panels/panel_large.png": {
+      "time": 1773101343044.9287,
+      "uuid": "eec8ef2a-f4e5-4082-81b1-0cbb3c613be2"
+    },
+    "textures/ui/panels/panel_medium.png": {
+      "time": 1773101327511.6821,
+      "uuid": "73418a9a-468d-4cc8-a170-5d121c0c938d"
+    },
+    "textures/ui/panels/panel_small.png": {
+      "time": 1773101311102.0981,
+      "uuid": "f8e76d61-d75e-4192-b0b0-0962ff8e29a2"
+    },
+    "textures/ui/tabs/tab_battle.png": {
+      "time": 1773119796493.061,
+      "uuid": "e48a6f4d-ace5-47bd-bbb2-2773364fae5d"
+    },
+    "textures/ui/tabs/tab_battle_active.png": {
+      "time": 1773119796493.3794,
+      "uuid": "d9f8a160-ba01-44c9-851e-ce279bb0ccfa"
+    },
+    "textures/ui/tabs/tab_galaxy.png": {
+      "time": 1773119796492.3882,
+      "uuid": "8e7cd451-884c-4425-95ab-37d8146edd2f"
+    },
+    "textures/ui/tabs/tab_galaxy_active.png": {
+      "time": 1773119796492.7202,
+      "uuid": "a6a67028-eead-4c11-b458-8262a43adc19"
+    },
+    "textures/ui/tabs/tab_home.png": {
+      "time": 1773119796491.6755,
+      "uuid": "67f09475-1aed-42a3-a4af-03c76af09647"
+    },
+    "textures/ui/tabs/tab_home_active.png": {
+      "time": 1773119796492.0264,
+      "uuid": "425c9031-c476-4c51-8a77-e39e6959132e"
+    },
+    "textures/ui/tabs/tab_market.png": {
+      "time": 1773119796493.718,
+      "uuid": "67ed7649-b3f0-4d1a-8308-dbfe715a716f"
+    },
+    "textures/ui/tabs/tab_market_active.png": {
+      "time": 1773119796494.0505,
+      "uuid": "c2d78e37-659b-4021-9fa3-f1cba1c6c5c8"
+    },
+    "textures/ui/tabs/tab_profile.png": {
+      "time": 1773119796494.3892,
+      "uuid": "9266dca1-6b37-41b1-927f-06b6bb668e12"
+    },
+    "textures/ui/tabs/tab_profile_active.png": {
+      "time": 1773119796494.7007,
+      "uuid": "82f4dff2-f71b-441a-91aa-a2ce9a042468"
+    },
+    "scenes/TestScene.scene.meta": {
+      "time": 1773198364673.4565
+    },
+    "MainScene.scene.meta": {
+      "time": 1773198364673.777
+    },
+    "README.md.meta": {
+      "time": 1773198364674.396
+    },
+    "scenes/MainScene.scene.meta": {
+      "time": 1773198364674.0037
+    },
+    "scripts/README.md.meta": {
+      "time": 1773198364674.2778
+    },
+    "textures/buildings/building_defense.png.meta": {
+      "time": 1773198364675.8638
+    },
+    "textures/buildings/building_emotion_factory.png.meta": {
+      "time": 1773198364675.7869
+    },
+    "textures/buildings/building_research.png.meta": {
+      "time": 1773198364676.763
+    },
+    "textures/buildings/building_time_bank.png.meta": {
+      "time": 1773198364676.6428
+    },
+    "textures/battle/bg_battle.png.meta": {
+      "time": 1773198364677.9436
+    },
+    "textures/equipment/equip_accelerator.png.meta": {
+      "time": 1773198364678.171
+    },
+    "textures/buildings/building_warehouse.png.meta": {
+      "time": 1773198364677.6235
+    },
+    "textures/equipment/equip_armor.png.meta": {
+      "time": 1773198364678.6543
+    },
+    "textures/equipment/equip_boots.png.meta": {
+      "time": 1773198364678.7263
+    },
+    "textures/equipment/equip_engine.png.meta": {
+      "time": 1773198364679.34
+    },
+    "textures/equipment/equip_helmet.png.meta": {
+      "time": 1773198364679.834
+    },
+    "textures/equipment/equip_gloves.png.meta": {
+      "time": 1773198364679.7188
+    },
+    "textures/equipment/equip_necklace.png.meta": {
+      "time": 1773198364680.266
+    },
+    "textures/equipment/equip_ring.png.meta": {
+      "time": 1773198364680.3887
+    },
+    "textures/equipment/equip_shield.png.meta": {
+      "time": 1773198364682.0593
+    },
+    "textures/equipment/equip_weapon.png.meta": {
+      "time": 1773198364682.3826
+    },
+    "textures/equipment/equip_slot_empty.png.meta": {
+      "time": 1773198364682.4912
+    },
+    "textures/frames/frame_common.png.meta": {
+      "time": 1773198364683.8745
+    },
+    "textures/frames/frame_rare.png.meta": {
+      "time": 1773198364684.683
+    },
+    "textures/frames/frame_legendary.png.meta": {
+      "time": 1773198364685.1863
+    },
+    "textures/frames/frame_epic.png.meta": {
+      "time": 1773198364684.0771
+    },
+    "textures/galaxy/galaxy_binary.png.meta": {
+      "time": 1773198364686.4363
+    },
+    "textures/galaxy/galaxy_cluster.png.meta": {
+      "time": 1773198364687.6406
+    },
+    "textures/galaxy/galaxy_blackhole.png.meta": {
+      "time": 1773198364688.3518
+    },
+    "textures/icons/icon_add.png.meta": {
+      "time": 1773198364687.9172
+    },
+    "textures/galaxy/galaxy_nebula.png.meta": {
+      "time": 1773198364688.1265
+    },
+    "textures/galaxy/galaxy_normal.png.meta": {
+      "time": 1773198364688.5217
+    },
+    "textures/ui/bg_splash.png.meta": {
+      "time": 1773198364689.5896
+    },
+    "textures/battle/icons/icon_defeat.png.meta": {
+      "time": 1773198364689.4207
+    },
+    "textures/battle/icons/icon_sword.png.meta": {
+      "time": 1773198364690.1792
+    },
+    "textures/battle/icons/icon_shield.png.meta": {
+      "time": 1773198364690.3267
+    },
+    "textures/ui/logo.png.meta": {
+      "time": 1773198364691.1067
+    },
+    "textures/battle/icons/icon_type_emotion.png.meta": {
+      "time": 1773198364691.386
+    },
+    "textures/battle/icons/icon_type_revenge.png.meta": {
+      "time": 1773198364691.501
+    },
+    "textures/battle/icons/icon_type_war.png.meta": {
+      "time": 1773198364692.0496
+    },
+    "textures/battle/icons/icon_victory.png.meta": {
+      "time": 1773198364692.1208
+    },
+    "textures/icons/resources/icon_anger.png.meta": {
+      "time": 1773198364694.3816
+    },
+    "textures/icons/resources/icon_calm.png.meta": {
+      "time": 1773198364694.7646
+    },
+    "textures/icons/resources/icon_diamond.png.meta": {
+      "time": 1773198364694.854
+    },
+    "textures/icons/resources/icon_gold.png.meta": {
+      "time": 1773198364695.363
+    },
+    "textures/icons/resources/icon_happy.png.meta": {
+      "time": 1773198364695.4482
+    },
+    "textures/icons/resources/icon_passion.png.meta": {
+      "time": 1773198364697.4988
+    },
+    "textures/icons/resources/icon_timecoin.png.meta": {
+      "time": 1773198364697.8928
+    },
+    "textures/icons/resources/icon_wisdom.png.meta": {
+      "time": 1773198364697.7751
+    },
+    "textures/icons/wuxing/icon_wuxing_earth.png.meta": {
+      "time": 1773198364698.6912
+    },
+    "textures/icons/wuxing/icon_wuxing_fire.png.meta": {
+      "time": 1773198364698.4336
+    },
+    "textures/icons/wuxing/icon_wuxing_metal.png.meta": {
+      "time": 1773198364700.181
+    },
+    "textures/icons/wuxing/icon_wuxing_wood.png.meta": {
+      "time": 1773198364701.1885
+    },
+    "textures/icons/zodiac/icon_zodiac_aries.png.meta": {
+      "time": 1773198364701.5852
+    },
+    "textures/icons/zodiac/icon_zodiac_aquarius.png.meta": {
+      "time": 1773198364701.7188
+    },
+    "textures/icons/wuxing/icon_wuxing_water.png.meta": {
+      "time": 1773198364701.3882
+    },
+    "textures/icons/zodiac/icon_zodiac_cancer.png.meta": {
+      "time": 1773198364702.6768
+    },
+    "textures/icons/zodiac/icon_zodiac_capricorn.png.meta": {
+      "time": 1773198364703.4578
+    },
+    "textures/icons/zodiac/icon_zodiac_gemini.png.meta": {
+      "time": 1773198364704.0144
+    },
+    "textures/icons/zodiac/icon_zodiac_leo.png.meta": {
+      "time": 1773198364704.3245
+    },
+    "textures/icons/zodiac/icon_zodiac_libra.png.meta": {
+      "time": 1773198364704.5989
+    },
+    "textures/icons/zodiac/icon_zodiac_pisces.png.meta": {
+      "time": 1773198364704.8086
+    },
+    "textures/icons/zodiac/icon_zodiac_sagittarius.png.meta": {
+      "time": 1773198364705.7888
+    },
+    "textures/ui/backgrounds/bg_card.png.meta": {
+      "time": 1773198364706.8025
+    },
+    "textures/icons/zodiac/icon_zodiac_scorpio.png.meta": {
+      "time": 1773198364706.55
+    },
+    "textures/icons/zodiac/icon_zodiac_taurus.png.meta": {
+      "time": 1773198364706.637
+    },
+    "textures/icons/zodiac/icon_zodiac_virgo.png.meta": {
+      "time": 1773198364707.8123
+    },
+    "textures/ui/backgrounds/bg_list_item.png.meta": {
+      "time": 1773198364708.3555
+    },
+    "textures/ui/backgrounds/bg_modal.png.meta": {
+      "time": 1773198364708.9746
+    },
+    "textures/ui/buttons/btn_disabled.png.meta": {
+      "time": 1773198364708.78
+    },
+    "textures/ui/buttons/btn_primary.png.meta": {
+      "time": 1773198364709.1409
+    },
+    "textures/ui/buttons/btn_primary_pressed.png.meta": {
+      "time": 1773198364709.5703
+    },
+    "textures/ui/buttons/btn_secondary.png.meta": {
+      "time": 1773198364711.941
+    },
+    "textures/ui/buttons/btn_secondary_pressed.png.meta": {
+      "time": 1773198364713.1868
+    },
+    "textures/ui/buttons/btn_small.png.meta": {
+      "time": 1773198364714.0852
+    },
+    "textures/ui/buttons/btn_wechat_login.png.meta": {
+      "time": 1773198364714.7505
+    },
+    "textures/ui/login/bg_login.png.meta": {
+      "time": 1773198364716.208
+    },
+    "textures/ui/panels/panel_medium.png.meta": {
+      "time": 1773198364719.89
+    },
+    "textures/ui/panels/panel_large.png.meta": {
+      "time": 1773198364718.8
+    },
+    "textures/ui/tabs/tab_battle.png.meta": {
+      "time": 1773198364722.8533
+    },
+    "textures/ui/panels/panel_small.png.meta": {
+      "time": 1773198364720.223
+    },
+    "textures/ui/tabs/tab_battle_active.png.meta": {
+      "time": 1773198364724.0513
+    },
+    "textures/ui/tabs/tab_galaxy.png.meta": {
+      "time": 1773198364727.571
+    },
+    "textures/ui/tabs/tab_home.png.meta": {
+      "time": 1773198364728.5457
+    },
+    "textures/ui/tabs/tab_galaxy_active.png.meta": {
+      "time": 1773198364727.9248
+    },
+    "textures/ui/tabs/tab_home_active.png.meta": {
+      "time": 1773198364739.6519
+    },
+    "textures/ui/tabs/tab_market.png.meta": {
+      "time": 1773198364740.33
+    },
+    "textures/ui/tabs/tab_market_active.png.meta": {
+      "time": 1773198364741.5466
+    },
+    "textures/ui/tabs/tab_profile.png.meta": {
+      "time": 1773198364741.6726
+    },
+    "textures/ui/tabs/tab_profile_active.png.meta": {
+      "time": 1773198364741.7979
+    },
+    "resources.meta": {
+      "time": 1773201782491.804
+    },
+    "resources/icons.meta": {
+      "time": 1773201782491.8926
+    },
+    "resources/tabs.meta": {
+      "time": 1773201782491.9812
+    },
+    "resources": {
+      "time": 1773201782491.106,
+      "uuid": "6790ec1e-c580-479a-a7d1-22b2cce77085"
+    },
+    "resources/icons": {
+      "time": 1773201782492.7744,
+      "uuid": "6a233796-5c70-4968-b457-5393167398a6"
+    },
+    "resources/tabs": {
+      "time": 1773201782493.7583,
+      "uuid": "df96547c-d64b-45f7-adca-999a8f630ddd"
+    },
+    "resources/icons/icon_anger.png.meta": {
+      "time": 1773201782503.3872
+    },
+    "resources/icons/icon_calm.png.meta": {
+      "time": 1773201782503.2202
+    },
+    "resources/icons/icon_diamond.png.meta": {
+      "time": 1773201782504.2375
+    },
+    "resources/icons/icon_gold.png.meta": {
+      "time": 1773201782503.8901
+    },
+    "resources/icons/icon_happy.png.meta": {
+      "time": 1773201782504.9863
+    },
+    "resources/icons/icon_passion.png.meta": {
+      "time": 1773201782508.1663
+    },
+    "resources/icons/icon_timecoin.png.meta": {
+      "time": 1773201782508.4717
+    },
+    "resources/icons/icon_wisdom.png.meta": {
+      "time": 1773201782508.7236
+    },
+    "resources/tabs/tab_battle.png.meta": {
+      "time": 1773201782508.8376
+    },
+    "resources/tabs/tab_battle_active.png.meta": {
+      "time": 1773201782507.8992
+    },
+    "resources/tabs/tab_galaxy.png.meta": {
+      "time": 1773201782512.0828
+    },
+    "resources/tabs/tab_galaxy_active.png.meta": {
+      "time": 1773201782511.9788
+    },
+    "resources/tabs/tab_home.png.meta": {
+      "time": 1773201782510.6167
+    },
+    "resources/tabs/tab_home_active.png.meta": {
+      "time": 1773201782511.6467
+    },
+    "resources/tabs/tab_market.png.meta": {
+      "time": 1773201782511.539
+    },
+    "resources/tabs/tab_market_active.png.meta": {
+      "time": 1773201782515.0151
+    },
+    "resources/tabs/tab_profile.png.meta": {
+      "time": 1773201782515.1265
+    },
+    "resources/tabs/tab_profile_active.png.meta": {
+      "time": 1773201782514.8027
+    },
+    "resources/icons/icon_calm.png": {
+      "time": 1773201619000.4912,
+      "uuid": "80e11a4c-01a6-4c03-bf09-6f45ffcdad2e"
+    },
+    "resources/icons/icon_anger.png": {
+      "time": 1773201618999.8894,
+      "uuid": "e5d659d1-92a3-448d-ad24-28ede94db85b"
+    },
+    "resources/icons/icon_gold.png": {
+      "time": 1773201619001.4922,
+      "uuid": "92c81428-4123-4386-ad2c-8c3a857a561f"
+    },
+    "resources/icons/icon_diamond.png": {
+      "time": 1773201619001.1562,
+      "uuid": "244df03e-638b-489d-952f-0d27696f89ff"
+    },
+    "resources/icons/icon_happy.png": {
+      "time": 1773201619001.78,
+      "uuid": "dbba90d1-3f6c-4b1a-9187-6bee21a5eeaf"
+    },
+    "resources/tabs/tab_battle_active.png": {
+      "time": 1773201619008.7136,
+      "uuid": "dfd849eb-d292-4fc6-af6d-7f70d73831ec"
+    },
+    "resources/icons/icon_passion.png": {
+      "time": 1773201619002.1023,
+      "uuid": "a074e0d9-7c9c-4cf0-b56f-d64797d95671"
+    },
+    "resources/icons/icon_timecoin.png": {
+      "time": 1773201619002.4019,
+      "uuid": "ca27e4ed-6107-4f40-b430-3731dc671ab4"
+    },
+    "resources/icons/icon_wisdom.png": {
+      "time": 1773201619002.7163,
+      "uuid": "b41f4f44-9a81-497b-ac19-2da57df712e4"
+    },
+    "resources/tabs/tab_battle.png": {
+      "time": 1773201619008.0876,
+      "uuid": "c9e7f1ae-f195-4c53-9aa6-7ee3c5a97c18"
+    },
+    "resources/tabs/tab_home.png": {
+      "time": 1773201619010.008,
+      "uuid": "287a7a29-8321-4993-b55f-c1baff69f98a"
+    },
+    "resources/tabs/tab_market.png": {
+      "time": 1773201619010.6912,
+      "uuid": "2b8c6368-06b5-4db5-91c3-32857010e6f7"
+    },
+    "resources/tabs/tab_home_active.png": {
+      "time": 1773201619010.342,
+      "uuid": "68a5835c-6f11-41e1-b59d-d998a26f48a7"
+    },
+    "resources/tabs/tab_galaxy_active.png": {
+      "time": 1773201619009.6665,
+      "uuid": "87ec6a7d-5f55-46cf-8258-c1ec954786bf"
+    },
+    "resources/tabs/tab_galaxy.png": {
+      "time": 1773201619009.283,
+      "uuid": "9fc52c60-5706-4a9a-aaab-dfd678b31e89"
+    },
+    "resources/tabs/tab_profile_active.png": {
+      "time": 1773201619011.718,
+      "uuid": "2847bfed-027c-4c75-a3fc-0a858f365d05"
+    },
+    "resources/tabs/tab_market_active.png": {
+      "time": 1773201619011.0369,
+      "uuid": "0f9a7039-8de9-4217-b6c7-f2f50f847033"
+    },
+    "resources/tabs/tab_profile.png": {
+      "time": 1773201619011.3862,
+      "uuid": "6008194c-e984-4b13-96f8-a23f2847963d"
+    },
+    "scripts/GameTester.ts.meta": {
+      "time": 1773204758590.173
+    },
+    "scripts/GameTester.ts": {
+      "time": 1773203019601.9287,
+      "uuid": "3d42dd43-6656-4c39-b7a9-a161638b7635"
+    },
+    "scripts/pages/LoginPage.ts": {
+      "time": 1773229820499.4402,
+      "uuid": "5108325e-f17a-444f-93f4-5cf24e3eb21f"
+    },
+    "scripts/pages/MainPage.ts": {
+      "time": 1773229854847.7627,
+      "uuid": "0a2deaa3-f29c-4caa-9eee-24dad1239826"
+    },
+    "scripts/pages/LoginPage.ts.meta": {
+      "time": 1773240280049.401
+    },
+    "scripts/pages/MainPage.ts.meta": {
+      "time": 1773240280049.4795
+    },
+    "scenes/LoginScene.scene": {
+      "time": 1773240280729.9875,
+      "uuid": "f634bf49-ff10-43ad-8e1e-69736018c138"
+    },
+    "scenes/LoginScene.scene.meta": {
+      "time": 1773240280732.496
+    }
+  },
+  "missing": {}
+}

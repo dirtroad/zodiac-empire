@@ -1,0 +1,19 @@
+{
+  "__version__": "1.0.6",
+  "general": {
+    "designResolution": {
+      "width": 960,
+      "height": 640,
+      "policy": 3
+    },
+    "startScene": "3412ddf5-808c-4017-9032-e0dcb76fa105"
+  },
+  "scripting": {
+    "scriptBundleType": "bundled"
+  },
+  "fbx": {
+    "legacyFbxImporter": {
+      "visible": true
+    }
+  }
+}

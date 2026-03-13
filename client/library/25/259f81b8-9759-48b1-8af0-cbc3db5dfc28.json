@@ -1,0 +1,8 @@
+{
+  "__type__": "cc.TextAsset",
+  "_name": "README",
+  "_objFlags": 0,
+  "__editorExtras__": {},
+  "_native": "",
+  "text": "# 星座帝国 - 前端脚本说明\n\n## 脚本结构\n\n```\nassets/scripts/\n├── MainGame.ts        # 主游戏脚本（核心入口）\n├── GameEntry.ts       # 游戏入口说明\n├── TestScene.ts       # 测试场景脚本\n├── ui/                # UI组件\n│   ├── TabBar.ts      # 底部导航栏\n│   ├── ResourceBar.ts # 资源栏（金币/钻石/时间币）\n│   └── UserInfo.ts    # 用户信息组件\n├── managers/          # 管理器\n│   └── ApiClient.ts   # API客户端\n└── utils/             # 工具类\n    └── Config.ts      # 配置文件\n```\n\n## 使用方法\n\n### 1. 创建场景\n\n在 Cocos Creator 中：\n\n1. 新建场景 `MainScene`\n2. 创建 Canvas 节点\n3. 在 Canvas 下创建UI节点：\n   - UserInfo（用户信息）\n   - ResourceBar（资源栏）\n   - TabBar（底部导航）\n\n### 2. 挂载脚本\n\n- Canvas → 添加 `MainGame` 组件\n- UserInfo节点 → 添加 `UserInfo` 组件\n- ResourceBar节点 → 添加 `ResourceBar` 组件\n- TabBar节点 → 添加 `TabBar` 组件\n\n### 3. 关联节点\n\n在 MainGame 组件中，将对应的节点拖入属性面板。\n\n## 注意事项\n\n- 所有脚本使用 Cocos Creator 3.8.x 格式\n- 使用 `@property` 装饰器定义可编辑属性\n- 使用 `@ccclass` 装饰器注册组件\n\n---\n\n*创建时间：2026-03-10*"
+}

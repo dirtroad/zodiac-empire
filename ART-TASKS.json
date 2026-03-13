@@ -1,0 +1,84 @@
+{
+  "project": "星座帝国",
+  "version": "v1.0",
+  "updated": "2026-03-10",
+  "contact": "小科",
+  
+  "batches": [
+    {
+      "id": "batch-1",
+      "name": "第一批 - 解锁主界面",
+      "deadline": "今天",
+      "priority": "P0",
+      "total": 10,
+      "completed": 0,
+      "tasks": [
+        {"id": "tab-home", "name": "首页图标", "size": "48x48", "desc": "房子，未选中", "status": "pending"},
+        {"id": "tab-home-active", "name": "首页图标(选中)", "size": "48x48", "desc": "房子，高亮", "status": "pending"},
+        {"id": "tab-galaxy", "name": "星系图标", "size": "48x48", "desc": "星星，未选中", "status": "pending"},
+        {"id": "tab-galaxy-active", "name": "星系图标(选中)", "size": "48x48", "desc": "星星，高亮", "status": "pending"},
+        {"id": "tab-battle", "name": "战斗图标", "size": "48x48", "desc": "交叉剑，未选中", "status": "pending"},
+        {"id": "tab-battle-active", "name": "战斗图标(选中)", "size": "48x48", "desc": "交叉剑，高亮", "status": "pending"},
+        {"id": "tab-market", "name": "市场图标", "size": "48x48", "desc": "商店，未选中", "status": "pending"},
+        {"id": "tab-market-active", "name": "市场图标(选中)", "size": "48x48", "desc": "商店，高亮", "status": "pending"},
+        {"id": "tab-profile", "name": "我的图标", "size": "48x48", "desc": "人头，未选中", "status": "pending"},
+        {"id": "tab-profile-active", "name": "我的图标(选中)", "size": "48x48", "desc": "人头，高亮", "status": "pending"}
+      ],
+      "output_dir": "client/assets/textures/icons/tabs/"
+    },
+    {
+      "id": "batch-2", 
+      "name": "第二批 - 解锁资源系统",
+      "deadline": "明天",
+      "priority": "P0",
+      "total": 8,
+      "completed": 0,
+      "tasks": [
+        {"id": "icon-gold", "name": "金币图标", "size": "48x48", "desc": "💰 金黄色", "status": "pending"},
+        {"id": "icon-diamond", "name": "钻石图标", "size": "48x48", "desc": "💎 蓝紫色", "status": "pending"},
+        {"id": "icon-timecoin", "name": "时间币图标", "size": "48x48", "desc": "⏰ 青色", "status": "pending"},
+        {"id": "icon-passion", "name": "激情图标", "size": "48x48", "desc": "🔥 红橙色", "status": "pending"},
+        {"id": "icon-happy", "name": "快乐图标", "size": "48x48", "desc": "😊 明黄色", "status": "pending"},
+        {"id": "icon-calm", "name": "平静图标", "size": "48x48", "desc": "😌 浅蓝色", "status": "pending"},
+        {"id": "icon-wisdom", "name": "智慧图标", "size": "48x48", "desc": "💡 紫色", "status": "pending"},
+        {"id": "icon-anger", "name": "愤怒图标", "size": "48x48", "desc": "😠 深红色", "status": "pending"}
+      ],
+      "output_dir": "client/assets/textures/icons/resources/"
+    },
+    {
+      "id": "batch-3",
+      "name": "第三批 - 解锁通用交互",
+      "deadline": "后天",
+      "priority": "P0",
+      "total": 6,
+      "completed": 0,
+      "tasks": [
+        {"id": "btn-primary", "name": "主要按钮", "size": "300x60", "desc": "紫蓝渐变，正常", "status": "pending"},
+        {"id": "btn-primary-pressed", "name": "主要按钮(按下)", "size": "300x60", "desc": "紫蓝渐变，加深", "status": "pending"},
+        {"id": "btn-secondary", "name": "次要按钮", "size": "300x60", "desc": "灰色边框，正常", "status": "pending"},
+        {"id": "btn-secondary-pressed", "name": "次要按钮(按下)", "size": "300x60", "desc": "灰色边框，按下", "status": "pending"},
+        {"id": "btn-disabled", "name": "禁用按钮", "size": "300x60", "desc": "灰色，不可点", "status": "pending"},
+        {"id": "btn-small", "name": "小按钮", "size": "120x40", "desc": "通用小按钮", "status": "pending"}
+      ],
+      "output_dir": "client/assets/textures/ui/buttons/"
+    }
+  ],
+  
+  "style": {
+    "theme": "科幻 + 星空 + 卡通",
+    "colors": {
+      "primary": "#6B5BFF",
+      "secondary": "#FF6B9D", 
+      "gold": "#FFD700",
+      "bg_dark": "#0A0E27",
+      "bg_light": "#1A1F3A"
+    },
+    "reference": "已完成星座图标风格"
+  },
+  
+  "notes": [
+    "输出格式：PNG 透明背景",
+    "命名规范：{id}.png，如 tab-home.png",
+    "选中状态用高亮色（primary #6B5BFF）"
+  ]
+}

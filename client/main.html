@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>星座帝国</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: linear-gradient(135deg, #0a0a1a, #1a1a3e); color: #fff; min-height: 100vh; }
+        .header { background: rgba(0,0,0,0.3); padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #6B5BFF, #FF6B9D); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .resources { display: flex; gap: 15px; font-size: 14px; }
+        .main-content { padding: 15px; padding-bottom: 70px; }
+        .section-title { font-size: 16px; color: #FFD700; margin: 15px 0 10px; }
+        .emotion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .emotion-card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+        .emotion-icon { font-size: 24px; }
+        .emotion-name { font-size: 12px; color: #888; margin: 5px 0; }
+        .emotion-amount { font-size: 18px; font-weight: bold; }
+        .team-grid { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
+        .team-member { min-width: 70px; text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); }
+        .btn { padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; margin: 5px; }
+        .btn-primary { background: linear-gradient(90deg, #6B5BFF, #FF6B9D); color: #fff; }
+        .btn-success { background: #4CAF50; color: #fff; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; padding: 10px 0; }
+        .nav-item { text-align: center; color: #666; cursor: pointer; }
+        .nav-item.active { color: #FFD700; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; z-index: 1000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: #1a1a3e; border-radius: 15px; padding: 20px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; }
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 15px 30px; border-radius: 10px; z-index: 2000; display: none; }
+        .toast.show { display: block; }
+        .login-page { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center; padding: 20px; }
+        .login-page h1 { font-size: 32px; background: linear-gradient(90deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body>
+    <div id="loginPage" class="login-page">
+        <h1>🌌 星座帝国</h1>
+        <p style="color:#888;margin:10px 0 30px;">你的情绪，你的修炼，你的宇宙</p>
+        <button class="btn btn-primary" onclick="login()" style="padding:15px 40px;font-size:18px;">🔐 微信登录</button>
+    </div>
+
+    <div id="mainPage" style="display:none;">
+        <div class="header">
+            <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="showUserProfile()">
+                <div class="avatar" id="userAvatar">⭐</div>
+                <div>
+                    <div id="userName">旅行者</div>
+                    <div style="font-size:12px;color:#888;" id="userLevel">Lv.1</div>
+                </div>
+            </div>
+            <div class="resources">
+                <span>💰<span id="goldAmount">0</span></span>
+                <span>💎<span id="crystalAmount">0</span></span>
+                <span id="currentLocation" style="color:#4CAF50;font-size:12px">🌍 地球</span>
+                <span onclick="logout()" style="cursor:pointer">🚪</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="page-home" class="page active">
+                <div class="section-title">💫 情绪资源</div>
+                <div class="emotion-grid" id="emotionGrid"></div>
+                <div class="section-title">🪐 我的战队 <span id="teamCount" style="font-size:11px;color:#888;"></span></div>
+                <div class="team-grid" id="teamGrid"></div>
+                <div class="section-title">💬 聊天</div>
+                <div id="chatMessages" style="height:30vh;overflow-y:auto;background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;"></div>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                    <input id="chatInput" style="flex:1;padding:10px;border:none;border-radius:20px;background:rgba(255,255,255,0.1);color:#fff;" placeholder="输入消息...">
+                    <button class="btn btn-primary" onclick="sendChat()">发送</button>
+                </div>
+            </div>
+            <div id="page-warp" class="page">
+                <div class="section-title">🚀 穿越</div>
+                <div class="card"><p>晶体: <span id="warpCrystal">0</span> 💎</p></div>
+                <div style="display:flex;gap:10px;margin:10px 0;">
+                    <button class="btn" id="tabPlanet" onclick="switchWarpTab('planet')" style="flex:1;background:#FFD700;color:#000;">🌌 星际穿越</button>
+                    <button class="btn" id="tabCity" onclick="switchWarpTab('city')" style="flex:1;background:rgba(255,255,255,0.1);">🏛️ 时空穿越</button>
+                </div>
+                <div id="warpList"></div>
+            </div>
+            <div id="page-battle" class="page">
+                <div class="section-title">⚔️ 战斗竞技场</div>
+                <div class="card" style="text-align:center">
+                    <div style="font-size:14px;color:#888">我的战力</div>
+                    <div style="font-size:32px;color:#FFD700" id="myBattlePower">0</div>
+                </div>
+                <div style="display:flex;gap:10px;margin:10px 0;">
+                    <button class="btn" id="tabRank" onclick="switchBattleTab('rank')" style="flex:1;background:#FFD700;color:#000;">🏆 排行榜</button>
+                    <button class="btn" id="tabTarget" onclick="switchBattleTab('target')" style="flex:1;background:rgba(255,255,255,0.1);">🎯 选择目标</button>
+                    <button class="btn" id="tabHistory" onclick="switchBattleTab('history')" style="flex:1;background:rgba(255,255,255,0.1);">📜 战斗记录</button>
+                </div>
+                <div id="battleRankList"></div>
+                <div id="battleTargetList" style="display:none;"></div>
+                <div id="battleHistoryList" style="display:none;"></div>
+            </div>
+            <div id="page-cultivate" class="page">
+                <div class="section-title">⚡ 修炼中心</div>
+                <div class="card" style="text-align:center">
+                    <div style="font-size:48px;color:#FFD700" id="cultivatePower">0</div>
+                    <div style="font-size:12px;color:#888">当前修炼值</div>
+                </div>
+                <div class="section-title">🏔️ 修炼境界</div>
+                <div id="realmProgress" class="card"></div>
+                <div class="section-title">💪 提升修炼</div>
+                <div id="cultivateOptions"></div>
+            </div>
+            <div id="page-territory" class="page">
+                <div class="section-title">🗺️ 地盘占领</div>
+                <div id="territoryLocation" style="text-align:center;color:#4CAF50;font-size:14px;margin-bottom:10px">当前位置: 🌍 地球</div>
+                <div style="display:flex;gap:10px;margin:10px 0;">
+                    <button class="btn" id="tabLocalTerritory" onclick="switchTerritoryTab('local')" style="flex:1;background:#FFD700;color:#000;">🎯 可占领</button>
+                    <button class="btn" id="tabMyTerritory" onclick="switchTerritoryTab('my')" style="flex:1;background:rgba(255,255,255,0.1);">🏠 我的地盘</button>
+                </div>
+                <div id="localTerritoryList"></div>
+                <div id="myTerritoryList" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchPage('home')">🏠<br><span style="font-size:10px;">首页</span></div>
+            <div class="nav-item" onclick="switchPage('warp')">🚀<br><span style="font-size:10px;">穿越</span></div>
+            <div class="nav-item" onclick="switchPage('cultivate')">⚡<br><span style="font-size:10px;">修炼</span></div>
+            <div class="nav-item" onclick="switchPage('battle')">⚔️<br><span style="font-size:10px;">战斗</span></div>
+            <div class="nav-item" onclick="switchPage('territory')">🗺️<br><span style="font-size:10px;">地盘</span></div>
+        </div>
+    </div>
+
+    <div id="emotionModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle" style="text-align:center;margin-bottom:15px;"></h3>
+            <div id="modalBody"></div>
+            <button class="btn" style="width:100%;margin-top:15px;background:rgba(255,255,255,0.1);color:#fff;" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <h3 style="text-align:center;margin-bottom:15px;">👤 我的</h3>
+            <div id="userModalBody"></div>
+            <button class="btn" style="width:100%;margin-top:15px;background:rgba(255,255,255,0.1);color:#fff;" onclick="closeUserModal()">关闭</button>
+        </div>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const API_BASE = 'http://192.168.6.238:3000/v1';
+        let token = '', userData = null, currentWarpTab = 'planet';
+
+        const EMOTIONS = [
+            { id: 1, name: '喜悦', icon: '😊', color: '#FFD700', effect: '修炼+10', attr: 'power' },
+            { id: 2, name: '平和', icon: '😌', color: '#87CEEB', effect: '防御+5', attr: 'defense' },
+            { id: 3, name: '悲伤', icon: '😢', color: '#6495ED', effect: '战术+3', attr: 'tactics' },
+            { id: 4, name: '愤怒', icon: '😠', color: '#DC143C', effect: '攻击+8', attr: 'attack' },
+            { id: 5, name: '恐惧', icon: '😨', color: '#2F4F4F', effect: '闪避+3%', attr: 'dodgeRate' },
+            { id: 6, name: '贪婪', icon: '🤑', color: '#32CD32', effect: '金币+50', attr: 'goldBonus' },
+        ];
+
+        const WARPS = [
+            // 太阳系内
+            { id: 'mars', name: '🔴 火星', cost: 20, bonus: '修炼+20%', type: 'planet' },
+            { id: 'venus', name: '🌟 金星', cost: 25, bonus: '智慧+20%', type: 'planet' },
+            { id: 'europa', name: '🌊 木卫二', cost: 35, bonus: '防御+25%', type: 'planet' },
+            { id: 'titan', name: '🪐 土卫六', cost: 40, bonus: '战术+25%', type: 'planet' },
+            // 太阳系外
+            { id: 'sirius', name: '⭐ 天狼星', cost: 50, bonus: '全属性+5%', type: 'planet' },
+            { id: 'zeta', name: '👽 泽塔双星', cost: 60, bonus: '暴击+20%', type: 'planet' },
+            { id: 'pleiades', name: '✨ 昂宿星团', cost: 70, bonus: '修炼+40%', type: 'planet' },
+            { id: 'andromeda', name: '🌀 仙女座星系', cost: 90, bonus: '全属性+10%', type: 'planet' },
+            { id: 'orion', name: '⚔️ 猎户座星云', cost: 75, bonus: '暴击+25%', type: 'planet' },
+            { id: 'arcturus', name: '🔮 大角星', cost: 80, bonus: '智慧+35%', type: 'planet' },
+            { id: 'vega', name: '💎 织女星', cost: 55, bonus: '收益+30%', type: 'planet' },
+            { id: 'proxima', name: '🌍 比邻星', cost: 45, bonus: '金币+25%', type: 'planet' },
+            { id: 'tau', name: '🐋 天仓五', cost: 65, bonus: '防御+30%', type: 'planet' },
+            { id: 'sanxingdui', name: '🗿 三星堆', cost: 15, bonus: '智慧+15%', type: 'city' },
+            { id: 'pyramid', name: '🔺 金字塔', cost: 20, bonus: '防御+20%', type: 'city' },
+            { id: 'pumapunku', name: '🧱 普玛彭古', cost: 25, bonus: '战术+15%', type: 'city' },
+            { id: 'nazca', name: '🌀 纳斯卡', cost: 18, bonus: '闪避+10%', type: 'city' },
+            { id: 'maya', name: '🏛️ 玛雅神庙', cost: 22, bonus: '暴击+10%', type: 'city' },
+            { id: 'machu', name: '⛰️ 马丘比丘', cost: 28, bonus: '修炼+25%', type: 'city' },
+            { id: 'angkor', name: '🏯 吴哥窟', cost: 30, bonus: '收益+20%', type: 'city' },
+            { id: 'petra', name: '🏜️ 佩特拉', cost: 24, bonus: '金币+25%', type: 'city' },
+            { id: 'easter', name: '🗿 复活节岛', cost: 26, bonus: '神秘+30%', type: 'city' },
+            { id: 'atlantis', name: '🌊 亚特兰蒂斯', cost: 80, bonus: '全属性+10%', type: 'city' },
+            { id: 'mu', name: '🏝️ 姆大陆', cost: 70, bonus: '修炼+40%', type: 'city' },
+            { id: 'lemuria', name: '🌺 雷姆利亚', cost: 65, bonus: '智慧+35%', type: 'city' },
+            { id: 'shambhala', name: '🏔️ 香巴拉', cost: 55, bonus: '收益+35%', type: 'city' },
+            { id: 'avalon', name: '✨ 阿瓦隆', cost: 60, bonus: '防御+30%', type: 'city' },
+            { id: 'agartha', name: '🕳️ 阿加尔塔', cost: 75, bonus: '暴击+20%', type: 'city' },
+            { id: 'eldorado', name: '💎 埃尔多拉多', cost: 68, bonus: '金币+50%', type: 'city' },
+            { id: 'antarctica', name: '🧊 南极冰城', cost: 85, bonus: '防御+40%', type: 'city' },
+            { id: 'arctic', name: '❄️ 北极门户', cost: 82, bonus: '闪避+25%', type: 'city' },
+        ];
+
+        async function api(m, p, d) {
+            const h = { 'Content-Type': 'application/json' };
+            if (token) h['Authorization'] = 'Bearer ' + token;
+            const r = await fetch(API_BASE + p, { method: m, headers: h, body: d ? JSON.stringify(d) : null });
+            const j = await r.json();
+            if (j.code !== 0) throw new Error(j.message);
+            return j.data;
+        }
+
+        function toast(m) { const e = document.getElementById('toast'); e.textContent = m; e.classList.add('show'); setTimeout(() => e.classList.remove('show'), 2000); }
+
+        let currentLocation = { id: 'earth', name: '🌍 地球', type: 'planet' };
+
+        function switchPage(p) {
+            document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+            document.getElementById('page-' + p).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach((x, i) => x.classList.toggle('active', ['home','warp','cultivate','battle','territory'][i] === p));
+            if (p === 'warp') loadWarp();
+            else if (p === 'battle') loadBattle();
+            else if (p === 'territory') loadMyTerritory();
+            else if (p === 'cultivate') loadCultivate();
+            else if (p === 'home') loadChat();
+        }
+
+        async function login() {
+            try {
+                const r = await api('POST', '/auth/wechat/login', { code: 'dev_' + Date.now() });
+                token = r.access_token; userData = r.user;
+                localStorage.setItem('zodiac_token', token);
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainPage').style.display = 'block';
+                loadMain(); toast('欢迎!');
+            } catch (e) { toast('登录失败: ' + e.message); }
+        }
+
+        function logout() { localStorage.removeItem('zodiac_token'); location.reload(); }
+
+        async function loadMain() {
+            if (!userData) return;
+            const zi = ['','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+            document.getElementById('userAvatar').textContent = zi[userData.zodiacSign] || '⭐';
+            document.getElementById('userName').textContent = userData.nickname;
+            document.getElementById('userLevel').textContent = 'Lv.' + userData.level + ' · 修炼 ' + userData.power;
+            document.getElementById('goldAmount').textContent = parseInt(userData.gold) || 0;
+            document.getElementById('crystalAmount').textContent = parseInt(userData.timeCoin) || 0;
+            try { renderEmotions(await api('GET', '/emotion/resources')); } catch (e) {}
+            loadTeam();
+            loadChat();
+        }
+
+        let emotionData = [];
+
+        function renderEmotions(em) {
+            emotionData = em;
+            document.getElementById('emotionGrid').innerHTML = em.map((e, i) => {
+                const o = EMOTIONS[i];
+                const collectable = parseInt(e.collectable) || 0;
+                return '<div class="emotion-card" onclick="openEmotion(' + i + ')">' +
+                    '<div class="emotion-icon">' + o.icon + '</div>' +
+                    '<div class="emotion-name">' + o.name + '</div>' +
+                    '<div class="emotion-amount" style="color:' + o.color + '">' + (parseInt(e.amount)||0) + '</div>' +
+                    (collectable > 0 ? '<div style="font-size:10px;color:#FFD700">可收集:' + collectable + '</div>' : '') +
+                    '<div style="font-size:10px;color:#4CAF50">' + o.effect + '</div></div>';
+            }).join('');
+        }
+
+        function openEmotion(i) {
+            const o = EMOTIONS[i];
+            const e = emotionData[i];
+            const amt = parseInt(e.amount) || 0;
+            const collectable = parseInt(e.collectable) || 0;
+            const v = parseInt(userData[o.key]) || 0;
+            document.getElementById('modalTitle').textContent = o.icon + ' ' + o.name + '修炼';
+            document.getElementById('modalBody').innerHTML =
+                '<div style="text-align:center"><p style="font-size:24px;color:' + o.color + '">' + o.icon + ' ' + v + '</p>' +
+                '<p style="color:#888;font-size:12px;">当前' + o.effect.split('+')[0] + '</p></div>' +
+                (collectable > 0 ? '<button class="btn btn-primary" style="width:100%;margin-top:15px" onclick="collectEmotion(' + i + ')">📥 收集 ' + collectable + ' 点</button>' : '') +
+                (amt >= 10 ? '<button class="btn btn-success" style="width:100%;margin-top:10px" onclick="useEmotion(' + i + ')">消耗10点 → ' + o.effect + '</button>' : '<p style="color:#888;text-align:center;margin-top:10px;font-size:12px">情绪不足10点，无法修炼</p>') +
+                '<div style="margin-top:20px"><textarea id="logTxt" style="width:100%;height:60px;border:none;border-radius:10px;background:rgba(255,255,255,0.1);color:#fff;padding:10px" placeholder="写日志吸引点赞..."></textarea>' +
+                '<button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="postLog(' + i + ')">📝 发布日志</button></div>';
+            document.getElementById('emotionModal').classList.add('show');
+        }
+
+        function closeModal() { document.getElementById('emotionModal').classList.remove('show'); }
+
+        function showUserProfile() {
+            if (!userData) return;
+            const realms = ['凡人','筑基','金丹','元婴','化神','渡劫','飞仙','真仙','仙帝'];
+            const power = parseInt(userData.power) || 100;
+            const realmIdx = Math.min(Math.floor(power / 1000), realms.length - 1);
+            const gold = parseInt(userData.gold) || 0;
+            const crystal = parseInt(userData.timeCoin) || 0;
+
+            document.getElementById('userModalBody').innerHTML =
+                '<div style="text-align:center;margin-bottom:15px"><div style="font-size:48px">' + (['','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'][userData.zodiacSign] || '⭐') + '</div>' +
+                '<div style="font-size:18px;margin-top:5px">' + userData.nickname + '</div>' +
+                '<div style="color:#FFD700;font-size:14px">Lv.' + userData.level + ' · ' + realms[realmIdx] + '</div>' +
+                '<div style="font-size:12px;color:#4CAF50;margin-top:5px">' + currentLocation.name + '</div></div>' +
+                '<div style="display:flex;gap:10px;margin:10px 0"><div class="card" style="flex:1;text-align:center"><div style="font-size:24px">💰</div><div>' + gold + '</div></div>' +
+                '<div class="card" style="flex:1;text-align:center"><div style="font-size:24px">💎</div><div>' + crystal + '</div></div>' +
+                '<div class="card" style="flex:1;text-align:center"><div style="font-size:24px">⚡</div><div>' + power + '</div></div></div>' +
+                '<div class="card" onclick="switchPage(\'cultivate\');closeUserModal()" style="cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div>⚡ 前往修炼</div><div style="color:#888">▶</div></div></div>' +
+                '<div style="margin-top:20px"><button class="btn" style="width:100%;background:rgba(255,255,255,0.1);color:#fff" onclick="logout();closeUserModal()">🚪 退出登录</button></div>';
+            document.getElementById('userModal').classList.add('show');
+        }
+
+        function closeUserModal() { document.getElementById('userModal').classList.remove('show'); }
+        
+        async function collectEmotion(i) {
+            const o = EMOTIONS[i];
+            try {
+                await api('POST', '/emotion/collect', { emotionType: o.id });
+                toast('📥 收集成功!');
+                renderEmotions(await api('GET', '/emotion/resources'));
+                openEmotion(i);
+            } catch (e) { toast('收集失败: ' + e.message); }
+        }
+
+        async function useEmotion(i) {
+            const o = EMOTIONS[i];
+            userData[o.key] = (parseInt(userData[o.key]) || 0) + (o.effect.includes('%') ? 5 : 10);
+            toast('✨ ' + o.effect + '!'); closeModal();
+            try { renderEmotions(await api('GET', '/emotion/resources')); } catch (e) {}
+        }
+
+        function postLog(i) {
+            const t = document.getElementById('logTxt').value.trim();
+            if (!t) { toast('请输入内容'); return; }
+            const likes = Math.floor(Math.random() * 5) + 1;
+            toast('发布成功! ' + likes + '赞 = ' + (likes * 10) + '情绪值'); closeModal();
+        }
+
+        let myTeamData = null;
+
+        async function loadTeam() {
+            const zi = ['','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+            try {
+                const team = await api('GET', '/team/my');
+                myTeamData = team;
+                if (team) {
+                    const members = team.members || [];
+                    document.getElementById('teamCount').textContent = '(' + members.length + '/' + (team.maxMembers || 5) + '人)';
+                    document.getElementById('teamGrid').innerHTML = members.map(m => {
+                        const u = m.user || {};
+                        return '<div class="team-member"><div style="font-size:20px">' + (zi[u.zodiacSign] || "⭐") + '</div><div style="font-size:11px;margin-top:5px">' + (u.nickname || '成员') + '</div></div>';
+                    }).join('');
+                } else {
+                    document.getElementById('teamCount').textContent = '(未加入)';
+                    document.getElementById('teamGrid').innerHTML = '<div class="team-member" onclick="createTeam()" style="cursor:pointer"><div style="font-size:20px;color:#FFD700">➕</div><div style="font-size:11px;color:#FFD700;margin-top:5px">创建战队</div></div>' +
+                        '<div class="team-member" onclick="searchTeam()" style="cursor:pointer"><div style="font-size:20px;color:#888">🔍</div><div style="font-size:11px;color:#888;margin-top:5px">搜索加入</div></div>';
+                }
+            } catch (e) {
+                document.getElementById('teamCount').textContent = '(未加入)';
+                document.getElementById('teamGrid').innerHTML = '<div class="team-member" onclick="createTeam()" style="cursor:pointer"><div style="font-size:20px;color:#FFD700">➕</div><div style="font-size:11px;color:#FFD700;margin-top:5px">创建战队</div></div>';
+            }
+        }
+
+        async function createTeam() {
+            const name = prompt('输入战队名称:');
+            if (!name) return;
+            try {
+                await api('POST', '/team/create', { name });
+                toast('战队创建成功!');
+                loadTeam();
+            } catch (e) { toast('创建失败: ' + e.message); }
+        }
+
+        async function searchTeam() {
+            const keyword = prompt('搜索战队名称:');
+            if (!keyword) return;
+            try {
+                const teams = await api('GET', '/team/search?keyword=' + encodeURIComponent(keyword));
+                if (!teams || teams.length === 0) {
+                    toast('未找到战队');
+                    return;
+                }
+                const team = teams[0];
+                if (confirm(`找到战队: ${team.name}\n成员: ${team.memberCount}/${team.maxMembers}\n是否加入?`)) {
+                    await api('POST', '/team/' + team.id + '/join');
+                    toast('加入成功!');
+                    loadTeam();
+                }
+            } catch (e) { toast('操作失败: ' + e.message); }
+        }
+
+        function invite() {
+            const n = prompt('输入玩家昵称:'); if (!n) return;
+            toast('邀请功能需要好友系统支持');
+        }
+
+        async function loadCultivate() {
+            const power = parseInt(userData?.power) || 100;
+            const realms = ['凡人','筑基','金丹','元婴','化神','渡劫','飞仙','真仙','仙帝'];
+            const realmIdx = Math.min(Math.floor(power / 1000), realms.length - 1);
+            const nextRealm = (realmIdx + 1) * 1000;
+            const progress = Math.min(100, (power / nextRealm * 100)).toFixed(1);
+
+            document.getElementById('cultivatePower').textContent = power;
+            document.getElementById('realmProgress').innerHTML =
+                '<div style="text-align:center"><div style="font-size:24px;color:#FFD700">' + realms[realmIdx] + '</div>' +
+                '<div style="margin-top:10px;background:rgba(255,255,255,0.1);border-radius:5px;height:10px"><div style="background:linear-gradient(90deg,#FFD700,#FFA500);height:100%;border-radius:5px;width:' + progress + '%"></div></div>' +
+                '<div style="font-size:12px;color:#888;margin-top:5px">' + power + ' / ' + nextRealm + ' (距离' + (realms[realmIdx+1] || '满级') + ')</div></div>';
+
+            const gold = parseInt(userData?.gold) || 0;
+            
+            // 用户属性
+            const attack = parseInt(userData?.attack) || 0;
+            const defense = parseInt(userData?.defense) || 0;
+            const tactics = parseInt(userData?.tactics) || 0;
+            const critRate = parseInt(userData?.critRate) || 0;
+            const dodgeRate = parseInt(userData?.dodgeRate) || 0;
+            
+            // 属性显示
+            let attrsHtml = '<div class="section-title">⚔️ 角色属性</div>';
+            attrsHtml += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px">';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">⚔️</div><div style="font-size:10px">攻击</div><div style="color:#FFD700">'+attack+'</div></div>';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">🛡️</div><div style="font-size:10px">防御</div><div style="color:#FFD700">'+defense+'</div></div>';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">🎯</div><div style="font-size:10px">战术</div><div style="color:#FFD700">'+tactics+'</div></div>';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">💥</div><div style="font-size:10px">暴击</div><div style="color:#FFD700">'+critRate+'%</div></div>';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">💨</div><div style="font-size:10px">闪避</div><div style="color:#FFD700">'+dodgeRate+'%</div></div>';
+            attrsHtml += '<div class="card" style="text-align:center;padding:8px"><div style="font-size:18px">💰</div><div style="font-size:10px">金币+</div><div style="color:#FFD700">'+(parseInt(userData?.goldBonus)||0)+'%</div></div>';
+            attrsHtml += '</div>';
+            
+            // 加载情绪数据
+            try {
+                emotionData = await api('GET', '/emotion/resources');
+            } catch (e) { emotionData = []; }
+            
+            // 情绪修炼选项
+            const EMOTIONS = [
+                { id: 1, name: '喜悦', icon: '😊', color: '#FFD700', effect: '修炼+10', attr: 'power' },
+                { id: 2, name: '平和', icon: '😌', color: '#87CEEB', effect: '防御+5', attr: 'defense' },
+                { id: 3, name: '悲伤', icon: '😢', color: '#6495ED', effect: '战术+3', attr: 'tactics' },
+                { id: 4, name: '愤怒', icon: '😠', color: '#DC143C', effect: '攻击+8', attr: 'attack' },
+                { id: 5, name: '恐惧', icon: '😨', color: '#2F4F4F', effect: '闪避+3%', attr: 'dodgeRate' },
+                { id: 6, name: '贪婪', icon: '🤑', color: '#32CD32', effect: '金币+50', attr: 'goldBonus' },
+            ];
+            
+            let emotionHtml = '<div class="section-title">💫 情绪修炼</div>';
+            emotionHtml += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+            for (const e of EMOTIONS) {
+                const ed = emotionData.find(d => d.emotionType === e.id) || { amount: 0 };
+                const amount = parseInt(ed.amount) || 0;
+                const canUse = amount >= 10;
+                emotionHtml += '<div class="card" style="text-align:center;padding:8px">' +
+                    '<div style="font-size:24px">' + e.icon + '</div>' +
+                    '<div style="font-size:11px;color:' + e.color + '">' + e.name + '</div>' +
+                    '<div style="font-size:10px;color:#888">' + amount + '</div>' +
+                    '<button class="btn" style="font-size:10px;padding:4px 8px;margin-top:5px;' + (canUse ? 'background:' + e.color : 'opacity:0.3') + '" ' + (canUse ? 'onclick="useEmotionInCultivate(' + e.id + ',\'' + e.attr + '\')"' : 'disabled') + '>修炼</button>' +
+                    '</div>';
+            }
+            emotionHtml += '</div>';
+            
+            document.getElementById('cultivateOptions').innerHTML =
+                '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><div>⚔️ 金币修炼</div><div style="font-size:12px;color:#888">消耗100金币 +10修炼</div></div>' +
+                '<button class="btn btn-success" onclick="upgradePower()" ' + (gold >= 100 ? '' : 'disabled style="opacity:0.5"') + '>提升</button></div></div>' +
+                '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><div>🎰 装备抽卡</div><div style="font-size:12px;color:#888">消耗500金币</div></div>' +
+                '<button class="btn btn-primary" onclick="gachaEquipment()" ' + (gold >= 500 ? '' : 'disabled style="opacity:0.5"') + '>抽卡</button></div></div>' +
+                attrsHtml +
+                emotionHtml;
+        }
+        
+        async function useEmotionInCultivate(emotionType, attr) {
+            try {
+                const r = await api('POST', '/emotion/use', { emotionType, amount: 10 });
+                toast('修炼成功! ' + (r.effect || '+属性'));
+                // 刷新数据
+                emotionData = await api('GET', '/emotion/resources');
+                loadCultivate();
+            } catch (e) { toast('修炼失败: ' + e.message); }
+        }
+
+        async function upgradePower() {
+            if ((parseInt(userData.gold) || 0) < 100) { toast('金币不足!'); return; }
+            try {
+                const r = await api('POST', '/users/upgrade-power');
+                userData.gold = r.gold;
+                userData.power = r.power;
+                document.getElementById('goldAmount').textContent = userData.gold;
+                loadCultivate();
+                toast('修炼+10! 战力:' + r.power);
+            } catch (e) { toast('提升失败: ' + e.message); }
+        }
+
+        async function gachaEquipment() {
+            if ((parseInt(userData.gold) || 0) < 500) { toast('金币不足!'); return; }
+            try {
+                const r = await api('POST', '/equipment/gacha', { count: 1 });
+                userData.gold = (parseInt(userData.gold) || 0) - 500;
+                document.getElementById('goldAmount').textContent = userData.gold;
+                loadCultivate();
+                toast('获得装备: ' + (r[0]?.name || '神秘装备'));
+            } catch (e) { toast('抽卡失败: ' + e.message); }
+        }
+
+        function loadWarp() {
+            document.getElementById('warpCrystal').textContent = parseInt(userData?.timeCoin) || 0;
+            document.getElementById('warpList').innerHTML = WARPS.filter(w => w.type === currentWarpTab).map(w =>
+                '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div>' + w.name + '</div>' +
+                '<div style="font-size:12px;color:#4CAF50">' + w.bonus + '</div></div>' +
+                '<button class="btn ' + (w.cost === 0 ? 'btn-success' : 'btn-primary') + '" onclick="warp(\'' + w.id + '\',' + w.cost + ')">' + (w.cost === 0 ? '免费' : w.cost + '💎') + '</button></div>'
+            ).join('');
+        }
+
+        function switchWarpTab(t) {
+            currentWarpTab = t;
+            document.getElementById('tabPlanet').style.cssText = 'flex:1;' + (t === 'planet' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('tabCity').style.cssText = 'flex:1;' + (t === 'city' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            loadWarp();
+        }
+
+        async function warp(id, cost) {
+            const crystals = parseInt(userData?.timeCoin) || 0;
+            if (cost > 0 && crystals < cost) { toast('晶体不足!'); return; }
+
+            // 找到目的地信息
+            const dest = WARPS.find(w => w.id === id);
+            if (!dest) { toast('目的地不存在!'); return; }
+
+            toast('穿越中...');
+            try {
+                const r = await api('POST', '/time-crystal/travel', { destination: id, cost });
+                userData.timeCoin = r.timeCoin;
+                userData.gold = r.gold;
+                document.getElementById('goldAmount').textContent = userData.gold;
+                document.getElementById('crystalAmount').textContent = userData.timeCoin;
+                document.getElementById('warpCrystal').textContent = userData.timeCoin;
+
+                // 更新当前位置
+                currentLocation = { id: dest.id, name: dest.name, type: dest.type };
+                document.getElementById('currentLocation').textContent = dest.name;
+                document.getElementById('territoryLocation').textContent = '当前位置: ' + dest.name;
+
+                toast('穿越成功! +' + r.goldReward + '💰 +' + r.crystalReward + '💎');
+            } catch (e) {
+                toast('穿越失败: ' + e.message);
+            }
+        }
+
+        let currentRoomId = 'global';
+
+        function loadChat() {
+            document.getElementById('chatMessages').innerHTML = '<p style="color:#888;text-align:center">加载中...</p>';
+            api('GET', '/chat/messages/' + currentRoomId + '?limit=30').then(messages => {
+                if (!messages || messages.length === 0) {
+                    document.getElementById('chatMessages').innerHTML = '<p style="color:#888;text-align:center">暂无消息</p>';
+                    return;
+                }
+                document.getElementById('chatMessages').innerHTML = messages.map(m =>
+                    '<div style="margin-bottom:10px"><span style="color:#FFD700">' + (m.nickname || '匿名') + '</span> <span style="color:#666;font-size:11px">' + (m.createdAt ? new Date(m.createdAt).toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'}) : '') + '</span><div style="margin-top:3px">' + m.content + '</div></div>'
+                ).join('');
+                // 滚动到底部
+                const container = document.getElementById('chatMessages');
+                container.scrollTop = container.scrollHeight;
+            }).catch(e => {
+                document.getElementById('chatMessages').innerHTML = '<p style="color:#888;text-align:center">加载失败</p>';
+            });
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const content = input.value.trim();
+            if (!content) return;
+
+            api('POST', '/chat/send', { roomId: currentRoomId, content }).then(() => {
+                input.value = '';
+                loadChat();
+            }).catch(e => {
+                toast('发送失败: ' + e.message);
+            });
+        }
+
+        let currentBattleTab = 'rank';
+
+        function switchBattleTab(t) {
+            currentBattleTab = t;
+            document.getElementById('tabRank').style.cssText = 'flex:1;' + (t === 'rank' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('tabTarget').style.cssText = 'flex:1;' + (t === 'target' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('tabHistory').style.cssText = 'flex:1;' + (t === 'history' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('battleRankList').style.display = t === 'rank' ? 'block' : 'none';
+            document.getElementById('battleTargetList').style.display = t === 'target' ? 'block' : 'none';
+            document.getElementById('battleHistoryList').style.display = t === 'history' ? 'block' : 'none';
+            if (t === 'target') loadBattleTargets();
+            else if (t === 'history') loadBattleHistory();
+        }
+
+        async function loadBattle() {
+            document.getElementById('myBattlePower').textContent = parseInt(userData?.power) || 0;
+            try {
+                const r = await api('GET', '/battle/ranking');
+                document.getElementById('battleRankList').innerHTML = (r || []).slice(0, 10).map((x, i) =>
+                    '<div class="card" style="display:flex;align-items:center;gap:15px"><div style="font-size:20px;font-weight:bold;color:' + (i < 3 ? '#FFD700' : '#888') + '">#' + (i+1) + '</div>' +
+                    '<div style="flex:1"><div>' + x.nickname + '</div><div style="font-size:12px;color:#888">Lv.' + (x.level || 1) + ' · 修炼 ' + x.power + '</div></div>' +
+                    (x.id !== userData?.id ? '<button class="btn btn-primary" onclick="attackPlayer(' + x.id + ',\'' + x.nickname + '\')">攻击</button>' : '') + '</div>'
+                ).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无排行</p>';
+            } catch (e) { document.getElementById('battleRankList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>'; }
+        }
+
+        async function loadBattleTargets() {
+            document.getElementById('battleTargetList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">搜索中...</p>';
+            try {
+                const r = await api('GET', '/battle/ranking');
+                // 过滤掉自己，随机选5个
+                const targets = (r || []).filter(x => x.id !== userData?.id).slice(0, 5);
+                document.getElementById('battleTargetList').innerHTML = targets.map(x =>
+                    '<div class="card" style="display:flex;align-items:center;gap:15px">' +
+                    '<div style="flex:1"><div>' + x.nickname + '</div><div style="font-size:12px;color:#888">修炼 ' + x.power + '</div></div>' +
+                    '<button class="btn btn-success" onclick="attackPlayer(' + x.id + ',\'' + x.nickname + '\')">⚔️ 攻击</button></div>'
+                ).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无目标</p>';
+            } catch (e) { document.getElementById('battleTargetList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>'; }
+        }
+
+        async function loadBattleHistory() {
+            try {
+                const r = await api('GET', '/battle/history');
+                document.getElementById('battleHistoryList').innerHTML = (r || []).map(h =>
+                    '<div class="card"><div style="display:flex;justify-content:space-between"><span>' + (h.result === 'win' ? '✅ 胜利' : '❌ 失败') + '</span><span>' + (h.goldReward || 0) + '💰</span></div></div>'
+                ).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无战斗记录</p>';
+            } catch (e) { document.getElementById('battleHistoryList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">暂无战斗记录</p>'; }
+        }
+
+        async function attackPlayer(targetId, targetName) {
+            if (!confirm('确认攻击 ' + targetName + ' ?')) return;
+            toast('战斗中...');
+            try {
+                const result = await api('POST', '/battle/execute', { battleId: Date.now() });
+                const isWin = result.result === 'win';
+                if (isWin) {
+                    userData.gold = (parseInt(userData.gold) || 0) + (result.goldReward || 0);
+                    document.getElementById('goldAmount').textContent = userData.gold;
+                }
+                toast(isWin ? '🎉 胜利! +' + result.goldReward + '💰' : '💔 失败!');
+                loadBattle();
+            } catch (e) { toast('战斗失败: ' + e.message); }
+        }
+
+        let currentTerritoryTab = 'local';
+
+        function switchTerritoryTab(t) {
+            currentTerritoryTab = t;
+            document.getElementById('tabLocalTerritory').style.cssText = 'flex:1;' + (t === 'local' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('tabMyTerritory').style.cssText = 'flex:1;' + (t === 'my' ? 'background:#FFD700;color:#000' : 'background:rgba(255,255,255,0.1)');
+            document.getElementById('localTerritoryList').style.display = t === 'local' ? 'block' : 'none';
+            document.getElementById('myTerritoryList').style.display = t === 'my' ? 'block' : 'none';
+        }
+
+        async function loadMyTerritory() {
+            try {
+                const r = await api('GET', '/map/territories?lat=39.9&lng=116.4');
+                const ic = {
+                    mall: '🏪', factory: '🏭', mine: '⛏️', gold_mine: '💰',
+                    power_station: '⚡', warehouse: '📦', farm: '🌾', lab: '🔬'
+                };
+                // 本星地盘 - 所有可占领的
+                document.getElementById('localTerritoryList').innerHTML = (r || []).map(t => {
+                    const isMine = t.owner && t.owner.id === userData?.id;
+                    const canCapture = !t.owner;
+                    const canAttack = t.owner && !isMine;
+                    return '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px">' + (ic[t.type] || '🏢') + ' ' + t.name + '</div>' +
+                    '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + ' ' + (t.outputType === 'gold' ? '金币' : t.outputType === 'crystal' ? '晶体' : t.outputType) + '/h</div></div>' +
+                    (isMine ? '<span style="color:#4CAF50">✅ 我的</span>' : 
+                     canCapture ? '<button class="btn btn-success" onclick="captureTerritory(' + t.id + ')">占领</button>' :
+                     '<button class="btn btn-primary" onclick="attackTerritory(' + t.id + ',\'' + t.name + '\')">⚔️ 抢夺</button>') + '</div>';
+                }).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无地盘</p>';
+                // 我的地盘 - 当前用户占领的
+                const myTerritories = (r || []).filter(t => t.owner && t.owner.id === userData?.id);
+                document.getElementById('myTerritoryList').innerHTML =
+                    (myTerritories.length > 0 ? '<button class="btn btn-success" style="width:100%;margin-bottom:10px" onclick="collectAllTerritory()">💰 一键收取全部</button>' : '') +
+                    myTerritories.map(t =>
+                    '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px">' + (ic[t.type] || '🏢') + ' ' + t.name + '</div>' +
+                    '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + '/h</div></div>' +
+                    '<div><button class="btn btn-primary" onclick="collectTerritory(' + t.id + ')">收取</button></div></div>'
+                ).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无占领的地盘</p>';
+            } catch (e) {
+                document.getElementById('localTerritoryList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>';
+                document.getElementById('myTerritoryList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>';
+            }
+        }
+
+        async function captureTerritory(id) {
+            try {
+                await api('POST', '/map/territories/' + id + '/capture');
+                toast('占领成功!');
+                loadMyTerritory();
+            } catch (e) { toast('占领失败: ' + e.message); }
+        }
+        
+        async function attackTerritory(id, name) {
+            if (!confirm('确认抢夺 ' + name + ' ?\n需要战斗胜利才能抢夺!')) return;
+            
+            // 切换到战斗页面
+            switchPage('battle');
+            toast('战斗中...');
+            
+            try {
+                const r = await api('POST', '/map/territories/' + id + '/attack');
+                
+                // 显示战斗结果
+                const battleResult = document.getElementById('battleHistoryList');
+                const resultHtml = 
+                    '<div class="card" style="text-align:center;margin-bottom:10px">' +
+                    '<div style="font-size:24px;margin-bottom:10px">' + (r.success ? '🎉 胜利!' : '💔 失败!') + '</div>' +
+                    '<div style="font-size:12px;color:#888">抢夺 ' + name + '</div>' +
+                    '<div style="margin:10px 0;padding:10px;background:rgba(255,255,255,0.1);border-radius:10px">' +
+                    '<div>⚔️ 你的战力: ' + r.battle.attackPower + '</div>' +
+                    '<div>🛡️ 对方战力: ' + r.battle.defensePower + '</div>' +
+                    '</div>' +
+                    '<div style="color:' + (r.success ? '#4CAF50' : '#EF5350') + '">' + r.message + '</div>' +
+                    (r.success ? '<button class="btn btn-success" style="margin-top:10px" onclick="switchPage(\'territory\')">查看地盘</button>' : '') +
+                    '</div>';
+                
+                // 切换到战斗记录tab
+                switchBattleTab('history');
+                battleResult.innerHTML = resultHtml + (battleResult.innerHTML || '');
+                
+            } catch (e) { 
+                toast('抢夺失败: ' + e.message); 
+            }
+        }
+
+        async function collectTerritory(id) {
+            try {
+                const r = await api('POST', '/map/territories/' + id + '/collect');
+                const gold = r?.collected?.gold || 0;
+                const crystal = r?.collected?.crystal || 0;
+                // 更新用户数据
+                userData.gold = (parseInt(userData.gold) || 0) + gold;
+                userData.timeCoin = (parseInt(userData.timeCoin) || 0) + crystal;
+                document.getElementById('goldAmount').textContent = userData.gold;
+                document.getElementById('crystalAmount').textContent = userData.timeCoin;
+                toast('收取成功! +' + gold + '💰' + (crystal > 0 ? ' +' + crystal + '💎' : ''));
+                loadMyTerritory();
+            } catch (e) { toast('收取失败: ' + e.message); }
+        }
+
+        async function collectAllTerritory() {
+            try {
+                const r = await api('GET', '/map/territories?lat=39.9&lng=116.4');
+                const myTerritories = (r || []).filter(t => t.owner && t.owner.id === userData?.id);
+                if (myTerritories.length === 0) {
+                    toast('没有可收取的地盘');
+                    return;
+                }
+                let totalGold = 0, totalCrystal = 0, successCount = 0;
+                toast(`正在收取 ${myTerritories.length} 个地盘...`);
+                for (const t of myTerritories) {
+                    try {
+                        const result = await api('POST', '/map/territories/' + t.id + '/collect');
+                        totalGold += result?.collected?.gold || 0;
+                        totalCrystal += result?.collected?.crystal || 0;
+                        successCount++;
+                    } catch (e) {}
+                }
+                // 更新用户数据
+                userData.gold = (parseInt(userData.gold) || 0) + totalGold;
+                userData.timeCoin = (parseInt(userData.timeCoin) || 0) + totalCrystal;
+                document.getElementById('goldAmount').textContent = userData.gold;
+                document.getElementById('crystalAmount').textContent = userData.timeCoin;
+                toast(`收取完成! ${successCount}/${myTerritories.length}个 +${totalGold}💰${totalCrystal > 0 ? ' +' + totalCrystal + '💎' : ''}`);
+                // 延迟刷新列表
+                setTimeout(() => loadMyTerritory(), 500);
+            } catch (e) { toast('收取失败'); }
+        }
+
+        window.onload = async () => {
+            token = localStorage.getItem('zodiac_token') || '';
+            if (token) {
+                try {
+                    userData = await api('GET', '/users/me');
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('mainPage').style.display = 'block';
+                    loadMain();
+                } catch (e) { localStorage.removeItem('zodiac_token'); token = ''; }
+            }
+        };
+    </script>
+</body>
+</html>

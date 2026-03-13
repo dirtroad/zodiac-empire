@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试登录</title>
+</head>
+<body style="background:#1a1a3e;color:#fff;font-family:sans-serif;padding:20px;">
+    <h1>测试登录</h1>
+    <button onclick="testLogin()" style="padding:10px 20px;font-size:16px;cursor:pointer;">点击登录</button>
+    <div id="result" style="margin-top:20px;"></div>
+    
+    <script>
+        const API_BASE = 'http://192.168.6.238:3000/v1';
+        
+        async function testLogin() {
+            document.getElementById('result').textContent = '登录中...';
+            
+            try {
+                const res = await fetch(API_BASE + '/auth/wechat/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: 'test_' + Date.now() })
+                });
+                
+                const json = await res.json();
+                console.log('Response:', json);
+                
+                if (json.code === 0) {
+                    document.getElementById('result').innerHTML = 
+                        '<p style="color:#4CAF50;">登录成功!</p>' +
+                        '<p>昵称: ' + json.data.user.nickname + '</p>' +
+                        '<p>Token: ' + json.data.access_token.substring(0, 20) + '...</p>';
+                } else {
+                    document.getElementById('result').innerHTML = '<p style="color:red;">失败: ' + json.message + '</p>';
+                }
+            } catch (e) {
+                document.getElementById('result').innerHTML = '<p style="color:red;">错误: ' + e.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
