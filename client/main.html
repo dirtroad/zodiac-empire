@@ -657,7 +657,7 @@
                     '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + ' ' + (t.outputType === 'gold' ? '金币' : t.outputType === 'crystal' ? '晶体' : t.outputType) + '/h</div></div>' +
                     (isMine ? '<span style="color:#4CAF50">✅ 我的</span>' : 
                      canCapture ? '<button class="btn btn-success" onclick="captureTerritory(' + t.id + ')">占领</button>' :
-                     '<button class="btn btn-primary" onclick="attackTerritory(' + t.id + ',\'' + t.name + '\')">⚔️ 抢夺</button>') + '</div>';
+                     '<button class="btn btn-primary" onclick="attackTerritory(' + t.id + ',\'' + t.name + '\')">⚔️ 攻占</button>') + '</div>';
                 }).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无地盘</p>';
                 // 我的地盘 - 当前用户占领的
                 const myTerritories = (r || []).filter(t => t.owner && t.owner.id === userData?.id);
@@ -683,7 +683,7 @@
         }
         
         async function attackTerritory(id, name) {
-            if (!confirm('确认抢夺 ' + name + ' ?\n需要战斗胜利才能抢夺!')) return;
+            if (!confirm('确认攻占 ' + name + ' ?\n需要战斗胜利才能攻占!')) return;
             
             // 切换到战斗页面
             switchPage('battle');
@@ -697,7 +697,7 @@
                 const resultHtml = 
                     '<div class="card" style="text-align:center;margin-bottom:10px">' +
                     '<div style="font-size:24px;margin-bottom:10px">' + (r.success ? '🎉 胜利!' : '💔 失败!') + '</div>' +
-                    '<div style="font-size:12px;color:#888">抢夺 ' + name + '</div>' +
+                    '<div style="font-size:12px;color:#888">攻占 ' + name + '</div>' +
                     '<div style="margin:10px 0;padding:10px;background:rgba(255,255,255,0.1);border-radius:10px">' +
                     '<div>⚔️ 你的战力: ' + r.battle.attackPower + '</div>' +
                     '<div>🛡️ 对方战力: ' + r.battle.defensePower + '</div>' +
@@ -711,7 +711,7 @@
                 battleResult.innerHTML = resultHtml + (battleResult.innerHTML || '');
                 
             } catch (e) { 
-                toast('抢夺失败: ' + e.message); 
+                toast('攻占失败: ' + e.message); 
             }
         }
 

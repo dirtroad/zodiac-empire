@@ -37,7 +37,7 @@ import { RedisService } from './common/redis/redis.service';
         host: configService.get('DB_HOST', 'localhost'),
         port: configService.get('DB_PORT', 3306),
         username: configService.get('DB_USERNAME', 'root'),
-        password: configService.get('DB_PASSWORD', 'root'),
+        password: configService.get('DB_PASSWORD', ''),
         database: configService.get('DB_DATABASE', 'zodiac_empire'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get('NODE_ENV') !== 'production',
@@ -80,11 +80,17 @@ import { RedisService } from './common/redis/redis.service';
     {
       provide: 'REDIS_CLIENT',
       useFactory: async (configService: ConfigService) => {
-        const client = createClient({
-          url: `redis://${configService.get('REDIS_HOST', 'localhost')}:${configService.get('REDIS_PORT', 6379)}`,
-        });
-        await client.connect();
-        return client;
+        try {
+          const client = createClient({
+            url: `redis://${configService.get('REDIS_HOST', 'localhost')}:${configService.get('REDIS_PORT', 6379)}`,
+          });
+          await client.connect();
+          console.log('✅ Redis connected');
+          return client;
+        } catch (e) {
+          console.warn('⚠️ Redis not available, continuing without cache...');
+          return null;
+        }
       },
       inject: [ConfigService],
     },

@@ -160,107 +160,84 @@ export class EmotionService {
 
     // 增加用户对应属性
     const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (user) {
-      const effect = this.EMOTION_EFFECTS[emotionType];
-      if (effect) {
-        // 根据属性类型增加对应值
-        switch (effect.attr) {
-          case 'power':
-            user.power = (Number(user.power) || 100) + effect.amount;
-            break;
-          case 'attack':
-            user.attack = (Number(user.attack) || 0) + effect.amount;
-            break;
-          case 'defense':
-            user.defense = (Number(user.defense) || 0) + effect.amount;
-            break;
-          case 'tactics':
-            user.tactics = (Number(user.tactics) || 0) + effect.amount;
-            break;
-          case 'critRate':
-            user.critRate = (Number(user.critRate) || 0) + effect.amount;
-            break;
-          case 'dodgeRate':
-            user.dodgeRate = (Number(user.dodgeRate) || 0) + effect.amount;
-            break;
-          case 'goldBonus':
-            user.goldBonus = (Number(user.goldBonus) || 0) + effect.amount;
-            break;
-        }
-        await this.userRepository.save(user);
+    const eff = this.EMOTION_EFFECTS[emotionType];
+    
+    if (user && eff) {
+      // 根据属性类型增加对应值
+      switch (eff.attr) {
+        case 'power':
+          user.power = (Number(user.power) || 100) + eff.amount;
+          break;
+        case 'attack':
+          user.attack = (Number(user.attack) || 0) + eff.amount;
+          break;
+        case 'defense':
+          user.defense = (Number(user.defense) || 0) + eff.amount;
+          break;
+        case 'tactics':
+          user.tactics = (Number(user.tactics) || 0) + eff.amount;
+          break;
+        case 'critRate':
+          user.critRate = (Number(user.critRate) || 0) + eff.amount;
+          break;
+        case 'dodgeRate':
+          user.dodgeRate = (Number(user.dodgeRate) || 0) + eff.amount;
+          break;
+        case 'goldBonus':
+          user.goldBonus = (Number(user.goldBonus) || 0) + eff.amount;
+          break;
       }
+      await this.userRepository.save(user);
     }
 
     return {
       success: true,
       usedAmount: amount,
       remainingAmount: emotion.amount,
-      powerIncrease: effect?.attr === 'power' ? effect.amount : 0,
-      effect: effect?.effect || '属性提升',
+      powerIncrease: eff?.attr === 'power' ? eff.amount : 0,
+      effect: eff?.effect || '属性提升',
     };
   }
 
   // 上传情绪卡片
   async uploadCard(userId: number, dto: UploadCardDto) {
-    // 简化的情绪识别（实际应该用AI）
-    const emotionType = this.detectEmotion(dto.title || '');
-    
     const card = this.cardRepository.create({
       userId,
       title: dto.title,
       contentType: dto.contentType,
       contentUrl: dto.contentUrl,
       thumbnailUrl: dto.thumbnailUrl,
-      emotionType,
       isAnonymous: dto.isAnonymous || false,
-      status: 2, // 直接设为正常（实际应该审核）
+      popularity: 0,
     });
-
-    return this.cardRepository.save(card);
-  }
-
-  // 简化的情绪检测
-  private detectEmotion(text: string): number {
-    const keywords: Record<number, string[]> = {
-      1: ['开心', '快乐', '哈哈', '幸福', '棒'],
-      3: ['激动', '热血', '燃', '冲', '加油'],
-      5: ['生气', '愤怒', '气死', '烦'],
-      6: ['焦虑', '担心', '害怕', '紧张'],
-    };
-
-    for (const [type, words] of Object.entries(keywords)) {
-      if (words.some(w => text.includes(w))) {
-        return parseInt(type);
-      }
-    }
-    return 2; // 默认平静
+    await this.cardRepository.save(card);
+    return { success: true, card };
   }
 
   // 获取情绪卡片列表
-  async getCards(page: number, limit: number, orderBy: string) {
-    const order: any = {};
-    if (orderBy === 'popularity') {
-      order.popularity = 'DESC';
-    } else if (orderBy === 'latest') {
-      order.createdAt = 'DESC';
-    }
-
+  async getCards(page: number = 1, limit: number = 20, orderBy: string = 'popularity') {
+    const skip = (page - 1) * limit;
+    const orderConfig = orderBy === 'latest' 
+      ? { createdAt: 'DESC' as const } 
+      : { popularity: 'DESC' as const };
+    
     const [cards, total] = await this.cardRepository.findAndCount({
-      where: { status: 2 },
-      order,
-      skip: (page - 1) * limit,
+      order: orderConfig,
+      skip,
       take: limit,
+      relations: ['user'],
     });
-
+    
     return {
       cards: cards.map(c => ({
         id: c.id,
         title: c.title,
-        thumbnailUrl: c.thumbnailUrl || c.contentUrl,
         contentType: c.contentType,
+        contentUrl: c.contentUrl,
+        thumbnailUrl: c.thumbnailUrl,
+        emotionType: c.emotionType,
         popularity: c.popularity,
-        popularityLevel: this.getPopularityLevel(c.popularity),
-        isAnonymous: c.isAnonymous,
+        nickname: c.user?.nickname,
         createdAt: c.createdAt,
       })),
       total,
@@ -271,30 +248,36 @@ export class EmotionService {
 
   // 获取我的情绪卡片
   async getMyCards(userId: number) {
-    return this.cardRepository.find({
+    const cards = await this.cardRepository.find({
       where: { userId },
       order: { createdAt: 'DESC' },
     });
+    return { cards };
   }
 
   // 获取卡片详情
   async getCardDetail(id: number) {
-    const card = await this.cardRepository.findOne({ where: { id } });
+    const card = await this.cardRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
     if (!card) {
       throw new NotFoundException('卡片不存在');
     }
-
-    // 增加浏览次数
-    card.viewCount += 1;
-    await this.cardRepository.save(card);
-
     return {
-      ...card,
-      popularityLevel: this.getPopularityLevel(card.popularity),
+      id: card.id,
+      title: card.title,
+      contentType: card.contentType,
+      contentUrl: card.contentUrl,
+      thumbnailUrl: card.thumbnailUrl,
+      emotionType: card.emotionType,
+      popularity: card.popularity,
+      nickname: card.user?.nickname,
+      createdAt: card.createdAt,
     };
   }
 
-  // 点赞/踩
+  // 点赞/踩卡片
   async voteCard(userId: number, cardId: number, voteType: number) {
     const card = await this.cardRepository.findOne({ where: { id: cardId } });
     if (!card) {
@@ -307,10 +290,10 @@ export class EmotionService {
     });
 
     if (existingVote) {
-      throw new BadRequestException('已经投过票了');
+      throw new BadRequestException('你已经投票过了');
     }
 
-    // 创建投票记录
+    // 记录投票
     const vote = this.voteRepository.create({
       userId,
       cardId,
@@ -319,69 +302,36 @@ export class EmotionService {
     await this.voteRepository.save(vote);
 
     // 更新卡片人气
-    if (voteType === 1) {
-      card.popularity += 1;
-      
-      // 点赞时给卡片作者发放时空晶体
-      if (card.userId !== userId) {  // 不能给自己点赞奖励
-        await this.userRepository.increment(
-          { id: card.userId },
-          'timeCoin',
-          1  // 每个赞奖励1时空晶体
-        );
-      }
-    } else {
-      card.popularity -= 1;
-    }
-    card.popularityLevel = this.getPopularityLevel(card.popularity);
+    card.popularity = (card.popularity || 0) + (voteType === 1 ? 1 : -1);
     await this.cardRepository.save(card);
 
-    return {
-      popularity: card.popularity,
-      popularityLevel: card.popularityLevel,
-    };
+    return { success: true, popularity: card.popularity };
   }
 
   // 领取卡片奖励
   async collectCardReward(userId: number, cardId: number) {
-    const card = await this.cardRepository.findOne({ where: { id: cardId, userId } });
+    const card = await this.cardRepository.findOne({ where: { id: cardId } });
     if (!card) {
       throw new NotFoundException('卡片不存在');
     }
 
-    if (card.collectedAt) {
-      throw new BadRequestException('奖励已领取');
-    }
-
-    // 根据人气等级计算奖励
-    const level = POPULARITY_LEVELS.find(l => l.level === card.popularityLevel) || POPULARITY_LEVELS[0];
-    
-    // 增加用户情绪资源
-    const emotion = await this.emotionRepository.findOne({
-      where: { userId, emotionType: card.emotionType || 1 },
+    // 检查是否已领取
+    const existingVote = await this.voteRepository.findOne({
+      where: { userId, cardId },
     });
 
-    if (emotion) {
-      emotion.amount += level.reward;
-      await this.emotionRepository.save(emotion);
+    if (!existingVote) {
+      throw new BadRequestException('你需要先投票才能领取奖励');
     }
 
-    card.collectedAt = new Date();
-    await this.cardRepository.save(card);
-
-    return {
-      reward: level.reward,
-      emotionType: card.emotionType,
-    };
-  }
-
-  // 获取人气等级
-  private getPopularityLevel(popularity: number): number {
-    for (let i = POPULARITY_LEVELS.length - 1; i >= 0; i--) {
-      if (popularity >= POPULARITY_LEVELS[i].threshold) {
-        return POPULARITY_LEVELS[i].level;
-      }
+    // 简单奖励：给用户加一些金币
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (user) {
+      user.gold = (Number(user.gold) || 0) + 10;
+      await this.userRepository.save(user);
     }
-    return 1;
+
+    return { success: true, reward: 10 };
   }
+
 }
