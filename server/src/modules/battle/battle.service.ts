@@ -47,7 +47,7 @@ export class BattleService {
     };
   }
 
-  async executeBattle(battleId: number, userId: number) {
+  async executeBattle(battleId: number, userId: number, customBetAmount?: number) {
     // 简化的战斗逻辑
     const attacker = await this.userRepository.findOne({ where: { id: userId } });
     if (!attacker) {
@@ -56,9 +56,11 @@ export class BattleService {
     
     const attackerGalaxies = await this.galaxyRepository.find({ where: { userId } });
     
-    // 计算攻击方战力
-    const attackPower = attacker.power + 
-      attackerGalaxies.reduce((sum, g) => sum + g.defensePower, 0);
+    // 计算攻击方战力 = 基础战力 + 战斗加成(10%)
+    const basePower = Number(attacker.power) || 100;
+    const battleBonus = Math.floor(basePower * 0.1); // 战斗加成10%
+    const attackPower = basePower + battleBonus;
+    console.log(`⚔️ 战力: 基础=${basePower}, 战斗加成=+${battleBonus}, 最终=${attackPower}`);
 
     // 随机匹配一个目标（实际应该从战斗记录获取）
     const targets = await this.userRepository
@@ -75,19 +77,35 @@ export class BattleService {
     const defender = targets[0];
     const defensePower = defender.power;
 
-    // 战斗结果
-    const attackBonus = Math.random() * 0.3 + 0.85; // 85%-115%
-    const defenseBonus = Math.random() * 0.3 + 0.85;
+    // 战斗结果 - 缩小随机浮动范围
+    const attackBonus = Math.random() * 0.2 + 0.9; // 90%-110%
+    const defenseBonus = Math.random() * 0.2 + 0.9; // 90%-110%
 
-    const finalAttack = attackPower * attackBonus;
-    const finalDefense = defensePower * defenseBonus;
+    const finalAttack = Math.floor(attackPower * attackBonus);
+    const finalDefense = Math.floor(defensePower * defenseBonus);
+    
+    console.log(`⚔️ 战斗: 攻击方战力=${attackPower}, 最终=${finalAttack} vs 防御方战力=${defensePower}, 最终=${finalDefense}`);
 
     const isWin = finalAttack > finalDefense;
-    const goldReward = isWin ? Math.floor(defender.gold * 0.1) : 0;
+    // 赌注：自定义 > 默认10% > 最少100金币
+    let betAmount = customBetAmount || Math.floor(Number(attacker.gold) * 0.1);
+    betAmount = Math.max(betAmount, 100); // 最低100金币
 
-    if (isWin && goldReward > 0) {
-      await this.userRepository.increment({ id: userId }, 'gold', goldReward);
-      await this.userRepository.decrement({ id: defender.id }, 'gold', goldReward);
+    if (betAmount > Number(attacker.gold)) {
+      throw new Error('金币不足，无法战斗');
+    }
+
+    // 奖励/损失金币
+    const goldReward = isWin ? betAmount : -betAmount;
+
+    if (isWin) {
+      // 胜：获得赌注
+      await this.userRepository.increment({ id: userId }, 'gold', betAmount);
+      await this.userRepository.decrement({ id: defender.id }, 'gold', betAmount);
+    } else {
+      // 败：损失赌注
+      await this.userRepository.decrement({ id: userId }, 'gold', betAmount);
+      await this.userRepository.increment({ id: defender.id }, 'gold', betAmount);
     }
 
     // 保存战斗记录

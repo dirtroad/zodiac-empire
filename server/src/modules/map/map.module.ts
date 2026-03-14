@@ -5,9 +5,10 @@ import { MapService } from './map.service';
 import { User } from '../../entities/user.entity';
 import { TimeCrystal } from '../../entities/time-crystal.entity';
 import { Territory } from '../../entities/territory.entity';
+import { BattleRecord } from '../../entities/battle-record.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, TimeCrystal, Territory])],
+  imports: [TypeOrmModule.forFeature([User, TimeCrystal, Territory, BattleRecord])],
   controllers: [MapController],
   providers: [MapService],
   exports: [MapService],

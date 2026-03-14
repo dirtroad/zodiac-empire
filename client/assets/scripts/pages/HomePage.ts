@@ -143,8 +143,10 @@ export class HomePage extends Component {
                 console.log('收取成功:', result);
                 // 刷新数据
                 await GameManager.instance?.refreshUserData();
-            } catch (e) {
+            } catch (e: any) {
                 console.error('收取失败:', e);
+                const msg = e?.response?.data?.message || e?.message || '收取失败';
+                this.showToast(msg);
             }
         });
     }

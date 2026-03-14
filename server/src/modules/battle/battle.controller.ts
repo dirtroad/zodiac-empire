@@ -18,8 +18,12 @@ export class BattleController {
   }
 
   @Post('execute')
-  async executeBattle(@Request() req: any, @Body('battleId') battleId: number) {
-    return this.battleService.executeBattle(battleId, req.user.userId);
+  async executeBattle(
+    @Request() req: any, 
+    @Body('battleId') battleId: number,
+    @Body('betAmount') betAmount?: number,
+  ) {
+    return this.battleService.executeBattle(battleId, req.user.userId, betAmount);
   }
 
   @Public()

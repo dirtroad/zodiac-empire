@@ -214,7 +214,12 @@
             document.querySelectorAll('.nav-item').forEach((x, i) => x.classList.toggle('active', ['home','warp','cultivate','battle','territory'][i] === p));
             if (p === 'warp') loadWarp();
             else if (p === 'battle') loadBattle();
-            else if (p === 'territory') loadMyTerritory();
+            else if (p === 'territory') {
+                loadMyTerritory();
+                // 冷却倒计时定时刷新
+                if (window.territoryTimer) clearInterval(window.territoryTimer);
+                window.territoryTimer = setInterval(loadMyTerritory, 10000); // 每10秒刷新
+            }
             else if (p === 'cultivate') loadCultivate();
             else if (p === 'home') loadChat();
         }
@@ -663,11 +668,24 @@
                 const myTerritories = (r || []).filter(t => t.owner && t.owner.id === userData?.id);
                 document.getElementById('myTerritoryList').innerHTML =
                     (myTerritories.length > 0 ? '<button class="btn btn-success" style="width:100%;margin-bottom:10px" onclick="collectAllTerritory()">💰 一键收取全部</button>' : '') +
-                    myTerritories.map(t =>
-                    '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px">' + (ic[t.type] || '🏢') + ' ' + t.name + '</div>' +
-                    '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + '/h</div></div>' +
-                    '<div><button class="btn btn-primary" onclick="collectTerritory(' + t.id + ')">收取</button></div></div>'
-                ).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无占领的地盘</p>';
+                    myTerritories.map(t => {
+                    const canCollect = t.canCollect;
+                    const remaining = t.remainingMinutes || 0;
+                    // 倒计时显示
+                    const minutes = Math.floor(remaining);
+                    const seconds = Math.floor((remaining - minutes) * 60);
+                    const countdownStr = minutes > 0 ? minutes + '分' + seconds + '秒' : seconds + '秒';
+                    const statusHtml = canCollect 
+                      ? '<span style="color:#4CAF50;font-size:12px">✅ 可收取</span>'
+                      : '<span style="color:#FF6B6B;font-size:12px">⏳ 冷却中 ' + countdownStr + '</span>';
+                    const btnHtml = canCollect
+                      ? '<button class="btn btn-primary" onclick="collectTerritory(' + t.id + ')">收取</button>'
+                      : '<button class="btn" style="background:#666;cursor:not-allowed" disabled>冷却中</button>';
+                    return '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px">' + (ic[t.type] || '🏢') + ' ' + t.name + '</div>' +
+                    '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + '/h</div>' +
+                    '<div style="margin-top:4px">' + statusHtml + '</div></div>' +
+                    '<div>' + btnHtml + '</div></div>';
+                }).join('') || '<p style="color:#888;text-align:center;padding:20px">暂无占领的地盘</p>';
             } catch (e) {
                 document.getElementById('localTerritoryList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>';
                 document.getElementById('myTerritoryList').innerHTML = '<p style="color:#888;text-align:center;padding:20px">加载失败</p>';
@@ -685,30 +703,21 @@
         async function attackTerritory(id, name) {
             if (!confirm('确认攻占 ' + name + ' ?\n需要战斗胜利才能攻占!')) return;
             
-            // 切换到战斗页面
-            switchPage('battle');
             toast('战斗中...');
             
             try {
                 const r = await api('POST', '/map/territories/' + id + '/attack');
                 
-                // 显示战斗结果
-                const battleResult = document.getElementById('battleHistoryList');
-                const resultHtml = 
-                    '<div class="card" style="text-align:center;margin-bottom:10px">' +
-                    '<div style="font-size:24px;margin-bottom:10px">' + (r.success ? '🎉 胜利!' : '💔 失败!') + '</div>' +
-                    '<div style="font-size:12px;color:#888">攻占 ' + name + '</div>' +
-                    '<div style="margin:10px 0;padding:10px;background:rgba(255,255,255,0.1);border-radius:10px">' +
-                    '<div>⚔️ 你的战力: ' + r.battle.attackPower + '</div>' +
-                    '<div>🛡️ 对方战力: ' + r.battle.defensePower + '</div>' +
-                    '</div>' +
-                    '<div style="color:' + (r.success ? '#4CAF50' : '#EF5350') + '">' + r.message + '</div>' +
-                    (r.success ? '<button class="btn btn-success" style="margin-top:10px" onclick="switchPage(\'territory\')">查看地盘</button>' : '') +
-                    '</div>';
+                // 攻占结果提示
+                if (r.success) {
+                    alert('🎉 攻占成功！\n\n战力: ' + r.battle.attackPower + ' vs ' + r.battle.defensePower + '\n\n' + r.message);
+                } else {
+                    alert('💔 攻占失败！\n\n战力: ' + r.battle.attackPower + ' vs ' + r.battle.defensePower + '\n\n' + r.message);
+                }
                 
-                // 切换到战斗记录tab
-                switchBattleTab('history');
-                battleResult.innerHTML = resultHtml + (battleResult.innerHTML || '');
+                // 刷新地盘列表
+                loadMyTerritory();
+                loadLocalTerritory();
                 
             } catch (e) { 
                 toast('攻占失败: ' + e.message); 

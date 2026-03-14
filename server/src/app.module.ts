@@ -42,6 +42,7 @@ import { RedisService } from './common/redis/redis.service';
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get('NODE_ENV') !== 'production',
         logging: configService.get('NODE_ENV') !== 'production',
+        charset: 'utf8mb4_general_ci',
       }),
       inject: [ConfigService],
     }),

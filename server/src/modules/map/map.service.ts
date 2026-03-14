@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
 import { TimeCrystal } from '../../entities/time-crystal.entity';
 import { Territory } from '../../entities/territory.entity';
+import { BattleRecord } from '../../entities/battle-record.entity';
 
 // 12星座星域配置
 const STAR_REALMS = [
@@ -40,6 +41,8 @@ export class MapService {
     private crystalRepository: Repository<TimeCrystal>,
     @InjectRepository(Territory)
     private territoryRepository: Repository<Territory>,
+    @InjectRepository(BattleRecord)
+    private battleRecordRepository: Repository<BattleRecord>,
   ) {}
 
   async getLocalMap(userId: number, lat: number, lng: number) {
@@ -244,22 +247,33 @@ export class MapService {
       .where('t.ownerId = :userId', { userId })
       .getMany();
     
+    const now = new Date();
     return {
       count: territories.length,
       totalProduction: {
         gold: territories.reduce((sum, t) => sum + (t.outputType === 'gold' ? t.outputAmount : 0), 0),
         crystal: territories.reduce((sum, t) => sum + (t.outputType === 'crystal' ? t.outputAmount : 0), 0),
       },
-      territories: territories.map(t => ({
-        id: t.id,
-        name: t.name,
-        type: t.type,
-        typeName: t.typeName,
-        outputType: t.outputType,
-        outputAmount: t.outputAmount,
-        accumulatedGold: t.accumulatedGold,
-        accumulatedCrystal: t.accumulatedCrystal,
-      })),
+      territories: territories.map(t => {
+        const lastCollect = t.lastCollectAt || t.createdAt;
+        const minutesPassed = (now.getTime() - new Date(lastCollect).getTime()) / (1000 * 60);
+        const canCollect = minutesPassed >= 10;
+        const remainingMinutes = canCollect ? 0 : (10 - minutesPassed); // 保留小数精确到秒
+        
+        return {
+          id: t.id,
+          name: t.name,
+          type: t.type,
+          typeName: t.typeName,
+          outputType: t.outputType,
+          outputAmount: t.outputAmount,
+          accumulatedGold: t.accumulatedGold,
+          accumulatedCrystal: t.accumulatedCrystal,
+          lastCollectAt: t.lastCollectAt,
+          canCollect,
+          remainingMinutes,
+        };
+      }),
     };
   }
 
@@ -279,16 +293,28 @@ export class MapService {
         throw new Error('地盘已被占领，需要战斗抢夺');
       }
       
-      // 战斗逻辑
+      // 战斗逻辑 - 缩小攻击优势，增加战斗悬念
       const attackerPower = Number(user.power);
       const defenderPower = Number(territory.owner.power) || 100;
-      const attackBonus = Math.random() * 0.3 + 0.85;
-      const defenseBonus = Math.random() * 0.3 + 0.85;
+      const attackBonus = Math.random() * 0.2 + 0.8; // 80%-100%
+      const defenseBonus = Math.random() * 0.4 + 0.8; // 80%-120%
       
       const finalAttack = attackerPower * attackBonus;
       const finalDefense = defenderPower * defenseBonus;
+      const isWin = finalAttack > finalDefense;
       
-      if (finalAttack <= finalDefense) {
+      // 保存战斗记录
+      const record = this.battleRecordRepository.create({
+        attackerId: userId,
+        defenderId: territory.owner.id,
+        result: isWin ? 'win' : 'lose',
+        attackPower: Math.floor(finalAttack),
+        defensePower: Math.floor(finalDefense),
+        goldReward: isWin ? Math.floor(attackerPower * 0.1) : 0,
+      });
+      await this.battleRecordRepository.save(record);
+      
+      if (!isWin) {
         return {
           success: false,
           territoryId,
@@ -298,8 +324,11 @@ export class MapService {
       }
       
       // 战斗胜利，抢夺成功
-      // 给原主人产生恐惧情绪
-      const oldOwnerId = territory.owner.id;
+      // 战力提升10%
+      const powerIncrease = Math.floor(attackerPower * 0.1);
+      await this.userRepository.increment({ id: userId }, 'power', powerIncrease);
+      await this.userRepository.increment({ id: userId }, 'attack', Math.floor(powerIncrease * 0.5));
+      await this.userRepository.increment({ id: userId }, 'defense', Math.floor(powerIncrease * 0.5));
       
       // 转移所有权
       territory.owner = user;
@@ -309,8 +338,8 @@ export class MapService {
       return {
         success: true,
         territoryId,
-        message: '战斗胜利，抢夺成功！',
-        battle: { attackPower: Math.floor(finalAttack), defensePower: Math.floor(finalDefense) },
+        message: `战斗胜利，抢夺成功！战力+${powerIncrease}`,
+        battle: { attackPower: Math.floor(finalAttack), defensePower: Math.floor(finalDefense), powerIncrease },
         output: {
           type: territory.outputType,
           amount: territory.outputAmount,
@@ -391,9 +420,17 @@ export class MapService {
       throw new Error('这不是你的地盘');
     }
     
-    // 计算产出（按小时累计）
+    // 检查冷却时间（10分钟）
     const now = new Date();
     const lastCollect = territory.lastCollectAt || territory.createdAt;
+    const minutesPassed = (now.getTime() - new Date(lastCollect).getTime()) / (1000 * 60);
+    
+    if (minutesPassed < 10) {
+      const remaining = Math.ceil(10 - minutesPassed);
+      throw new Error(`冷却中，还需等待 ${remaining} 分钟`);
+    }
+    
+    // 计算产出（按小时累计）
     const hoursPassed = Math.max(0.1, (now.getTime() - new Date(lastCollect).getTime()) / (1000 * 60 * 60));
     const collectHours = Math.min(hoursPassed, 24); // 最多累计24小时
     
