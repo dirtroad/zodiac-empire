@@ -1,4 +1,4 @@
-import { Injectable, ForbiddenException } from '@nestjs/common';
+import { Injectable, ForbiddenException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
@@ -279,13 +279,13 @@ export class MapService {
 
   async captureTerritory(userId: number, territoryId: number, forceAttack: boolean = false) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (!user) throw new Error('用户不存在');
+    if (!user) throw new NotFoundException('用户不存在');
     
     const territory = await this.territoryRepository.findOne({ 
       where: { id: territoryId },
       relations: ['owner']
     });
-    if (!territory) throw new Error('地盘不存在');
+    if (!territory) throw new NotFoundException('地盘不存在');
     
     // 如果地盘已被别人占领，需要战斗
     if (territory.owner && territory.owner.id !== userId) {
@@ -293,23 +293,25 @@ export class MapService {
         throw new Error('地盘已被占领，需要战斗抢夺');
       }
       
-      // 战斗逻辑 - 缩小攻击优势，增加战斗悬念
+      // 战斗逻辑 - 增加战斗悬念和运气成分
       const attackerPower = Number(user.power);
       const defenderPower = Number(territory.owner.power) || 100;
-      const attackBonus = Math.random() * 0.2 + 0.8; // 80%-100%
-      const defenseBonus = Math.random() * 0.4 + 0.8; // 80%-120%
+      // 战力影响 + 随机性
+      const baseChance = attackerPower / (attackerPower + defenderPower); // 基础胜率
+      const winChance = attackerPower / (attackerPower + defenderPower); // 不限制范围
+      const isWin = Math.random() < winChance;
       
-      const finalAttack = attackerPower * attackBonus;
-      const finalDefense = defenderPower * defenseBonus;
-      const isWin = finalAttack > finalDefense;
+      // 用于显示的战力数值
+      const attackPower = Math.floor(attackerPower * (0.8 + Math.random() * 0.4));
+      const defensePower = Math.floor(defenderPower * (0.8 + Math.random() * 0.4));
       
       // 保存战斗记录
       const record = this.battleRecordRepository.create({
         attackerId: userId,
         defenderId: territory.owner.id,
         result: isWin ? 'win' : 'lose',
-        attackPower: Math.floor(finalAttack),
-        defensePower: Math.floor(finalDefense),
+        attackPower: Math.floor(attackPower),
+        defensePower: Math.floor(defensePower),
         goldReward: isWin ? Math.floor(attackerPower * 0.1) : 0,
       });
       await this.battleRecordRepository.save(record);
@@ -319,7 +321,7 @@ export class MapService {
           success: false,
           territoryId,
           message: '战斗失败，抢夺未成功',
-          battle: { attackPower: Math.floor(finalAttack), defensePower: Math.floor(finalDefense) }
+          battle: { attackPower: Math.floor(attackPower), defensePower: Math.floor(defensePower) }
         };
       }
       
@@ -339,7 +341,7 @@ export class MapService {
         success: true,
         territoryId,
         message: `战斗胜利，抢夺成功！战力+${powerIncrease}`,
-        battle: { attackPower: Math.floor(finalAttack), defensePower: Math.floor(finalDefense), powerIncrease },
+        battle: { attackPower: Math.floor(attackPower), defensePower: Math.floor(defensePower), powerIncrease },
         output: {
           type: territory.outputType,
           amount: territory.outputAmount,
@@ -349,7 +351,7 @@ export class MapService {
     
     // 自己的地盘
     if (territory.owner && territory.owner.id === userId) {
-      throw new Error('这是你的地盘');
+      throw new BadRequestException('这是你的地盘，不能攻击');
     }
     
     // 无人占领，直接占领
@@ -370,7 +372,7 @@ export class MapService {
 
   async attackTerritory(userId: number, territoryId: number) {
     const attacker = await this.userRepository.findOne({ where: { id: userId } });
-    if (!attacker) throw new Error('用户不存在');
+    if (!attacker) throw new NotFoundException('用户不存在');
     
     // 模拟战斗
     const attackerPower = Number(attacker.power);
@@ -415,9 +417,9 @@ export class MapService {
       relations: ['owner']
     });
     
-    if (!territory) throw new Error('地盘不存在');
+    if (!territory) throw new NotFoundException('地盘不存在');
     if (!territory.owner || territory.owner.id !== userId) {
-      throw new Error('这不是你的地盘');
+      throw new BadRequestException('这不是你的地盘');
     }
     
     // 检查冷却时间（10分钟）
@@ -528,5 +530,77 @@ export class MapService {
     // 简化：随机返回匹配度
     const bonuses = [0, 10, 20, 30];
     return bonuses[Math.floor(Math.random() * bonuses.length)];
+  }
+
+  // ========== 管理方法 ==========
+
+  async generateTerritories(lat: number, lng: number, count: number = 20) {
+    const types = [
+      { type: 'village', name: '村庄', outputType: 'gold', outputAmount: 50 },
+      { type: 'farm', name: '农场', outputType: 'gold', outputAmount: 60 },
+      { type: 'shop', name: '商店', outputType: 'gold', outputAmount: 80 },
+      { type: 'mall', name: '商场', outputType: 'gold', outputAmount: 150 },
+      { type: 'factory', name: '工厂', outputType: 'gold', outputAmount: 200 },
+      { type: 'mine', name: '矿场', outputType: 'crystal', outputAmount: 15 },
+      { type: 'gold_mine', name: '金矿', outputType: 'gold', outputAmount: 250 },
+      { type: 'power_station', name: '发电站', outputType: 'gold', outputAmount: 180 },
+      { type: 'warehouse', name: '仓库', outputType: 'gold', outputAmount: 160 },
+      { type: 'port', name: '港口', outputType: 'crystal', outputAmount: 20 },
+      { type: 'base', name: '基地', outputType: 'gold', outputAmount: 300 },
+      { type: 'city', name: '城市', outputType: 'gold', outputAmount: 400 },
+    ];
+    
+    // 删除现有无人占领的地盘
+    await this.territoryRepository.createQueryBuilder().delete().where('ownerId IS NULL').execute();
+    
+    // 重新生成
+    for (let i = 0; i < count; i++) {
+      const typeConfig = types[Math.floor(Math.random() * types.length)];
+      const territory = this.territoryRepository.create({
+        name: `${typeConfig.name}${Math.floor(Math.random() * 9000) + 1000}号`,
+        type: typeConfig.type,
+        typeName: typeConfig.name,
+        outputType: typeConfig.outputType,
+        outputAmount: typeConfig.outputAmount,
+        lat: lat + (Math.random() - 0.5) * 0.1,
+        lng: lng + (Math.random() - 0.5) * 0.1,
+        accumulatedGold: 0,
+        accumulatedCrystal: 0,
+      });
+      await this.territoryRepository.save(territory);
+    }
+    
+    return { message: `已生成 ${count} 个中文地名盘` };
+  }
+
+  async createTestUsers() {
+    const names = [
+      '星河勇士', '月光女神', '雷霆战神', '风暴使者', '暗影猎手',
+      '烈焰法师', '冰霜王者', '大地守护', '天空之子', '海洋之心',
+      '星辰大海', '宇宙行者', '时空旅者', '命运之轮', '黎明曙光',
+    ];
+    
+    for (const name of names) {
+      const existing = await this.userRepository.findOne({ where: { nickname: name } });
+      if (existing) continue;
+      
+      const user = this.userRepository.create({
+        openid: 'test_' + name,
+        nickname: name,
+        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + name,
+        gender: Math.random() > 0.5 ? 1 : 2,
+        level: Math.floor(Math.random() * 30) + 1,
+        power: Math.floor(Math.random() * 5000) + 500,
+        attack: Math.floor(Math.random() * 2000) + 200,
+        defense: Math.floor(Math.random() * 2000) + 200,
+        gold: Math.floor(Math.random() * 100000) + 10000,
+        timeCoin: Math.floor(Math.random() * 1000) + 100,
+        zodiacSign: Math.floor(Math.random() * 12) + 1,
+        zodiacName: ['白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'][Math.floor(Math.random() * 12)],
+      });
+      await this.userRepository.save(user);
+    }
+    
+    return { message: `已创建 ${names.length} 个测试用户` };
   }
 }
