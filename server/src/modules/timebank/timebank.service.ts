@@ -96,6 +96,11 @@ export class TimebankService {
       throw new ForbiddenException('用户不存在');
     }
 
+    // 验证 cost 参数
+    if (!cost || isNaN(cost) || cost <= 0) {
+      throw new ForbiddenException('无效的穿越成本');
+    }
+
     // 检查晶体是否足够
     const crystal = await this.getOrCreateCrystal(userId);
     if (crystal.balance < cost) {
