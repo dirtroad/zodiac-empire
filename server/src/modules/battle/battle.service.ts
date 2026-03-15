@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
@@ -48,6 +48,17 @@ export class BattleService {
   }
 
   async executeBattle(battleId: number, userId: number, customBetAmount?: number) {
+    // 验证 battleId
+    if (!battleId || battleId <= 0) {
+      throw new BadRequestException('无效的战斗 ID');
+    }
+    
+    // 检查战斗记录是否存在
+    const battle = await this.battleRecordRepository.findOne({ where: { id: battleId } });
+    if (!battle) {
+      throw new NotFoundException('战斗记录不存在');
+    }
+    
     // 简化的战斗逻辑
     const attacker = await this.userRepository.findOne({ where: { id: userId } });
     if (!attacker) {
@@ -75,25 +86,18 @@ export class BattleService {
     }
 
     const defender = targets[0];
-    const defensePower = defender.power;
+    const defensePower = Number(defender.power) || 100;
 
-    // 战斗结果 - 缩小随机浮动范围
-    const attackBonus = Math.random() * 0.2 + 0.9; // 90%-110%
-    const defenseBonus = Math.random() * 0.2 + 0.9; // 90%-110%
-
-    const finalAttack = Math.floor(attackPower * attackBonus);
-    const finalDefense = Math.floor(defensePower * defenseBonus);
+    // 战斗结果 - 战力影响
+    const winChance = basePower / (basePower + defensePower); // 不限制范围
+    const isWin = Math.random() < winChance;
     
-    console.log(`⚔️ 战斗: 攻击方战力=${attackPower}, 最终=${finalAttack} vs 防御方战力=${defensePower}, 最终=${finalDefense}`);
-
-    const isWin = finalAttack > finalDefense;
-    // 赌注：自定义 > 默认10% > 最少100金币
+    // 用于显示的战力数值
+    const displayAttack = Math.floor(basePower * (0.8 + Math.random() * 0.4));
+    const displayDefense = Math.floor(defensePower * (0.8 + Math.random() * 0.4));
+    // 赌注：自定义 > 默认10% > 最少10金币，如果金币不足10则免费战斗
     let betAmount = customBetAmount || Math.floor(Number(attacker.gold) * 0.1);
-    betAmount = Math.max(betAmount, 100); // 最低100金币
-
-    if (betAmount > Number(attacker.gold)) {
-      throw new Error('金币不足，无法战斗');
-    }
+    betAmount = Math.min(Math.max(betAmount, 10), Number(attacker.gold) || 0);
 
     // 奖励/损失金币
     const goldReward = isWin ? betAmount : -betAmount;
@@ -113,16 +117,16 @@ export class BattleService {
       attackerId: userId,
       defenderId: defender.id,
       result: isWin ? 'win' : 'lose',
-      attackPower: Math.floor(finalAttack),
-      defensePower: Math.floor(finalDefense),
+      attackPower: Math.floor(attackPower),
+      defensePower: Math.floor(defensePower),
       goldReward,
     });
     await this.battleRecordRepository.save(record);
 
     return {
       result: isWin ? 'win' : 'lose',
-      attackPower: Math.floor(finalAttack),
-      defensePower: Math.floor(finalDefense),
+      attackPower: Math.floor(attackPower),
+      defensePower: Math.floor(defensePower),
       goldReward,
     };
   }

@@ -16,8 +16,8 @@
 - [x] 20. 攻击不存在的领地返回 500 错误 - 已修复：返回 404
 - [x] 21. 领土占领 POST /v1/map/territories/:id/capture 返回 500 错误 - 已修复：返回 400
 - [x] 25. 空 code 可以登录 (安全隐患) - 已修复：返回 401
-- [ ] 27. 时间水晶使用 POST /v1/time-crystal/use 接口参数定义错误
-- [ ] 28. 市场挂单 POST /v1/market/listings 参数 itemType 要求数字而不是字符串
+- [x] 27. 时间水晶使用 POST /v1/time-crystal/use 接口参数定义错误 - 已验证：DTO 正常
+- [x] 28. 市场挂单 POST /v1/market/listings 参数 itemType - 已修复：支持字符串和数字
 - [ ] 29. 战斗执行 POST /v1/battle/execute 使用无效 battleId 仍返回成功
 
 ### 经济系统调整（策划报告 P0）

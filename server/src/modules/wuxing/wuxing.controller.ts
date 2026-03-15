@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Request, HttpException, HttpStatus } from '@nestjs/common';
 import { WuxingService } from './wuxing.service';
 import { SetWuxingDto } from './dto/set-wuxing.dto';
 import { Public } from '../auth/decorators/public.decorator';
@@ -10,6 +10,9 @@ export class WuxingController {
   @Public()
   @Get()
   async getMyWuxing(@Request() req: any) {
+    if (!req.user) {
+      throw new HttpException('未登录', HttpStatus.UNAUTHORIZED);
+    }
     return this.wuxingService.getByUserId(req.user.userId);
   }
 

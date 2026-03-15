@@ -84,4 +84,20 @@ export class MapController {
   async collectResource(@Request() req: any, @Body('resourceId') resourceId: number) {
     return this.mapService.collectResource(req.user.userId, resourceId);
   }
+
+  // ========== 管理接口 ==========
+
+  @Post('admin/reset-territories')
+  async resetTerritories() {
+    // 重新生成测试地盘
+    await this.mapService.generateTerritories(31.2304, 121.4737, 20);
+    return { message: '地盘已重新生成' };
+  }
+
+  @Post('admin/create-users')
+  async createTestUsers() {
+    // 创建测试用户
+    await this.mapService.createTestUsers();
+    return { message: '测试用户已创建' };
+  }
 }

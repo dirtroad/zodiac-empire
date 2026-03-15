@@ -36,7 +36,9 @@ export class AuthService {
         nickname: `旅行者${Date.now().toString().slice(-6)}`,
         level: 1,
         power: 100,
-        gold: 1000,
+        gold: 5000,
+        diamond: 100,
+        timeCoin: 200,
       });
       await this.userRepository.save(user);
       isNewUser = true;

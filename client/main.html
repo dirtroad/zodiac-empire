@@ -147,7 +147,7 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        const API_BASE = 'http://192.168.6.238:3000/v1';
+        const API_BASE = 'http://192.168.6.172:3000/v1';
         let token = '', userData = null, currentWarpTab = 'planet';
 
         const EMOTIONS = [
@@ -226,7 +226,8 @@
 
         async function login() {
             try {
-                const r = await api('POST', '/auth/wechat/login', { code: 'dev_' + Date.now() });
+                // 使用固定的发展测试账号
+                const r = await api('POST', '/auth/wechat/login', { code: 'dev_test_user' });
                 token = r.access_token; userData = r.user;
                 localStorage.setItem('zodiac_token', token);
                 document.getElementById('loginPage').style.display = 'none';
@@ -708,11 +709,47 @@
             try {
                 const r = await api('POST', '/map/territories/' + id + '/attack');
                 
-                // 攻占结果提示
+                // 攻占结果提示 - 有氛围感的弹窗
                 if (r.success) {
-                    alert('🎉 攻占成功！\n\n战力: ' + r.battle.attackPower + ' vs ' + r.battle.defensePower + '\n\n' + r.message);
+                    const powerGain = r.battle?.powerIncrease || Math.floor(r.battle.attackPower * 0.1);
+                    const msg = `
+╔══════════════════════════════════════╗
+║          🎉 攻占成功！🎉              ║
+╠══════════════════════════════════════╣
+║  🏰 目标: ${name}                     ║
+║                                      ║
+║  ⚔️  你的战力: ${r.battle.attackPower}            ║
+║  🛡️  敌方战力: ${r.battle.defensePower}            ║
+║                                      ║
+║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
+║     💪 战力 +${powerGain}                ║
+║     ⚔️ 攻击 +${Math.floor(powerGain*0.5)}               ║
+║     🛡️ 防御 +${Math.floor(powerGain*0.5)}               ║
+║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
+║                                      ║
+║  ${r.message}                    ║
+╚══════════════════════════════════════╝
+                    `.trim();
+                    alert(msg);
                 } else {
-                    alert('💔 攻占失败！\n\n战力: ' + r.battle.attackPower + ' vs ' + r.battle.defensePower + '\n\n' + r.message);
+                    const msg = `
+╔══════════════════════════════════════╗
+║          💔 攻占失败... 💔           ║
+╠══════════════════════════════════════╣
+║  🏰 目标: ${name}                     ║
+║                                      ║
+║  ⚔️  你的战力: ${r.battle.attackPower}            ║
+║  🛡️  敌方战力: ${r.battle.defensePower}            ║
+║                                      ║
+║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
+║     ${r.message}                 ║
+║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
+║                                      ║
+║  💡 提示: 提升战力后再来挑战！        ║
+║      修炼、装备、星座都能提升战力     ║
+╚══════════════════════════════════════╝
+                    `.trim();
+                    alert(msg);
                 }
                 
                 // 刷新地盘列表

@@ -86,6 +86,9 @@ export class EmotionService {
       where: { userId, emotionType },
     });
 
+    // 强制将 amount 转为数字（处理 MySQL bigint 返回字符串的问题）
+    const currentAmount = Number(emotion?.amount) || 0;
+
     // 如果不存在，创建新的情绪记录
     if (!emotion) {
       const typeConfig = EMOTION_TYPES.find(t => t.id === emotionType);
@@ -110,22 +113,24 @@ export class EmotionService {
 
     if (collectable <= 0) {
       // 如果没有可收集的，给一些基础值
-      emotion.amount += 15;
+      const newAmount = currentAmount + 15;
+      emotion.amount = newAmount as any;
       emotion.lastCollectAt = now;
       await this.emotionRepository.save(emotion);
       return {
         collected: 15,
-        totalAmount: emotion.amount,
+        totalAmount: newAmount,
       };
     }
 
-    emotion.amount += collectable;
+    const newAmount = currentAmount + collectable;
+    emotion.amount = newAmount as any;
     emotion.lastCollectAt = now;
     await this.emotionRepository.save(emotion);
 
     return {
       collected: collectable,
-      totalAmount: emotion.amount,
+      totalAmount: newAmount,
     };
   }
 
@@ -149,6 +154,11 @@ export class EmotionService {
       throw new NotFoundException('情绪资源不存在');
     }
 
+    // 验证 amount 不能为负数
+    if (amount <= 0) {
+      throw new BadRequestException('情绪使用量必须大于 0');
+    }
+    
     const currentAmount = Number(emotion.amount) || 0;
     if (currentAmount < amount) {
       throw new BadRequestException(`情绪资源不足，当前${currentAmount}点，需要${amount}点`);
