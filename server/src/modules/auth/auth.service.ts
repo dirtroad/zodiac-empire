@@ -17,6 +17,11 @@ export class AuthService {
   ) {}
 
   async wechatLogin(loginDto: WechatLoginDto) {
+    // 验证 code 参数
+    if (!loginDto.code || loginDto.code.trim() === '') {
+      throw new UnauthorizedException('微信登录 code 不能为空');
+    }
+
     // 获取微信openid
     const { openid, unionid } = await this.getWechatOpenid(loginDto.code);
 
