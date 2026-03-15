@@ -14,7 +14,7 @@
 - [x] 18. 时间水晶传送 POST /v1/time-crystal/travel 返回 500 错误 - 已修复：添加 cost 参数验证
 - [x] 19. 攻击自己领地返回 500 错误 - 已修复：返回 400
 - [x] 20. 攻击不存在的领地返回 500 错误 - 已修复：返回 404
-- [ ] 21. 领土占领 POST /v1/map/territories/:id/capture 返回 500 错误，应返回 400
+- [x] 21. 领土占领 POST /v1/map/territories/:id/capture 返回 500 错误 - 已修复：返回 400
 - [ ] 25. 空 code 可以登录 (安全隐患，应拒绝空字符串)
 - [ ] 27. 时间水晶使用 POST /v1/time-crystal/use 接口参数定义错误
 - [ ] 28. 市场挂单 POST /v1/market/listings 参数 itemType 要求数字而不是字符串

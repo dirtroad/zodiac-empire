@@ -290,7 +290,7 @@ export class MapService {
     // 如果地盘已被别人占领，需要战斗
     if (territory.owner && territory.owner.id !== userId) {
       if (!forceAttack) {
-        throw new Error('地盘已被占领，需要战斗抢夺');
+        throw new BadRequestException('地盘已被占领，需要战斗抢夺');
       }
       
       // 战斗逻辑 - 增加战斗悬念和运气成分
