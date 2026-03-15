@@ -1,7 +1,7 @@
 // 战斗界面管理器 - 表情包方案
 // 使用 emoji 代替美术资源，快速实现战斗界面
 
-import { _decorator, Component, Node, Label, Color, UITransform, Layers, Sprite, SpriteFrame, Texture2D } from 'cc';
+import { _decorator, Component, Node, Label, Color, UITransform, Layers, Sprite, SpriteFrame, Texture2D, Vec3, tween } from 'cc';
 
 const { ccclass, property } = _decorator;
 
@@ -333,15 +333,106 @@ export class BattleUI extends Component {
         });
     }
     
+    // ==================== 伤害飘字动画系统 ====================
+    
+    @property(Node)
+    damageTextPrefab: Node = null; // 伤害文字预制体
+    
+    @property(Node)
+    battleField: Node = null; // 战斗区域父节点
+    
     // 显示伤害数字
-    showDamage(value: number, isCrit: boolean, targetPos: {x: number, y: number}) {
-        const damageText = isCrit ? `💥${value}` : `-${value}`;
-        const color = isCrit ? new Color(255, 100, 100) : new Color(255, 255, 255);
+    showDamage(value: number, isCrit: boolean, targetPos: Vec3 | {x: number, y: number}) {
+        const pos = targetPos instanceof Vec3 ? targetPos : new Vec3(targetPos.x, targetPos.y, 0);
+        const text = isCrit ? `💥${value}` : `-${value}`;
+        const color = isCrit ? new Color(255, 50, 50) : new Color(255, 255, 255); // 暴击红色，普通白色
         
-        const node = this.createLabel(damageText, targetPos.x, targetPos.y, 28, color);
+        this.createFloatingText(text, pos, 40, false, color, isCrit);
+    }
+    
+    // 创建飘字
+    createFloatingText(
+        text: string, 
+        startPos: Vec3, 
+        fontSize: number = 40, 
+        isEmoji: boolean = false,
+        color: Color = new Color(255, 255, 255),
+        isCrit: boolean = false
+    ) {
+        // 创建文字节点
+        const textNode = new Node('DamageText');
+        const label = textNode.addComponent(Label);
         
-        // 简化版本：实际项目中需要添加飘字动画
-        // 这里只是显示伤害数字
+        label.string = text;
+        label.fontSize = fontSize;
+        label.color = color;
+        
+        // 如果是 emoji，使用系统字体
+        if (isEmoji) {
+            label.useSystemFont = true;
+        }
+        
+        // 设置初始位置
+        textNode.setPosition(startPos.x, startPos.y + 50, startPos.z);
+        
+        // 添加到战斗区域
+        if (this.battleField) {
+            this.battleField.addChild(textNode);
+        } else {
+            this.node.addChild(textNode);
+        }
+        
+        // 播放飘字动画
+        this.playFloatingAnimation(textNode, isCrit);
+        
+        // 2 秒后销毁
+        setTimeout(() => {
+            if (textNode.isValid) {
+                textNode.destroy();
+            }
+        }, 2000);
+        
+        return textNode;
+    }
+    
+    // 飘字动画
+    playFloatingAnimation(textNode: Node, isCrit: boolean) {
+        const duration = isCrit ? 1.5 : 1.0; // 暴击飘字时间更长
+        const startY = textNode.getPosition().y;
+        
+        tween(textNode)
+            .to(duration, { 
+                position: new Vec3(
+                    textNode.getPosition().x,
+                    startY + 100, // 向上飘 100 像素
+                    textNode.getPosition().z
+                )
+            })
+            .by(0.1, { scale: new Vec3(0.2, 0.2, 1) }) // 稍微放大
+            .to(0.5, { opacity: 0 }) // 最后淡出
+            .start();
+    }
+    
+    // 显示治疗飘字（绿色）
+    showHeal(value: number, target: Node | {x: number, y: number}) {
+        const pos = target instanceof Node ? target.getPosition() : new Vec3(target.x, target.y, 0);
+        const text = `+${value}`;
+        const color = new Color(100, 255, 100); // 绿色
+        this.createFloatingText(text, pos, 40, false, color);
+    }
+    
+    // 显示状态文字（暴击/闪避/格挡）
+    showStatusText(status: string, target: Node | {x: number, y: number}) {
+        const pos = target instanceof Node ? target.getPosition() : new Vec3(target.x, target.y, 0);
+        const emojiMap: Record<string, string> = {
+            'crit': '💥暴击!',
+            'dodge': '💨闪避!',
+            'block': '🛡️格挡!',
+            'miss': '❌未命中!',
+        };
+        
+        const text = emojiMap[status] || status;
+        this.createFloatingText(text, pos, 50, true, new Color(255, 255, 100), true);
     }
     
     // 显示技能特效

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>战斗动画测试 - 第 2 天</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-area {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .character {
+            width: 200px;
+            height: 300px;
+            background: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        .hp-bar {
+            width: 180px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #44ff44);
+            transition: width 0.3s;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #0f3460;
+            color: white;
+        }
+        button:hover {
+            background: #16213e;
+        }
+        #log {
+            width: 100%;
+            height: 200px;
+            background: #0f0f23;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            background: #16213e;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚔️ 战斗动画测试 - 第 2 天</h1>
+    
+    <div class="status">
+        <strong>测试状态：</strong>
+        <span id="status">✅ 代码已添加，请在 Cocos Creator 中测试</span>
+    </div>
+    
+    <div class="test-area">
+        <div class="character" id="attacker">
+            😎
+            <div class="hp-bar">
+                <div class="hp-fill" id="attacker-hp" style="width: 100%;"></div>
+            </div>
+            <div>攻击方</div>
+        </div>
+        
+        <div class="character" id="defender">
+            🤖
+            <div class="hp-bar">
+                <div class="hp-fill" id="defender-hp" style="width: 100%;"></div>
+            </div>
+            <div>防御方</div>
+        </div>
+    </div>
+    
+    <div>
+        <button onclick="testAttack()">⚔️ 普通攻击</button>
+        <button onclick="testFireSkill()">🔥 火系技能</button>
+        <button onclick="testCrit()">💥 暴击测试</button>
+        <button onclick="testDodge()">💨 闪避测试</button>
+        <button onclick="resetTest()">🔄 重置</button>
+    </div>
+    
+    <h3>战斗日志：</h3>
+    <div id="log"></div>
+    
+    <h3>📋 第 2 天任务清单：</h3>
+    <ul>
+        <li>✅ 复制攻击动画代码到 BattleSceneController.ts</li>
+        <li>✅ 复制伤害飘字代码到 BattleUI.ts</li>
+        <li>✅ 复制受击震动代码</li>
+        <li>⏳ 在 Cocos Creator 中测试</li>
+        <li>⏳ 提交代码</li>
+    </ul>
+    
+    <script>
+        let attackerHP = 100;
+        let defenderHP = 100;
+        
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function updateHP() {
+            document.getElementById('attacker-hp').style.width = attackerHP + '%';
+            document.getElementById('defender-hp').style.width = defenderHP + '%';
+        }
+        
+        function testAttack() {
+            log('开始普通攻击动画...');
+            const attacker = document.getElementById('attacker');
+            const defender = document.getElementById('defender');
+            
+            // 前摇
+            attacker.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                attacker.style.transform = 'scale(1.0)';
+            }, 100);
+            
+            // 冲锋
+            setTimeout(() => {
+                attacker.style.transform = 'translateX(100px)';
+            }, 300);
+            
+            // 受击
+            setTimeout(() => {
+                defender.style.transform = 'translateX(-10px)';
+                setTimeout(() => {
+                    defender.style.transform = 'translateX(10px)';
+                    setTimeout(() => {
+                        defender.style.transform = 'translateX(-10px)';
+                        setTimeout(() => {
+                            defender.style.transform = 'translateX(0)';
+                            defenderHP -= 10;
+                            updateHP();
+                            log('造成 10 点伤害！');
+                        }, 50);
+                    }, 50);
+                }, 50);
+            }, 500);
+            
+            // 返回
+            setTimeout(() => {
+                attacker.style.transform = 'translateX(0)';
+                log('攻击动画完成！');
+            }, 800);
+        }
+        
+        function testFireSkill() {
+            log('🔥 火系技能！');
+            testAttack();
+        }
+        
+        function testCrit() {
+            log('💥 暴击测试！');
+            defenderHP -= 25;
+            updateHP();
+            log('暴击！造成 25 点伤害！');
+        }
+        
+        function testDodge() {
+            log('💨 闪避！');
+            log('攻击未命中！');
+        }
+        
+        function resetTest() {
+            attackerHP = 100;
+            defenderHP = 100;
+            updateHP();
+            document.getElementById('log').innerHTML = '';
+            log('测试已重置');
+        }
+        
+        log('测试页面已加载，点击按钮测试动画！');
+        log('📝 注意：完整动画需要在 Cocos Creator 中运行');
+    </script>
+</body>
+</html>

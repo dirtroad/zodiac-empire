@@ -1,7 +1,7 @@
 // 战斗场景控制器
 // 管理战斗场景的初始化和战斗流程
 
-import { _decorator, Component, Node, Color, director, Scene } from 'cc';
+import { _decorator, Component, Node, Color, director, Scene, Vec3, tween, UITransform } from 'cc';
 import { BattleUI } from '../ui/battle/BattleUI';
 
 const { ccclass, property } = _decorator;
@@ -22,6 +22,18 @@ interface BattleUnit {
 
 @ccclass('BattleSceneController')
 export class BattleSceneController extends Component {
+    
+    @property(Node)
+    attackerNode: Node = null; // 攻击方节点
+    
+    @property(Node)
+    defenderNode: Node = null; // 防御方节点
+    
+    @property(Node)
+    hpBarNode: Node = null; // 血量条节点
+    
+    @property(Node)
+    cameraNode: Node = null; // 摄像机节点
     
     @property
     public playerData: BattleUnit = {
@@ -233,6 +245,178 @@ export class BattleSceneController extends Component {
         if (!this.battleUI) return;
         this.battleUI.addBattleLog('😢 虽败犹荣，继续加油！');
         // 实际项目中这里应该打开失败界面
+    }
+    
+    // ==================== 攻击动画系统 ====================
+    
+    // 攻击动画序列
+    async playAttackAnimation(skillType: string = 'attack') {
+        console.log('[战斗动画] 开始攻击动画:', skillType);
+        
+        const attackerPos = this.attackerNode ? this.attackerNode.getPosition() : new Vec3(0, 0, 0);
+        const defenderPos = this.defenderNode ? this.defenderNode.getPosition() : new Vec3(0, 0, 0);
+        
+        // 1. 前摇动画（蓄力 0.3 秒）
+        await this.playWindupAnimation(attackerPos);
+        
+        // 2. 冲锋动画（冲向对方 0.2 秒）
+        await this.playChargeAnimation(attackerPos, defenderPos);
+        
+        // 3. 显示技能特效
+        this.showSkillEffect(skillType, defenderPos);
+        
+        // 4. 受击方震动
+        await this.playHitAnimation();
+        
+        // 5. 返回原位（0.2 秒）
+        await this.playReturnAnimation(attackerPos);
+        
+        console.log('[战斗动画] 攻击动画完成');
+    }
+    
+    // 1. 前摇动画（蓄力）
+    async playWindupAnimation(originalPos: Vec3) {
+        if (!this.attackerNode) return Promise.resolve();
+        
+        return new Promise<void>((resolve) => {
+            tween(this.attackerNode)
+                .to(0.1, { scale: new Vec3(1.3, 1.3, 1) }) // 放大
+                .to(0.1, { scale: new Vec3(1.0, 1.0, 1) }) // 恢复
+                .to(0.1, { scale: new Vec3(1.3, 1.3, 1) }) // 再放大
+                .start();
+            
+            setTimeout(() => resolve(), 300);
+        });
+    }
+    
+    // 2. 冲锋动画（冲向对方）
+    async playChargeAnimation(startPos: Vec3, endPos: Vec3) {
+        if (!this.attackerNode) return Promise.resolve();
+        
+        return new Promise<void>((resolve) => {
+            // 计算中间位置（向前冲锋）
+            const midPos = new Vec3(
+                startPos.x + (endPos.x - startPos.x) * 0.8,
+                startPos.y,
+                startPos.z
+            );
+            
+            tween(this.attackerNode)
+                .to(0.1, { position: midPos }) // 快速冲锋
+                .start();
+            
+            setTimeout(() => resolve(), 200);
+        });
+    }
+    
+    // 3. 显示技能特效
+    showSkillEffect(skillType: string, targetPos: Vec3) {
+        const emojiMap: Record<string, string> = {
+            'attack': '⚔️',
+            'fire': '🔥',
+            'water': '💧',
+            'wind': '🌪️',
+            'earth': '🪨',
+            'light': '✨',
+            'dark': '🌑',
+            'defend': '🛡️',
+        };
+        
+        const emoji = emojiMap[skillType] || '⚔️';
+        if (this.battleUI) {
+            this.battleUI.createFloatingText(emoji, targetPos, 60, true);
+        }
+    }
+    
+    // 4. 受击动画（震动）
+    async playHitAnimation() {
+        if (!this.defenderNode) return Promise.resolve();
+        
+        return new Promise<void>((resolve) => {
+            tween(this.defenderNode)
+                .by(0.05, { position: new Vec3(-10, 0, 0) }) // 左移
+                .by(0.05, { position: new Vec3(10, 0, 0) })  // 右移
+                .by(0.05, { position: new Vec3(-10, 0, 0) }) // 左移
+                .by(0.05, { position: new Vec3(10, 0, 0) })  // 右移
+                .start();
+            
+            setTimeout(() => resolve(), 200);
+        });
+    }
+    
+    // 5. 返回动画（回到原位）
+    async playReturnAnimation(originalPos: Vec3) {
+        if (!this.attackerNode) return Promise.resolve();
+        
+        return new Promise<void>((resolve) => {
+            tween(this.attackerNode)
+                .to(0.2, { position: originalPos }) // 缓慢返回
+                .start();
+            
+            setTimeout(() => resolve(), 200);
+        });
+    }
+    
+    // ==================== 受击震动效果（增强版）====================
+    
+    // 受击震动（带血量条闪烁）
+    async playHitEffect(damage: number, isCrit: boolean) {
+        // 1. 角色震动
+        await this.playHitAnimation();
+        
+        // 2. 血量条闪烁红色
+        if (this.hpBarNode) {
+            await this.flashHPBar(isCrit);
+        }
+        
+        // 3. 屏幕震动（可选）
+        if (isCrit && this.cameraNode) {
+            await this.shakeCamera();
+        }
+    }
+    
+    // 血量条闪烁
+    async flashHPBar(isCrit: boolean) {
+        if (!this.hpBarNode) return;
+        
+        const originalColor = this.hpBarNode.color || new Color(255, 255, 255);
+        const flashColor = isCrit ? new Color(255, 0, 0) : new Color(255, 100, 100); // 暴击深红，普通浅红
+        
+        // 闪烁 3 次
+        for (let i = 0; i < 3; i++) {
+            if (this.hpBarNode) {
+                this.hpBarNode.color = flashColor;
+            }
+            await this.wait(100);
+            if (this.hpBarNode) {
+                this.hpBarNode.color = originalColor;
+            }
+            await this.wait(100);
+        }
+    }
+    
+    // 屏幕震动（暴击时）
+    async shakeCamera() {
+        if (!this.cameraNode) return;
+        
+        const originalPos = this.cameraNode.getPosition();
+        
+        // 快速震动 5 次
+        for (let i = 0; i < 5; i++) {
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            
+            this.cameraNode.setPosition(
+                originalPos.x + offsetX,
+                originalPos.y + offsetY,
+                originalPos.z
+            );
+            
+            await this.wait(50);
+        }
+        
+        // 恢复原位
+        this.cameraNode.setPosition(originalPos);
     }
     
     // 等待函数
