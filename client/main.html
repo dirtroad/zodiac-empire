@@ -220,10 +220,32 @@
                 loadMyTerritory();
                 // 冷却倒计时定时刷新
                 if (window.territoryTimer) clearInterval(window.territoryTimer);
-                window.territoryTimer = setInterval(loadMyTerritory, 10000); // 每10秒刷新
+                window.territoryTimer = setInterval(updateCountdown, 1000); // 每10秒刷新
             }
             else if (p === 'cultivate') loadCultivate();
             else if (p === 'home') loadChat();
+        }
+
+        
+        // 更新倒计时显示（每秒调用）
+        function updateCountdown() {
+            const countdownSpans = document.querySelectorAll('span[data-remaining]');
+            countdownSpans.forEach(span => {
+                let remaining = parseInt(span.getAttribute('data-remaining')) - 1;
+                if (remaining <= 0) {
+                    span.innerHTML = '✅ 可收取';
+                    span.style.color = '#4CAF50';
+                    span.removeAttribute('data-remaining');
+                    // 重新加载地盘列表以启用按钮
+                    setTimeout(loadMyTerritory, 1000);
+                } else {
+                    const mins = Math.floor(remaining / 60);
+                    const secs = Math.floor(remaining % 60);
+                    const timeStr = mins > 0 ? mins + '分' + secs + '秒' : secs + '秒';
+                    span.innerHTML = '⏳ ' + timeStr;
+                    span.setAttribute('data-remaining', remaining);
+                }
+            });
         }
 
         async function login() {
@@ -674,16 +696,19 @@
                     myTerritories.map(t => {
                     const canCollect = t.canCollect;
                     const remaining = t.remainingMinutes || 0;
-                    // 倒计时显示
-                    const minutes = Math.floor(remaining);
-                    const seconds = Math.floor((remaining - minutes) * 60);
-                    const countdownStr = minutes > 0 ? minutes + '分' + seconds + '秒' : seconds + '秒';
-                    const statusHtml = canCollect 
-                      ? '<span style="color:#4CAF50;font-size:12px">✅ 可收取</span>'
-                      : '<span style="color:#FF6B6B;font-size:12px">⏳ 冷却中 ' + countdownStr + '</span>';
+                    // 倒计时显示 - 精确到秒
+                    let countdownHtml = '';
+                    if (canCollect) {
+                      countdownHtml = '<span style="color:#4CAF50;font-size:12px">✅ 可收取</span>';
+                    } else {
+                      const mins = Math.floor(remaining / 60);
+                      const secs = Math.floor(remaining % 60);
+                      const timeStr = mins > 0 ? mins + '分' + secs + '秒' : secs + '秒';
+                      countdownHtml = '<span style="color:#FF6B6B;font-size:12px" data-remaining="' + remaining + '" data-id="' + t.id + '">⏳ ' + timeStr + '</span>';
+                    }
                     const btnHtml = canCollect
                       ? '<button class="btn btn-primary" onclick="collectTerritory(' + t.id + ')">收取</button>'
-                      : '<button class="btn" style="background:#666;cursor:not-allowed" disabled>冷却中</button>';
+                      : '<button class="btn" style="background:#666;cursor:not-allowed" disabled>⏳ 冷却</button>';
                     return '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px">' + (ic[t.type] || '🏢') + ' ' + t.name + '</div>' +
                     '<div style="font-size:12px;color:#888">' + (t.typeName || t.type) + ' · +' + t.outputAmount + '/h</div>' +
                     '<div style="margin-top:4px">' + statusHtml + '</div></div>' +

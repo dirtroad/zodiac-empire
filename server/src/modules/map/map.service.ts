@@ -422,14 +422,21 @@ export class MapService {
       throw new BadRequestException('这不是你的地盘');
     }
     
-    // 检查冷却时间（10分钟）
+    // 检查冷却时间（10 分钟 = 600 秒）
     const now = new Date();
     const lastCollect = territory.lastCollectAt || territory.createdAt;
-    const minutesPassed = (now.getTime() - new Date(lastCollect).getTime()) / (1000 * 60);
+    const secondsPassed = (now.getTime() - new Date(lastCollect).getTime()) / 1000;
+    const cooldownSeconds = 600; // 10 分钟
     
-    if (minutesPassed < 10) {
-      const remaining = Math.ceil(10 - minutesPassed);
-      throw new Error(`冷却中，还需等待 ${remaining} 分钟`);
+    const remainingSeconds = Math.max(0, cooldownSeconds - secondsPassed);
+    
+    if (remainingSeconds > 0) {
+      // 返回精确的剩余时间（秒），供前端显示倒计时
+      throw new BadRequestException({
+        message: '冷却中',
+        remainingSeconds: Math.ceil(remainingSeconds),
+        cooldownUntil: new Date(Date.now() + remainingSeconds * 1000).toISOString(),
+      });
     }
     
     // 计算产出（按小时累计）
