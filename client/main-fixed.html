@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星座帝国 - 测试版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; min-height: 100vh; }
+        .login-page { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #e94560, #ff6b6b); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(233,69,96,0.4); }
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 8px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 10000; }
+        .toast.show { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div id="loginPage" class="login-page">
+        <h1>🌌 星座帝国</h1>
+        <p style="color:#888;margin:10px 0 30px;">你的情绪，你的修炼，你的宇宙</p>
+        <button class="btn btn-primary" onclick="login()" style="padding:15px 40px;font-size:18px;">🔐 微信登录</button>
+    </div>
+    
+    <div id="mainPage" style="display:none;">
+        <h1>欢迎！</h1>
+        <p>登录成功</p>
+        <button class="btn btn-primary" onclick="logout()">退出登录</button>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script>
+        const API_BASE = 'http://localhost:3000/v1';
+        let token = localStorage.getItem('zodiac_token') || '';
+        let userData = null;
+        
+        async function api(method, path, data) {
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            
+            const response = await fetch(API_BASE + path, {
+                method: method,
+                headers: headers,
+                body: data ? JSON.stringify(data) : null
+            });
+            
+            const result = await response.json();
+            if (result.code !== 0) {
+                throw new Error(result.message);
+            }
+            return result.data;
+        }
+        
+        function toast(message) {
+            const toastEl = document.getElementById('toast');
+            toastEl.textContent = message;
+            toastEl.classList.add('show');
+            setTimeout(() => toastEl.classList.remove('show'), 2000);
+        }
+        
+        async function login() {
+            console.log('开始登录...');
+            toast('登录中...');
+            
+            try {
+                const result = await api('POST', '/auth/wechat/login', { code: 'test_user' });
+                
+                token = result.access_token;
+                userData = result.user;
+                localStorage.setItem('zodiac_token', token);
+                
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainPage').style.display = 'block';
+                
+                toast('欢迎，' + userData.nickname + '!');
+                console.log('登录成功:', userData);
+            } catch (error) {
+                console.error('登录失败:', error);
+                toast('登录失败：' + error.message);
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('zodiac_token');
+            token = '';
+            userData = null;
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('mainPage').style.display = 'none';
+            toast('已退出登录');
+        }
+        
+        // 页面加载时检查登录状态
+        window.addEventListener('DOMContentLoaded', () => {
+            if (token) {
+                console.log('检测到已登录 token');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -17,6 +17,7 @@ import { TeamModule } from './modules/team/team.module';
 import { MapModule } from './modules/map/map.module';
 import { WuxingModule } from './modules/wuxing/wuxing.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { DungeonModule } from './modules/dungeon/dungeon.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { RedisService } from './common/redis/redis.service';
 
@@ -72,6 +73,7 @@ import { RedisService } from './common/redis/redis.service';
     MapModule,
     WuxingModule,
     ChatModule,
+    DungeonModule,
   ],
   providers: [
     {

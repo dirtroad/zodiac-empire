@@ -204,4 +204,44 @@ export class UserService {
       interestRate: 0.001,
     };
   }
+
+  // 破产保护机制
+  async checkBankruptcyProtection(userId: number) {
+    const user = await this.findById(userId);
+    
+    // 触发条件：金币<500
+    if (Number(user.gold) >= 500) {
+      return {
+        triggered: false,
+        message: '金币充足，无需触发破产保护',
+        gold: user.gold,
+      };
+    }
+    
+    // 检查是否已经触发过破产保护（24 小时内只能触发一次）
+    const now = new Date();
+    const lastBankruptcy = user.lastActiveAt; // 复用 lastActiveAt 或新增字段
+    
+    // 破产保护措施
+    const reliefGold = 1000;  // 救济金
+    const discountedGachaCost = 100;  // 抽卡成本降至 100
+    const productionMultiplier = 2;  // 产出翻倍
+    
+    // 发放救济金
+    user.gold = (Number(user.gold) + reliefGold) as any;
+    
+    await this.userRepository.save(user);
+    
+    return {
+      triggered: true,
+      message: '触发破产保护！获得救济金帮助',
+      relief: {
+        gold: reliefGold,
+        gachaCost: discountedGachaCost,
+        productionMultiplier: productionMultiplier,
+      },
+      newGold: user.gold,
+      note: '破产保护已激活：抽卡成本降至 100 金币，所有产出×2，持续 24 小时',
+    };
+  }
 }

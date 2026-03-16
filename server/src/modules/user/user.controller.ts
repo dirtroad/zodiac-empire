@@ -55,4 +55,10 @@ export class UserController {
   async getUser(@Param('id') id: string) {
     return this.userService.getUserInfo(parseInt(id, 10));
   }
+
+  @Post('bankruptcy-check')
+  @ApiOperation({ summary: '破产保护检查（金币<500 时触发救济）' })
+  async checkBankruptcy(@Request() req: any) {
+    return this.userService.checkBankruptcyProtection(req.user.userId);
+  }
 }

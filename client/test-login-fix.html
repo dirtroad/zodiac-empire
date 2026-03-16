@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录测试</title>
+    <style>
+        body { background: #1a1a2e; color: white; font-family: Arial; text-align: center; padding: 50px; }
+        button { padding: 15px 30px; font-size: 18px; background: #e94560; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        #result { margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>🔐 登录测试</h1>
+    <button onclick="testLogin()">测试登录</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testLogin() {
+            const result = document.getElementById('result');
+            result.innerHTML = '登录中...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/v1/auth/wechat/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: 'test' })
+                });
+                
+                const data = await response.json();
+                
+                if (data.code === 0) {
+                    result.innerHTML = `
+                        ✅ 登录成功!<br><br>
+                        用户：${data.data.user.nickname}<br>
+                        金币：${data.data.user.gold}<br>
+                        Token: ${data.data.access_token.substring(0, 50)}...
+                    `;
+                } else {
+                    result.innerHTML = `❌ 登录失败：${data.message}`;
+                }
+            } catch (e) {
+                result.innerHTML = `❌ 错误：${e.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>星座帝国 - 登录</title>
+<style>
+body{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;font-family:Arial;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+.container{text-align:center}
+h1{font-size:48px;margin-bottom:10px}
+p{color:#888;margin-bottom:40px}
+button{background:linear-gradient(135deg,#e94560,#ff6b6b);color:white;border:none;padding:15px 40px;font-size:18px;border-radius:8px;cursor:pointer}
+button:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(233,69,96,0.4)}
+#msg{margin-top:20px;color:#ff4444}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🌌 星座帝国</h1>
+<p>你的情绪，你的修炼，你的宇宙</p>
+<button onclick="doLogin()">🔐 微信登录</button>
+<div id="msg"></div>
+</div>
+<script>
+async function doLogin() {
+document.getElementById('msg').textContent = '登录中...';
+try {
+const r = await fetch('http://localhost:3000/v1/auth/wechat/login', {
+method: 'POST',
+headers: {'Content-Type': 'application/json'},
+body: JSON.stringify({code: 'test'})
+});
+const d = await r.json();
+if (d.code === 0) {
+localStorage.setItem('zodiac_token', d.data.access_token);
+document.getElementById('msg').textContent = '✅ 登录成功！跳转中...';
+setTimeout(() => window.location.href = 'main.html', 1000);
+} else {
+document.getElementById('msg').textContent = '❌ ' + d.message;
+}
+} catch (e) {
+document.getElementById('msg').textContent = '❌ ' + e.message;
+}
+}
+</script>
+</body>
+</html>

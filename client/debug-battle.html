@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>战斗调试</title>
+<style>
+body{margin:0;background:#1a1a2e;color:white;font-family:Arial}
+#debug{position:fixed;top:0;left:0;right:0;background:red;padding:10px;z-index:9999;font-size:12px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#000;display:flex;justify-content:space-around;padding:10px}
+.nav-item{text-align:center;color:#666;cursor:pointer}
+.nav-item.active{color:#FFD700}
+.page{display:none;padding:20px}
+.page.active{display:block!important}
+.card{background:rgba(255,255,255,0.1);border-radius:8px;padding:15px;margin:10px 0}
+.btn{padding:10px 20px;border:none;border-radius:20px;cursor:pointer;margin:5px;background:#6B5BFF;color:white}
+</style>
+</head>
+<body>
+<div id="debug">调试中...</div>
+
+<div id="loginPage" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center">
+<h1>🌌 星座帝国 - 战斗调试</h1>
+<p style="color:#888">点击登录测试战斗界面</p>
+<button class="btn" onclick="login()">🔐 微信登录</button>
+</div>
+
+<div id="mainPage" style="display:none">
+<div id="page-home" class="page">
+<h2>🏠 首页</h2>
+<div class="card"><p>首页内容</p></div>
+</div>
+
+<div id="page-battle" class="page">
+<h2>⚔️ 战斗竞技场</h2>
+<div class="card"><p>我的战力：<span id="myPower">0</span></p></div>
+<button class="btn" onclick="loadBattle()">🔄 刷新排行榜</button>
+<div id="battleList" style="margin-top:20px"></div>
+</div>
+
+<div class="nav">
+<div class="nav-item" onclick="showPage('home')">🏠<br><small>首页</small></div>
+<div class="nav-item active" onclick="showPage('battle')">⚔️<br><small>战斗</small></div>
+</div>
+</div>
+
+<script>
+const API='http://localhost:3000/v1';
+let token=localStorage.getItem('zodiac_token')||'';
+let user=null;
+const debug=document.getElementById('debug');
+
+function log(msg){
+debug.textContent=msg;
+console.log('[DEBUG]',msg);
+}
+
+async function api(m,p,d){
+log('API 请求：'+m+' '+p);
+const h={'Content-Type':'application/json'};
+if(token)h['Authorization']='Bearer '+token;
+const body=(m==='GET'||m==='HEAD')?null:(d?JSON.stringify(d):null);
+try{
+const r=await fetch(API+p,{method:m,headers:h,body:body});
+const j=await r.json();
+log('API 响应：'+JSON.stringify(j).substring(0,100));
+if(j.code!==0)throw new Error(j.message);
+return j.data;
+}catch(e){
+log('API 错误：'+e.message);
+throw e;
+}
+}
+
+async function login(){
+log('开始登录...');
+try{
+const r=await api('POST','/auth/wechat/login',{code:'test'});
+log('登录成功：'+r.user.nickname);
+token=r.access_token;user=r.user;
+localStorage.setItem('zodiac_token',token);
+document.getElementById('loginPage').style.display='none';
+document.getElementById('mainPage').style.display='block';
+document.getElementById('myPower').textContent=user.power||0;
+log('显示战斗页面');
+showPage('battle');
+}catch(e){
+log('登录失败：'+e.message);
+alert('登录失败：'+e.message);
+}
+}
+
+function showPage(id){
+log('切换到页面：'+id);
+document.querySelectorAll('.page').forEach(p=>{
+p.classList.remove('active');
+log('页面 '+p.id+' 移除 active');
+});
+const target=document.getElementById('page-'+id);
+if(target){
+target.classList.add('active');
+log('页面 '+target.id+' 添加 active');
+log('页面 display: '+getComputedStyle(target).display);
+}else{
+log('❌ 找不到页面：page-'+id);
+}
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+event.currentTarget.classList.add('active');
+if(id==='battle')loadBattle();
+}
+
+async function loadBattle(){
+log('加载战斗列表...');
+try{
+const r=await api('GET','/battle/ranking');
+log('战斗数据：'+JSON.stringify(r).substring(0,100));
+const list=document.getElementById('battleList');
+if(!list){log('❌ 找不到 battleList');return;}
+list.innerHTML=(r||[]).map(p=>
+'<div class="card">'+(p.nickname||'玩家')+' 战力:'+p.power+'</div>'
+).join('')||'<p>暂无数据</p>';
+log('战斗列表加载完成');
+}catch(e){
+log('加载失败：'+e.message);
+document.getElementById('battleList').innerHTML='<p>加载失败：'+e.message+'</p>';
+}
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+log('页面加载完成');
+if(token){
+log('检测到 token');
+document.getElementById('loginPage').style.display='none';
+document.getElementById('mainPage').style.display='block';
+showPage('battle');
+}else{
+log('未登录');
+}
+});
+
+log('脚本加载完成');
+</script>
+</body>
+</html>
