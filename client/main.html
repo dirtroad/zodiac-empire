@@ -348,9 +348,27 @@
 
         async function useEmotion(i) {
             const o = EMOTIONS[i];
-            userData[o.key] = (parseInt(userData[o.key]) || 0) + (o.effect.includes('%') ? 5 : 10);
-            toast('✨ ' + o.effect + '!'); closeModal();
-            try { renderEmotions(await api('GET', '/emotion/resources')); } catch (e) {}
+            try {
+                const r = await api('POST', '/emotion/use', { emotionType: o.id, amount: 10 });
+                // 更新用户数据
+                if (r.attack) userData.attack = r.attack;
+                if (r.defense) userData.defense = r.defense;
+                if (r.tactics) userData.tactics = r.tactics;
+                if (r.critRate) userData.critRate = r.critRate;
+                if (r.dodgeRate) userData.dodgeRate = r.dodgeRate;
+                if (r.goldBonus) userData.goldBonus = r.goldBonus;
+                if (r.power) userData.power = r.power;
+                
+                toast('✨ ' + o.effect + '！修炼成功！');
+                closeModal();
+                // 刷新情绪资源
+                renderEmotions(await api('GET', '/emotion/resources'));
+                // 刷新用户显示
+                document.getElementById('userPower').textContent = userData.power;
+                document.getElementById('userLevel').textContent = 'Lv.' + userData.level + ' · 修炼 ' + userData.power;
+            } catch (e) {
+                toast('修炼失败：' + e.message);
+            }
         }
 
         function postLog(i) {
