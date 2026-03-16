@@ -19,6 +19,7 @@ import { WuxingModule } from './modules/wuxing/wuxing.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { DungeonModule } from './modules/dungeon/dungeon.module';
 import { DailySigninModule } from './modules/daily-signin/daily-signin.module';
+import { RobotModule } from './modules/robot/robot.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { RedisService } from './common/redis/redis.service';
 
@@ -76,6 +77,7 @@ import { RedisService } from './common/redis/redis.service';
     ChatModule,
     DungeonModule,
     DailySigninModule,
+    RobotModule,
   ],
   providers: [
     {
