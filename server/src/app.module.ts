@@ -20,6 +20,9 @@ import { ChatModule } from './modules/chat/chat.module';
 import { DungeonModule } from './modules/dungeon/dungeon.module';
 import { DailySigninModule } from './modules/daily-signin/daily-signin.module';
 import { RobotModule } from './modules/robot/robot.module';
+import { WeddingModule } from './modules/wedding/wedding.module';
+import { AwakeningModule } from './modules/zodiac-awakening/awakening.module';
+import { CrystalMineModule } from './modules/crystal-mine/crystal-mine.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { RedisService } from './common/redis/redis.service';
 
@@ -78,6 +81,9 @@ import { RedisService } from './common/redis/redis.service';
     DungeonModule,
     DailySigninModule,
     RobotModule,
+    WeddingModule,
+    AwakeningModule,
+    CrystalMineModule,
   ],
   providers: [
     {
