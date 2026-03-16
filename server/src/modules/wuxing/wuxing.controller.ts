@@ -7,12 +7,8 @@ import { Public } from '../auth/decorators/public.decorator';
 export class WuxingController {
   constructor(private readonly wuxingService: WuxingService) {}
 
-  @Public()
   @Get()
   async getMyWuxing(@Request() req: any) {
-    if (!req.user) {
-      throw new HttpException('未登录', HttpStatus.UNAUTHORIZED);
-    }
     return this.wuxingService.getByUserId(req.user.userId);
   }
 
