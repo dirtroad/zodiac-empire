@@ -147,12 +147,60 @@ export class BattleService {
       await this.userRepository.increment({ id: userId }, 'defense', Math.floor(powerIncrease * 0.5));
     }
     
+    // 连胜奖励
+    let winStreakReward = { gold: 0, item: null, title: null };
+    if (isWin) {
+      // 更新连胜
+      await this.userRepository.increment({ id: userId }, 'winStreak', 1);
+      
+      // 获取当前连胜
+      const currentUser = await this.userRepository.findOne({ where: { id: userId } });
+      const streak = currentUser.winStreak + 1;
+      
+      // 更新最大连胜
+      if (streak > (currentUser.maxWinStreak || 0)) {
+        await this.userRepository.update({ id: userId }, { maxWinStreak: streak });
+      }
+      
+      // 连胜奖励
+      if (streak === 3) {
+        winStreakReward.gold = 500;
+        await this.userRepository.increment({ id: userId }, 'gold', 500);
+      } else if (streak === 5) {
+        winStreakReward.gold = 1000;
+        winStreakReward.item = { name: '史诗碎片', quantity: 1 };
+        await this.userRepository.increment({ id: userId }, 'gold', 1000);
+        // 简化：史诗碎片暂时用 timeCoin 代替
+        await this.userRepository.increment({ id: userId }, 'timeCoin', 1);
+      } else if (streak === 10) {
+        winStreakReward.gold = 10000;
+        winStreakReward.title = '常胜将军';
+        await this.userRepository.increment({ id: userId }, 'gold', 10000);
+        // 称号暂时记录在 nickname 前缀
+        const user = await this.userRepository.findOne({ where: { id: userId } });
+        if (!user.nickname.includes('常胜将军')) {
+          await this.userRepository.update({ id: userId }, { 
+            nickname: '【常胜将军】' + user.nickname 
+          });
+        }
+      }
+    } else {
+      // 失败重置连胜
+      await this.userRepository.update({ id: userId }, { winStreak: 0 });
+    }
+    
+    // 获取更新后的用户数据
+    const updatedUser = await this.userRepository.findOne({ where: { id: userId } });
+    
     return {
       result: isWin ? 'win' : 'lose',
       attackPower: Math.floor(attackPower),
       defensePower: Math.floor(defensePower),
       goldReward,
       powerIncrease,
+      winStreak: updatedUser.winStreak || 0,
+      maxWinStreak: updatedUser.maxWinStreak || 0,
+      winStreakReward,
     };
   }
 

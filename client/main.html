@@ -742,6 +742,8 @@
                 // 攻占结果提示 - 有氛围感的弹窗
                 if (r.success) {
                     const powerGain = r.battle?.powerIncrease || Math.floor(r.battle.attackPower * 0.1);
+                    const winStreak = r.battle?.winStreak || 0;
+                    const streakMsg = winStreak >= 3 ? `\n🔥 连胜：${winStreak}场` : '';
                     const msg = `
 ╔══════════════════════════════════════╗
 ║          🎉 攻占成功！🎉              ║
@@ -752,7 +754,7 @@
 ║  🛡️  敌方战力: ${r.battle.defensePower}            ║
 ║                                      ║
 ║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
-║     💪 战力 +${powerGain}                ║
+║     💪 战力 +${powerGain}                ║${streakMsg ? '\n║' + streakMsg + '                ║' : ''}
 ║     ⚔️ 攻击 +${Math.floor(powerGain*0.5)}               ║
 ║     🛡️ 防御 +${Math.floor(powerGain*0.5)}               ║
 ║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
