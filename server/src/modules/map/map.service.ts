@@ -384,14 +384,51 @@ export class MapService {
     };
   }
 
-  async attackTerritory(userId: number, territoryId: number) {
+  async attackTerritory(userId: number, territoryId: number, preview: boolean = false) {
     const attacker = await this.userRepository.findOne({ where: { id: userId } });
     if (!attacker) throw new NotFoundException('用户不存在');
     
-    // 模拟战斗
-    const attackerPower = Number(attacker.power);
-    const defenderPower = Math.floor(Math.random() * 500) + 100;
+    const territory = await this.territoryRepository.findOne({
+      where: { id: territoryId },
+      relations: ['owner'],
+    });
     
+    if (!territory) throw new NotFoundException('地盘不存在');
+    
+    // 获取防守方战力
+    const defenderPower = territory.owner ? Number(territory.owner.power) : Math.floor(Math.random() * 500) + 100;
+    const attackerPower = Number(attacker.power);
+    
+    // 攻占地盘优化：预览模式返回战力和胜率
+    if (preview) {
+      const baseWinChance = attackerPower / (attackerPower + defenderPower);
+      const winRatePercent = Math.round(baseWinChance * 100);
+      
+      return {
+        territory: {
+          id: territory.id,
+          name: territory.name,
+          type: territory.type,
+          outputAmount: territory.outputAmount,
+        },
+        defender: territory.owner ? {
+          name: territory.owner.nickname,
+          level: territory.owner.level,
+          power: defenderPower,
+        } : null,
+        attacker: {
+          power: attackerPower,
+        },
+        winRate: winRatePercent,
+        suggestion: winRatePercent > 60 ? '稳胜' : winRatePercent >= 40 ? '五五开' : '建议提升战力',
+        cost: {
+          attacker: Math.floor(attackerPower * 0.1),
+          defender: territory.owner ? Math.floor(defenderPower * 0.1) : 0,
+        },
+      };
+    }
+    
+    // 实际战斗
     const success = attackerPower > defenderPower;
     
     if (success) {

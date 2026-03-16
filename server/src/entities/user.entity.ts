@@ -88,6 +88,50 @@ export class User {
   @Column({ length: 20, nullable: true })
   zodiacName: string;
 
+  // 星座觉醒
+  @Column({ type: 'boolean', default: false })
+  isZodiacAwakened: boolean;
+
+  @Column({ length: 20, nullable: true })
+  zodiacTrueName: string;
+
+  @Column({ type: 'datetime', nullable: true })
+  awakenedAt: Date;
+
+  // 结婚系统
+  @Column({ type: 'int', nullable: true, default: null })
+  spouseId: number;
+
+  @Column({ length: 64, nullable: true, default: null })
+  spouseName: string;
+
+  @Column({ type: 'datetime', nullable: true, default: null })
+  weddingDate: Date;
+
+  @Column({ type: 'boolean', default: false })
+  hasWeddingBuff: boolean;
+
+  // 每日签到
+  @Column({ type: 'datetime', nullable: true })
+  lastSigninAt: Date;
+
+  @Column({ type: 'int', default: 0 })
+  consecutiveSigninDays: number;
+
+  // 水晶矿
+  @Column({ type: 'datetime', nullable: true })
+  lastCrystalMineAt: Date;
+
+  @Column({ type: 'int', default: 0 })
+  crystalMineProductivity: number;
+
+  // 战斗连胜
+  @Column({ type: 'int', default: 0 })
+  winStreak: number;
+
+  @Column({ type: 'int', default: 0 })
+  maxWinStreak: number;
+
   @Column({ type: 'tinyint', default: 0 })
   vipLevel: number;
 

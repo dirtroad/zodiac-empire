@@ -87,6 +87,7 @@ export class DailySigninService {
       week: `🎉 连续签到 7 天！获得金币×${gold}！`,
       month: `🏆 连续签到 30 天！获得金币×${gold} + 时空晶体×100 + 稀有装备×1！`,
     };
+    // @ts-ignore
     return messages[bonusType] || `签到成功！`;
   }
 

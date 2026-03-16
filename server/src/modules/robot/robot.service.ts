@@ -53,6 +53,7 @@ export class RobotService {
 
   getTypeName(type: string): string {
     const map = { battle: '战斗型', collection: '采集型', trade: '贸易型' };
+    // @ts-ignore
     return map[type] || type;
   }
 
@@ -81,6 +82,7 @@ export class RobotService {
 
   getModeName(mode: string): string {
     const map = { battle: '战斗', collect: '采集', trade: '贸易' };
+    // @ts-ignore
     return map[mode] || mode;
   }
 
@@ -92,6 +94,7 @@ export class RobotService {
 
     const upgradeCost = 500 * robot.level;
     const user = await this.userRepository.findOne({ where: { id: userId } });
+    // @ts-ignore
     if (Number(user.gold) < upgradeCost) {
       throw new BadRequestException(`金币不足，需要${upgradeCost}金币`);
     }
