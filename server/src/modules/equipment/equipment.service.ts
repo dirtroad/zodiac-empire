@@ -85,7 +85,7 @@ export class EquipmentService {
       throw new NotFoundException('用户不存在');
     }
     
-    const cost = 500 * count; // 每次抽卡500金币
+    const cost = 500 * count; // 每次抽卡 500 金币
 
     if (Number(user.gold) < cost) {
       throw new ForbiddenException('金币不足');
@@ -93,19 +93,36 @@ export class EquipmentService {
 
     // 扣除金币
     user.gold = (Number(user.gold) - cost) as any;
-    await this.userRepository.save(user);
 
     const templates = await this.templateRepository.find();
     const results: UserEquipment[] = [];
 
     for (let i = 0; i < count; i++) {
-      // 简单的抽卡逻辑：按稀有度概率
-      const rand = Math.random();
+      // 首抽保底稀有（前 5 抽至少 1 个稀有）
       let rarity = 1;
-      if (rand > 0.95) rarity = 4;      // 5% 传说
-      else if (rand > 0.85) rarity = 3;  // 10% 史诗
-      else if (rand > 0.70) rarity = 2;  // 15% 稀有
-      // 70% 普通
+      const totalPulls = (user.gachaPullCount || 0) + i + 1;
+      
+      if (totalPulls <= 5) {
+        // 前 5 抽保底逻辑：如果前 4 抽都是普通，第 5 抽必出稀有
+        const hasRareOrBetter = results.some(r => r.rarity >= 2);
+        if (totalPulls === 5 && !hasRareOrBetter) {
+          rarity = 2; // 保底稀有
+        } else {
+          // 正常概率
+          const rand = Math.random();
+          if (rand > 0.95) rarity = 4;      // 5% 传说
+          else if (rand > 0.85) rarity = 3;  // 10% 史诗
+          else if (rand > 0.70) rarity = 2;  // 15% 稀有
+          // 70% 普通
+        }
+      } else {
+        // 正常概率
+        const rand = Math.random();
+        if (rand > 0.95) rarity = 4;      // 5% 传说
+        else if (rand > 0.85) rarity = 3;  // 10% 史诗
+        else if (rand > 0.70) rarity = 2;  // 15% 稀有
+        // 70% 普通
+      }
 
       const filteredTemplates = templates.filter(t => t.rarity === rarity);
       const template = filteredTemplates[Math.floor(Math.random() * filteredTemplates.length)];
@@ -125,7 +142,10 @@ export class EquipmentService {
       }
     }
 
-    await this.userRepository.update(userId, { diamond: user.diamond - cost });
+    // 更新抽卡次数
+    user.gachaPullCount = (user.gachaPullCount || 0) + count;
+    await this.userRepository.save(user);
+
     return results;
   }
 

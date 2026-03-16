@@ -76,6 +76,9 @@ export class User {
   @Column({ type: 'bigint', default: 0 })
   spaceTimeCrystal: number;
 
+  @Column({ type: 'int', default: 0 })
+  gachaPullCount: number;  // 抽卡次数（用于首抽保底）
+
   @Column({ type: 'int', default: 600 })
   creditScore: number;
 
