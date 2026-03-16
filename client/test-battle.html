@@ -1,595 +1,107 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚔️ 战斗界面测试 - 表情包方案</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .battle-container {
-            width: 100%;
-            max-width: 920px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .round-display {
-            text-align: center;
-            font-size: 32px;
-            color: #fff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        .fighter-area {
-            background: rgba(60, 40, 50, 0.7);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .fighter-area.player {
-            background: rgba(30, 50, 80, 0.7);
-        }
-        
-        .fighter-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .fighter-name {
-            font-size: 24px;
-            color: #fff;
-            font-weight: bold;
-        }
-        
-        .fighter-stats {
-            font-size: 14px;
-            color: #aaa;
-            margin-top: 5px;
-        }
-        
-        .hp-bar-container {
-            width: 100%;
-            height: 30px;
-            background: #333;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 10px 0;
-            position: relative;
-        }
-        
-        .hp-bar {
-            height: 100%;
-            transition: width 0.3s ease, background-color 0.3s ease;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #000;
-            text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
-        }
-        
-        .hp-bar.high {
-            background: linear-gradient(90deg, #64ff64, #40c040);
-        }
-        
-        .hp-bar.medium {
-            background: linear-gradient(90deg, #ffff64, #e0e040);
-        }
-        
-        .hp-bar.low {
-            background: linear-gradient(90deg, #ff6464, #e04040);
-        }
-        
-        .hp-text {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #fff;
-            font-size: 14px;
-            text-shadow: 0 0 3px #000;
-        }
-        
-        .vs-display {
-            text-align: center;
-            font-size: 40px;
-            color: #ffd700;
-            margin: 20px 0;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-        }
-        
-        .log-area {
-            background: rgba(20, 20, 30, 0.9);
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 20px;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-        
-        .log-title {
-            text-align: center;
-            color: #999;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        .log-entry {
-            color: #fff;
-            font-size: 14px;
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-        
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .action-btn {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: bold;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-        }
-        
-        .action-btn:active {
-            transform: translateY(0);
-        }
-        
-        .btn-auto {
-            background: linear-gradient(135deg, #64b0ff, #4090e0);
-            color: #fff;
-        }
-        
-        .btn-skill {
-            background: linear-gradient(135deg, #ff64ff, #e040e0);
-            color: #fff;
-        }
-        
-        .btn-run {
-            background: linear-gradient(135deg, #ffaa64, #e08040);
-            color: #fff;
-        }
-        
-        .controls {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .control-btn {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            border: 2px solid #fff;
-            background: transparent;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .control-btn.primary {
-            background: #fff;
-            color: #1a1a2e;
-        }
-        
-        .control-btn.primary:hover {
-            background: #e0e0e0;
-        }
-        
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>战斗测试</title>
+<style>
+body{margin:0;background:#1a1a2e;color:white;font-family:Arial}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#000;display:flex;justify-content:space-around;padding:10px}
+.nav-item{text-align:center;color:#666;cursor:pointer}
+.nav-item.active{color:#FFD700}
+.page{display:none;padding:20px}
+.page.active{display:block}
+.card{background:rgba(255,255,255,0.1);border-radius:8px;padding:15px;margin:10px 0}
+.btn{padding:10px 20px;border:none;border-radius:20px;cursor:pointer;margin:5px;background:#6B5BFF;color:white}
+</style>
 </head>
 <body>
-    <div class="battle-container">
-        <div class="round-display">⚔️ 第 <span id="round">1</span> 回合</div>
-        
-        <!-- 敌方区域 -->
-        <div class="fighter-area">
-            <div class="fighter-info">
-                <div>
-                    <div class="fighter-name">👤 星尘 (Lv.10)</div>
-                    <div class="fighter-stats">♌ 狮子座  🔥火系</div>
-                </div>
-                <div class="fighter-stats" style="text-align: right;">
-                    <div>🛡️ 防御：3,500  ⚔️ 攻击：2,800</div>
-                    <div>💨 闪避：5%  💥 暴击：8%</div>
-                </div>
-            </div>
-            <div class="hp-bar-container">
-                <div class="hp-bar high" id="enemy-hp-bar" style="width: 100%;">
-                    ████████████
-                </div>
-                <div class="hp-text" id="enemy-hp-text">HP: 12,000/12,000  100%</div>
-            </div>
-        </div>
-        
-        <div class="vs-display">⚔️ VS ⚔️</div>
-        
-        <!-- 玩家区域 -->
-        <div class="fighter-area player">
-            <div class="fighter-info">
-                <div>
-                    <div class="fighter-name">👤 星际旅行者 (Lv.8)</div>
-                    <div class="fighter-stats">♈ 白羊座  🔥火系</div>
-                </div>
-                <div class="fighter-stats" style="text-align: right;">
-                    <div>🛡️ 防御：4,000  ⚔️ 攻击：3,200</div>
-                    <div>💨 闪避：8%  💥 暴击：12%</div>
-                </div>
-            </div>
-            <div class="hp-bar-container">
-                <div class="hp-bar high" id="player-hp-bar" style="width: 100%;">
-                    ████████████████
-                </div>
-                <div class="hp-text" id="player-hp-text">HP: 15,000/15,000  100%</div>
-            </div>
-        </div>
-        
-        <!-- 战斗日志 -->
-        <div class="log-area">
-            <div class="log-title">━━━ 战斗日志 ━━━</div>
-            <div id="log-container">
-                <div class="log-entry">· ⚔️ 战斗开始！</div>
-            </div>
-        </div>
-        
-        <!-- 操作按钮 -->
-        <div class="action-buttons">
-            <button class="action-btn btn-auto" onclick="toggleAutoBattle()">🤖 自动战斗</button>
-            <button class="action-btn btn-skill" onclick="useSkill()">⚡ 手动技能</button>
-            <button class="action-btn btn-run" onclick="tryRun()">🏃 逃跑</button>
-        </div>
-        
-        <!-- 控制按钮 -->
-        <div class="controls">
-            <button class="control-btn primary" onclick="resetBattle()">🔄 重置战斗</button>
-            <button class="control-btn" onclick="simulateDamage()">🎲 模拟伤害</button>
-        </div>
-    </div>
+<div id="loginPage" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center">
+<h1>🌌 星座帝国</h1>
+<button class="btn" onclick="login()" style="margin-top:20px">🔐 微信登录</button>
+</div>
 
-    <script>
-        // 战斗数据
-        let battleData = {
-            round: 1,
-            player: {
-                name: '星际旅行者',
-                maxHP: 15000,
-                currentHP: 15000,
-                defense: 4000,
-                attack: 3200,
-                dodgeRate: 0.08,
-                critRate: 0.12
-            },
-            enemy: {
-                name: '星尘',
-                maxHP: 12000,
-                currentHP: 12000,
-                defense: 3500,
-                attack: 2800,
-                dodgeRate: 0.05,
-                critRate: 0.08
-            }
-        };
-        
-        let isAutoBattling = false;
-        let autoBattleInterval = null;
-        let logs = [];
-        
-        // 更新血量条
-        function updateHPBar(who, current, max) {
-            const percent = current / max;
-            const bar = document.getElementById(`${who}-hp-bar`);
-            const text = document.getElementById(`${who}-hp-text`);
-            
-            // 更新宽度
-            bar.style.width = `${percent * 100}%`;
-            
-            // 更新颜色
-            bar.className = 'hp-bar';
-            if (percent > 0.5) {
-                bar.classList.add('high');
-            } else if (percent > 0.3) {
-                bar.classList.add('medium');
-            } else {
-                bar.classList.add('low');
-            }
-            
-            // 更新文字
-            text.textContent = `HP: ${current.toLocaleString()}/${max.toLocaleString()}  ${Math.floor(percent * 100)}%`;
-            
-            // 更新血量条字符
-            const totalBlocks = who === 'player' ? 16 : 12;
-            const filledBlocks = Math.floor(totalBlocks * percent);
-            const emptyBlocks = totalBlocks - filledBlocks;
-            bar.textContent = '█'.repeat(filledBlocks) + '░'.repeat(emptyBlocks);
-            
-            // 血量低时添加警告
-            if (percent < 0.3 && percent > 0) {
-                addLog(`🤕 ${who === 'player' ? '玩家' : '敌方'}血量危急！`);
-            }
-        }
-        
-        // 添加日志
-        function addLog(message) {
-            logs.unshift(`· ${message}`);
-            if (logs.length > 10) {
-                logs.pop();
-            }
-            refreshLog();
-        }
-        
-        // 刷新日志
-        function refreshLog() {
-            const container = document.getElementById('log-container');
-            container.innerHTML = logs.map(log => `<div class="log-entry">${log}</div>`).join('');
-        }
-        
-        // 计算伤害
-        function calculateDamage(attacker, defender, isSkill) {
-            let baseDamage = attacker.attack * (isSkill ? 1.5 : 1.0);
-            const luckCoeff = 0.8 + Math.random() * 0.4;
-            let finalDamage = baseDamage * luckCoeff;
-            const defenseReduction = defender.defense / (defender.defense + 1000);
-            finalDamage = finalDamage * (1 - defenseReduction);
-            return Math.floor(finalDamage);
-        }
-        
-        // 执行回合
-        function executeRound() {
-            if (battleData.player.currentHP <= 0 || battleData.enemy.currentHP <= 0) {
-                stopAutoBattle();
-                return;
-            }
-            
-            document.getElementById('round').textContent = battleData.round;
-            
-            // 玩家回合
-            const playerAction = Math.random() < 0.6 ? 'attack' : (Math.random() < 0.9 ? 'skill' : 'defend');
-            if (playerAction === 'attack' || playerAction === 'skill') {
-                const isSkill = playerAction === 'skill';
-                const damage = calculateDamage(battleData.player, battleData.enemy, isSkill);
-                const isCrit = Math.random() < battleData.player.critRate;
-                const finalDamage = isCrit ? Math.floor(damage * 1.5) : damage;
-                
-                battleData.enemy.currentHP = Math.max(0, battleData.enemy.currentHP - finalDamage);
-                updateHPBar('enemy', battleData.enemy.currentHP, battleData.enemy.maxHP);
-                
-                const emoji = isSkill ? ['🔥', '💧', '🌪️', '🪨', '✨', '🌑'][Math.floor(Math.random() * 6)] : '⚔️';
-                if (isCrit) {
-                    addLog(`${battleData.player.name} 使用${emoji}攻击，造成 ${finalDamage} 伤害！💥暴击！`);
-                } else {
-                    addLog(`${battleData.player.name} 使用${emoji}攻击，造成 ${finalDamage} 伤害`);
-                }
-            } else {
-                addLog(`${battleData.player.name} 使用🛡️防御姿态，减少 30% 伤害`);
-            }
-            
-            // 检查胜负
-            if (battleData.enemy.currentHP <= 0) {
-                addLog('🏆 战斗胜利！');
-                addLog('🎉🎉🎉 恭喜获胜！🎉🎉🎉');
-                stopAutoBattle();
-                return;
-            }
-            
-            // 敌方回合
-            setTimeout(() => {
-                const enemyAction = Math.random() < 0.6 ? 'attack' : (Math.random() < 0.9 ? 'skill' : 'defend');
-                if (enemyAction === 'attack' || enemyAction === 'skill') {
-                    const isSkill = enemyAction === 'skill';
-                    const damage = calculateDamage(battleData.enemy, battleData.player, isSkill);
-                    const isCrit = Math.random() < battleData.enemy.critRate;
-                    const finalDamage = isCrit ? Math.floor(damage * 1.5) : damage;
-                    
-                    battleData.player.currentHP = Math.max(0, battleData.player.currentHP - finalDamage);
-                    updateHPBar('player', battleData.player.currentHP, battleData.player.maxHP);
-                    
-                    const emoji = isSkill ? ['🔥', '💧', '🌪️', '🪨', '✨', '🌑'][Math.floor(Math.random() * 6)] : '⚔️';
-                    if (isCrit) {
-                        addLog(`${battleData.enemy.name} 使用${emoji}攻击，造成 ${finalDamage} 伤害！💥暴击！`);
-                    } else {
-                        addLog(`${battleData.enemy.name} 使用${emoji}攻击，造成 ${finalDamage} 伤害`);
-                    }
-                } else {
-                    addLog(`${battleData.enemy.name} 使用🛡️防御姿态，减少 30% 伤害`);
-                }
-                
-                // 检查胜负
-                if (battleData.player.currentHP <= 0) {
-                    addLog('💀 战斗失败...');
-                    addLog('😢 虽败犹荣，继续加油！');
-                    stopAutoBattle();
-                    return;
-                }
-                
-                battleData.round++;
-            }, 500);
-        }
-        
-        // 切换自动战斗
-        function toggleAutoBattle() {
-            if (isAutoBattling) {
-                stopAutoBattle();
-            } else {
-                startAutoBattle();
-            }
-        }
-        
-        function startAutoBattle() {
-            isAutoBattling = true;
-            executeRound();
-            autoBattleInterval = setInterval(() => {
-                executeRound();
-            }, 1500);
-        }
-        
-        function stopAutoBattle() {
-            isAutoBattling = false;
-            if (autoBattleInterval) {
-                clearInterval(autoBattleInterval);
-                autoBattleInterval = null;
-            }
-        }
-        
-        // 使用技能
-        function useSkill() {
-            if (battleData.enemy.currentHP <= 0 || battleData.player.currentHP <= 0) {
-                addLog('⚠️ 战斗已结束');
-                return;
-            }
-            
-            const skills = [
-                { name: '🔥 烈焰斩', damage: 1.8 },
-                { name: '💧 冰霜冲击', damage: 1.5 },
-                { name: '🌪️ 龙卷风', damage: 1.6 },
-                { name: '🪨 岩石崩塌', damage: 1.7 },
-                { name: '✨ 神圣之光', damage: 2.0 },
-                { name: '🌑 黑暗侵蚀', damage: 1.9 }
-            ];
-            
-            const skill = skills[Math.floor(Math.random() * skills.length)];
-            const damage = Math.floor(calculateDamage(battleData.player, battleData.enemy, true) * skill.damage);
-            const isCrit = Math.random() < battleData.player.critRate;
-            const finalDamage = isCrit ? Math.floor(damage * 1.5) : damage;
-            
-            battleData.enemy.currentHP = Math.max(0, battleData.enemy.currentHP - finalDamage);
-            updateHPBar('enemy', battleData.enemy.currentHP, battleData.enemy.maxHP);
-            
-            if (isCrit) {
-                addLog(`你使用${skill.name}，造成 ${finalDamage} 伤害！💥暴击！`);
-            } else {
-                addLog(`你使用${skill.name}，造成 ${finalDamage} 伤害`);
-            }
-            
-            if (battleData.enemy.currentHP <= 0) {
-                addLog('🏆 战斗胜利！');
-                addLog('🎉🎉🎉 恭喜获胜！🎉🎉🎉');
-            }
-        }
-        
-        // 尝试逃跑
-        function tryRun() {
-            if (Math.random() < 0.3) {
-                addLog('🏃 逃跑成功！');
-                stopAutoBattle();
-            } else {
-                addLog('❌ 逃跑失败！被敌人追击！');
-                executeRound();
-            }
-        }
-        
-        // 重置战斗
-        function resetBattle() {
-            stopAutoBattle();
-            battleData = {
-                round: 1,
-                player: {
-                    name: '星际旅行者',
-                    maxHP: 15000,
-                    currentHP: 15000,
-                    defense: 4000,
-                    attack: 3200,
-                    dodgeRate: 0.08,
-                    critRate: 0.12
-                },
-                enemy: {
-                    name: '星尘',
-                    maxHP: 12000,
-                    currentHP: 12000,
-                    defense: 3500,
-                    attack: 2800,
-                    dodgeRate: 0.05,
-                    critRate: 0.08
-                }
-            };
-            
-            logs = ['⚔️ 战斗开始！'];
-            refreshLog();
-            updateHPBar('player', 15000, 15000);
-            updateHPBar('enemy', 12000, 12000);
-            document.getElementById('round').textContent = 1;
-        }
-        
-        // 模拟伤害
-        function simulateDamage() {
-            const targets = ['player', 'enemy'];
-            const target = targets[Math.floor(Math.random() * 2)];
-            const damage = Math.floor(Math.random() * 2000) + 500;
-            const isCrit = Math.random() < 0.3;
-            const finalDamage = isCrit ? damage * 2 : damage;
-            
-            if (target === 'player') {
-                battleData.player.currentHP = Math.max(0, battleData.player.currentHP - finalDamage);
-                updateHPBar('player', battleData.player.currentHP, battleData.player.maxHP);
-                addLog(`你受到${isCrit ? '💥' : ''}${finalDamage}点伤害！`);
-            } else {
-                battleData.enemy.currentHP = Math.max(0, battleData.enemy.currentHP - finalDamage);
-                updateHPBar('enemy', battleData.enemy.currentHP, battleData.enemy.maxHP);
-                addLog(`敌方受到${isCrit ? '💥' : ''}${finalDamage}点伤害！`);
-            }
-        }
-        
-        // 初始化
-        updateHPBar('player', battleData.player.currentHP, battleData.player.maxHP);
-        updateHPBar('enemy', battleData.enemy.currentHP, battleData.enemy.maxHP);
-    </script>
+<div id="mainPage" style="display:none">
+<div id="page-home" class="page active">
+<h2>🏠 首页</h2>
+<div class="card"><p>欢迎！点击下方导航开始游戏</p></div>
+</div>
+
+<div id="page-battle" class="page">
+<h2>⚔️ 战斗竞技场</h2>
+<div class="card"><p>我的战力：<span id="myPower">0</span></p></div>
+<button class="btn" onclick="loadBattle()">🔄 刷新排行榜</button>
+<div id="battleList"></div>
+</div>
+
+<div class="nav">
+<div class="nav-item active" onclick="showPage('home')">🏠<br><small>首页</small></div>
+<div class="nav-item" onclick="showPage('battle')">⚔️<br><small>战斗</small></div>
+</div>
+</div>
+
+<script>
+const API='http://localhost:3000/v1';
+let token=localStorage.getItem('zodiac_token')||'';
+let user=null;
+
+async function api(m,p,d){
+const h={'Content-Type':'application/json'};
+if(token)h['Authorization']='Bearer '+token;
+const body=(m==='GET'||m==='HEAD')?null:(d?JSON.stringify(d):null);
+const r=await fetch(API+p,{method:m,headers:h,body:body});
+const j=await r.json();
+if(j.code!==0)throw new Error(j.message);
+return j.data;
+}
+
+async function login(){
+try{
+const r=await api('POST','/auth/wechat/login',{code:'test'});
+token=r.access_token;user=r.user;
+localStorage.setItem('zodiac_token',token);
+document.getElementById('loginPage').style.display='none';
+document.getElementById('mainPage').style.display='block';
+document.getElementById('myPower').textContent=user.power||0;
+showPage('battle');
+}catch(e){alert('登录失败：'+e.message);}
+}
+
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+document.getElementById('page-'+id).classList.add('active');
+event.currentTarget.classList.add('active');
+if(id==='battle')loadBattle();
+}
+
+async function loadBattle(){
+try{
+const r=await api('GET','/battle/ranking',{});
+document.getElementById('battleList').innerHTML=(r||[]).map(p=>
+'<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;">'+
+'<div>'+(p.nickname||'玩家')+' Lv.'+(p.level||1)+' 战力:'+p.power+'</div>'+
+'<button class="btn" onclick="attack('+p.id+',\''+(p.nickname||'玩家')+'\')">⚔️ 攻击</button></div></div>'
+).join('')||'<p>暂无数据</p>';
+}catch(e){document.getElementById('battleList').innerHTML='<p>加载失败：'+e.message+'</p>';}
+}
+
+async function attack(id,name){
+if(!confirm('攻击 '+name+' ?'))return;
+try{
+const r=await api('POST','/battle/execute',{battleId:Date.now()});
+alert(r.result==='win'?'🎉 胜利！':'💔 失败！');
+loadBattle();
+}catch(e){alert('战斗失败：'+e.message);}
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+if(token){
+document.getElementById('loginPage').style.display='none';
+document.getElementById('mainPage').style.display='block';
+showPage('battle');
+}
+});
+</script>
 </body>
 </html>

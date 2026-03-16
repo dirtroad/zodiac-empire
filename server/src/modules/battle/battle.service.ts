@@ -48,15 +48,14 @@ export class BattleService {
   }
 
   async executeBattle(battleId: number, userId: number, customBetAmount?: number) {
-    // 验证 battleId
-    if (!battleId || battleId <= 0) {
-      throw new BadRequestException('无效的战斗 ID');
-    }
-    
-    // 检查战斗记录是否存在
-    const battle = await this.battleRecordRepository.findOne({ where: { id: battleId } });
-    if (!battle) {
-      throw new NotFoundException('战斗记录不存在');
+    // battleId 为可选参数（攻击时不需要）
+    // 如果提供了 battleId，验证其有效性
+    if (battleId && battleId > 0) {
+      const battle = await this.battleRecordRepository.findOne({ where: { id: battleId } });
+      if (!battle) {
+        // battleId 无效但不阻止战斗，只是忽略它
+        console.log(`⚠️ 战斗记录 ${battleId} 不存在，继续执行战斗`);
+      }
     }
     
     // 简化的战斗逻辑

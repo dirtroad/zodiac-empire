@@ -198,7 +198,9 @@
         async function api(m, p, d) {
             const h = { 'Content-Type': 'application/json' };
             if (token) h['Authorization'] = 'Bearer ' + token;
-            const r = await fetch(API_BASE + p, { method: m, headers: h, body: d ? JSON.stringify(d) : null });
+            // GET/HEAD 请求不能有 body
+            const body = (m === 'GET' || m === 'HEAD') ? null : (d ? JSON.stringify(d) : null);
+            const r = await fetch(API_BASE + p, { method: m, headers: h, body: body });
             const j = await r.json();
             if (j.code !== 0) throw new Error(j.message);
             return j.data;
@@ -232,7 +234,7 @@
                 localStorage.setItem('zodiac_token', token);
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('mainPage').style.display = 'block';
-                loadMain(); toast('欢迎!');
+                loadMain(); switchPage('battle'); toast('欢迎，' + r.user.nickname + '!');
             } catch (e) { toast('登录失败: ' + e.message); }
         }
 
