@@ -122,11 +122,20 @@ export class BattleService {
     });
     await this.battleRecordRepository.save(record);
 
+    // 战斗胜利，战力提升 10%
+    const powerIncrease = isWin ? Math.floor(displayAttack * 0.1) : 0;
+    if (isWin && powerIncrease > 0) {
+      await this.userRepository.increment({ id: userId }, 'power', powerIncrease);
+      await this.userRepository.increment({ id: userId }, 'attack', Math.floor(powerIncrease * 0.5));
+      await this.userRepository.increment({ id: userId }, 'defense', Math.floor(powerIncrease * 0.5));
+    }
+    
     return {
       result: isWin ? 'win' : 'lose',
       attackPower: Math.floor(attackPower),
       defensePower: Math.floor(defensePower),
       goldReward,
+      powerIncrease,
     };
   }
 
