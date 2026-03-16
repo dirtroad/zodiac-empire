@@ -18,6 +18,7 @@ import { MapModule } from './modules/map/map.module';
 import { WuxingModule } from './modules/wuxing/wuxing.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { DungeonModule } from './modules/dungeon/dungeon.module';
+import { DailySigninModule } from './modules/daily-signin/daily-signin.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { RedisService } from './common/redis/redis.service';
 
@@ -74,6 +75,7 @@ import { RedisService } from './common/redis/redis.service';
     WuxingModule,
     ChatModule,
     DungeonModule,
+    DailySigninModule,
   ],
   providers: [
     {
