@@ -223,7 +223,10 @@
                 window.territoryTimer = setInterval(updateCountdown, 1000); // 每10秒刷新
             }
             else if (p === 'cultivate') loadCultivate();
-            else if (p === 'home') loadChat();
+            else if (p === 'home') {
+                loadChat();
+                loadSigninStatus();
+            }
         }
 
         
