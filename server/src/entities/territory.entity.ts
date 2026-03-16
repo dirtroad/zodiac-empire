@@ -29,6 +29,9 @@ export class Territory {
   @Column({ type: 'int' })
   outputAmount: number;
 
+  @Column({ length: 20, nullable: true })
+  terrainType: string;  // 战斗地形：plain/fire/ice/forest/void/mountain
+
   @Column({ type: 'decimal', precision: 10, scale: 6 })
   lat: number;
 

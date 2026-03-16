@@ -45,6 +45,20 @@ export class MapService {
     private battleRecordRepository: Repository<BattleRecord>,
   ) {}
 
+  // 获取地形加成
+  getTerrainBonus(terrainType: string | null) {
+    const terrain = Object.values(BATTLE_TERRAINS).find(t => t.name.toLowerCase() === terrainType?.toLowerCase());
+    if (!terrain) {
+      return { defense: 0, attack: 0 }; // 无地形加成
+    }
+    return {
+      defense: terrain.defenseBonus,
+      attack: terrain.attackBonus,
+      emoji: terrain.emoji,
+      name: terrain.name,
+    };
+  }
+
   async getLocalMap(userId: number, lat: number, lng: number) {
     // 本地LBS地图，返回附近玩家和资源
     // 简化：返回模拟数据
@@ -395,9 +409,14 @@ export class MapService {
     
     if (!territory) throw new NotFoundException('地盘不存在');
     
-    // 获取防守方战力
+    // 获取防守方战力 + 地形加成
     const defenderPower = territory.owner ? Number(territory.owner.power) : Math.floor(Math.random() * 500) + 100;
     const attackerPower = Number(attacker.power);
+    
+    // 地形加成（防守方主场优势）
+    const terrainBonus = this.getTerrainBonus(territory.terrainType);
+    const terrainAdjustedDefenderPower = Math.floor(defenderPower * (1 + terrainBonus.defense));
+    const terrainAdjustedAttackerPower = Math.floor(attackerPower * (1 + terrainBonus.attack));
     
     // 攻占地盘优化：预览模式返回战力和胜率
     if (preview) {
