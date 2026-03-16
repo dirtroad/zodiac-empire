@@ -87,9 +87,26 @@ export class BattleService {
     const defender = targets[0];
     const defensePower = Number(defender.power) || 100;
 
-    // 战斗结果 - 战力影响
-    const winChance = basePower / (basePower + defensePower); // 不限制范围
+    // 战斗结果 - 增加悬念和运气成分
+    // 基础胜率
+    let baseWinChance = basePower / (basePower + defensePower);
+    
+    // 运气系数：±30% 随机波动，增加不确定性
+    const luckFactor = 0.7 + Math.random() * 0.6; // 0.7 ~ 1.3
+    baseWinChance *= luckFactor;
+    
+    // 弱者保护：弱势方额外 +15% 胜率，让战斗更有悬念
+    if (baseWinChance < 0.4) {
+      baseWinChance += 0.15; // 弱势方保护
+    } else if (baseWinChance > 0.6) {
+      baseWinChance -= 0.1; // 强势方略微削弱
+    }
+    
+    // 限制胜率范围：10% ~ 90%，避免绝对胜负
+    const winChance = Math.max(0.1, Math.min(0.9, baseWinChance));
     const isWin = Math.random() < winChance;
+    
+    console.log(`🎲 战斗胜率计算：基础=${(basePower / (basePower + defensePower) * 100).toFixed(1)}%, 运气=${(luckFactor * 100).toFixed(0)}%, 最终=${(winChance * 100).toFixed(1)}%, 结果=${isWin ? '胜' : '负'}');
     
     // 用于显示的战力数值
     const displayAttack = Math.floor(basePower * (0.8 + Math.random() * 0.4));

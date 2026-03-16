@@ -296,9 +296,23 @@ export class MapService {
       // 战斗逻辑 - 增加战斗悬念和运气成分
       const attackerPower = Number(user.power);
       const defenderPower = Number(territory.owner.power) || 100;
-      // 战力影响 + 随机性
-      const baseChance = attackerPower / (attackerPower + defenderPower); // 基础胜率
-      const winChance = attackerPower / (attackerPower + defenderPower); // 不限制范围
+      
+      // 基础胜率
+      let baseWinChance = attackerPower / (attackerPower + defenderPower);
+      
+      // 运气系数：±30% 随机波动
+      const luckFactor = 0.7 + Math.random() * 0.6; // 0.7 ~ 1.3
+      baseWinChance *= luckFactor;
+      
+      // 弱者保护：弱势方额外 +15% 胜率
+      if (baseWinChance < 0.4) {
+        baseWinChance += 0.15;
+      } else if (baseWinChance > 0.6) {
+        baseWinChance -= 0.1;
+      }
+      
+      // 限制胜率范围：10% ~ 90%
+      const winChance = Math.max(0.1, Math.min(0.9, baseWinChance));
       const isWin = Math.random() < winChance;
       
       // 用于显示的战力数值
