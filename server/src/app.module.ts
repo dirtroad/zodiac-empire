@@ -23,6 +23,10 @@ import { RobotModule } from './modules/robot/robot.module';
 import { WeddingModule } from './modules/wedding/wedding.module';
 import { AwakeningModule } from './modules/zodiac-awakening/awakening.module';
 import { CrystalMineModule } from './modules/crystal-mine/crystal-mine.module';
+import { TutorialModule } from './modules/tutorial/tutorial.module';
+import { EmotionLiveModule } from './modules/emotion-live/emotion-live.module';
+import { ZodiacMatchModule } from './modules/zodiac-match/zodiac-match.module';
+import { WandererUnionModule } from './modules/wanderer-union/wanderer-union.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { RedisService } from './common/redis/redis.service';
 
@@ -84,6 +88,10 @@ import { RedisService } from './common/redis/redis.service';
     WeddingModule,
     AwakeningModule,
     CrystalMineModule,
+    TutorialModule,
+    EmotionLiveModule,
+    ZodiacMatchModule,
+    WandererUnionModule,
   ],
   providers: [
     {
