@@ -2,140 +2,337 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>战斗动画测试 - 第 2 天</title>
+    <title>战斗动画测试 - 星座帝国</title>
     <style>
         body {
             margin: 0;
             padding: 20px;
             font-family: Arial, sans-serif;
-            background: #1a1a2e;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         .test-area {
             display: flex;
-            gap: 20px;
-            margin: 20px 0;
+            gap: 40px;
+            justify-content: center;
+            margin: 40px 0;
         }
         .character {
-            width: 200px;
-            height: 300px;
-            background: #16213e;
-            border: 2px solid #0f3460;
-            border-radius: 10px;
+            width: 220px;
+            height: 320px;
+            background: linear-gradient(145deg, #16213e, #0f3460);
+            border: 3px solid #e94560;
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-size: 80px;
+            transition: transform 0.1s;
+            box-shadow: 0 8px 32px rgba(233, 69, 96, 0.3);
+            position: relative;
+        }
+        .character.attacking {
+            animation: attack-charge 0.3s ease-out;
+        }
+        .character.hit {
+            animation: hit-shake 0.2s ease-in-out;
+        }
+        @keyframes attack-charge {
+            0% { transform: translateX(0) scale(1); }
+            50% { transform: translateX(100px) scale(1.2); }
+            100% { transform: translateX(0) scale(1); }
+        }
+        @keyframes hit-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
         }
         .hp-bar {
-            width: 180px;
-            height: 20px;
-            background: #333;
-            border-radius: 10px;
-            margin: 10px 0;
+            width: 200px;
+            height: 25px;
+            background: #2a2a3e;
+            border-radius: 15px;
+            margin: 15px 0;
             overflow: hidden;
+            border: 2px solid #0f3460;
+            position: relative;
         }
         .hp-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ff4444, #44ff44);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, #44ff44, #44aa44);
+            transition: width 0.5s ease-out, background 0.3s;
+            border-radius: 13px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hp-fill.low {
+            background: linear-gradient(90deg, #ff4444, #aa4444);
+            animation: hp-flash 0.5s ease-in-out 3;
+        }
+        .hp-fill.medium {
+            background: linear-gradient(90deg, #ffff44, #aaaa44);
+        }
+        @keyframes hp-flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .hp-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 3px black;
+            z-index: 1;
+        }
+        .info {
+            font-size: 16px;
+            color: #aaa;
+            text-align: center;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
         }
         button {
-            padding: 10px 20px;
+            padding: 15px 25px;
             font-size: 16px;
-            margin: 5px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
-            background: #0f3460;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #0f3460, #16213e);
             color: white;
+            border: 2px solid #e94560;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
         }
         button:hover {
-            background: #16213e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.5);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button.crit {
+            background: linear-gradient(145deg, #e94560, #c73e54);
+        }
+        button.skill {
+            background: linear-gradient(145deg, #4a90d9, #357abd);
         }
         #log {
-            width: 100%;
-            height: 200px;
-            background: #0f0f23;
-            border: 1px solid #333;
-            border-radius: 5px;
-            padding: 10px;
+            width: 90%;
+            max-width: 800px;
+            height: 250px;
+            background: rgba(15, 15, 35, 0.9);
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 30px auto;
             overflow-y: auto;
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
             font-size: 14px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
         }
-        .status {
-            margin: 10px 0;
-            padding: 10px;
-            background: #16213e;
-            border-radius: 5px;
+        #log div {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #e94560;
+            background: rgba(233, 69, 96, 0.1);
+        }
+        .damage-popup {
+            position: absolute;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff4444;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+            pointer-events: none;
+            animation: damage-float 1.5s ease-out forwards;
+            z-index: 100;
+        }
+        @keyframes damage-float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.3);
+            }
+        }
+        .skill-effect {
+            position: absolute;
+            font-size: 60px;
+            pointer-events: none;
+            animation: skill-pop 0.8s ease-out forwards;
+            z-index: 50;
+        }
+        @keyframes skill-pop {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>⚔️ 战斗动画测试 - 第 2 天</h1>
-    
-    <div class="status">
-        <strong>测试状态：</strong>
-        <span id="status">✅ 代码已添加，请在 Cocos Creator 中测试</span>
-    </div>
+    <h1>⚔️ 星座帝国 - 战斗动画测试</h1>
     
     <div class="test-area">
         <div class="character" id="attacker">
-            😎
+            <div>😎</div>
             <div class="hp-bar">
-                <div class="hp-fill" id="attacker-hp" style="width: 100%;"></div>
+                <div class="hp-fill" id="attacker-hp" style="width: 100%;">
+                    <span class="hp-text" id="attacker-hp-text">100%</span>
+                </div>
             </div>
-            <div>攻击方</div>
+            <div class="info">
+                <div>攻击方</div>
+                <div style="font-size: 12px;">♈ 白羊座 🔥</div>
+            </div>
         </div>
         
         <div class="character" id="defender">
-            🤖
+            <div>🤖</div>
             <div class="hp-bar">
-                <div class="hp-fill" id="defender-hp" style="width: 100%;"></div>
+                <div class="hp-fill" id="defender-hp" style="width: 100%;">
+                    <span class="hp-text" id="defender-hp-text">100%</span>
+                </div>
             </div>
-            <div>防御方</div>
+            <div class="info">
+                <div>防御方</div>
+                <div style="font-size: 12px;">♌ 狮子座 🔥</div>
+            </div>
         </div>
     </div>
     
-    <div>
+    <div class="controls">
         <button onclick="testAttack()">⚔️ 普通攻击</button>
-        <button onclick="testFireSkill()">🔥 火系技能</button>
-        <button onclick="testCrit()">💥 暴击测试</button>
+        <button class="skill" onclick="testFireSkill()">🔥 火系技能</button>
+        <button class="skill" onclick="testWaterSkill()">💧 水系技能</button>
+        <button class="crit" onclick="testCrit()">💥 暴击测试</button>
         <button onclick="testDodge()">💨 闪避测试</button>
+        <button onclick="testCombo()">🎬 连招演示</button>
         <button onclick="resetTest()">🔄 重置</button>
     </div>
     
-    <h3>战斗日志：</h3>
+    <h3 style="text-align: center; color: #ffd700;">📜 战斗日志</h3>
     <div id="log"></div>
-    
-    <h3>📋 第 2 天任务清单：</h3>
-    <ul>
-        <li>✅ 复制攻击动画代码到 BattleSceneController.ts</li>
-        <li>✅ 复制伤害飘字代码到 BattleUI.ts</li>
-        <li>✅ 复制受击震动代码</li>
-        <li>⏳ 在 Cocos Creator 中测试</li>
-        <li>⏳ 提交代码</li>
-    </ul>
     
     <script>
         let attackerHP = 100;
         let defenderHP = 100;
+        let attackerMaxHP = 100;
+        let defenderMaxHP = 100;
         
         function log(message) {
             const logDiv = document.getElementById('log');
-            logDiv.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${message}</div>`;
+            const time = new Date().toLocaleTimeString('zh-CN');
+            logDiv.innerHTML += `<div>[${time}] ${message}</div>`;
             logDiv.scrollTop = logDiv.scrollHeight;
         }
         
-        function updateHP() {
-            document.getElementById('attacker-hp').style.width = attackerHP + '%';
-            document.getElementById('defender-hp').style.width = defenderHP + '%';
+        function updateHP(type, percent) {
+            const hp = type === 'attacker' ? attackerHP : defenderHP;
+            const maxHP = type === 'attacker' ? attackerMaxHP : defenderMaxHP;
+            const hpBar = document.getElementById(`${type}-hp`);
+            const hpText = document.getElementById(`${type}-hp-text`);
+            
+            hpBar.style.width = percent + '%';
+            hpText.textContent = `${hp}/${maxHP} (${percent}%)`;
+            
+            // 根据血量改变颜色
+            hpBar.classList.remove('low', 'medium');
+            if (percent < 30) {
+                hpBar.classList.add('low');
+            } else if (percent < 50) {
+                hpBar.classList.add('medium');
+            }
+        }
+        
+        function showDamagePopup(target, damage, isCrit) {
+            const targetEl = document.getElementById(target);
+            const rect = targetEl.getBoundingClientRect();
+            
+            const popup = document.createElement('div');
+            popup.className = 'damage-popup';
+            popup.textContent = isCrit ? `💥${damage}!` : `-${damage}`;
+            popup.style.left = (rect.left + rect.width / 2) + 'px';
+            popup.style.top = (rect.top + 50) + 'px';
+            popup.style.color = isCrit ? '#ff4444' : '#ffffff';
+            popup.style.fontSize = isCrit ? '48px' : '32px';
+            
+            document.body.appendChild(popup);
+            
+            setTimeout(() => popup.remove(), 1500);
+        }
+        
+        function showSkillEffect(emoji, x, y) {
+            const effect = document.createElement('div');
+            effect.className = 'skill-effect';
+            effect.textContent = emoji;
+            effect.style.left = x + 'px';
+            effect.style.top = y + 'px';
+            document.body.appendChild(effect);
+            setTimeout(() => effect.remove(), 800);
         }
         
         function testAttack() {
-            log('开始普通攻击动画...');
+            log('⚔️ 开始普通攻击动画...');
+            const attacker = document.getElementById('attacker');
+            const defender = document.getElementById('defender');
+            
+            // 前摇（蓄力）
+            attacker.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                attacker.style.transform = 'scale(1.0)';
+            }, 100);
+            
+            // 冲锋
+            setTimeout(() => {
+                attacker.classList.add('attacking');
+                showSkillEffect('⚔️', window.innerWidth / 2, window.innerHeight / 2 - 50);
+            }, 300);
+            
+            // 受击
+            setTimeout(() => {
+                attacker.classList.remove('attacking');
+                defender.classList.add('hit');
+                const damage = Math.floor(Math.random() * 10) + 10;
+                defenderHP = Math.max(0, defenderHP - damage);
+                updateHP('defender', defenderHP);
+                showDamagePopup('defender', damage, false);
+                log(`造成 ${damage} 点伤害！`);
+            }, 600);
+            
+            // 恢复
+            setTimeout(() => {
+                defender.classList.remove('hit');
+                log('攻击动画完成！');
+            }, 1000);
+        }
+        
+        function testFireSkill() {
+            log('🔥 火系技能！');
             const attacker = document.getElementById('attacker');
             const defender = document.getElementById('defender');
             
@@ -145,62 +342,101 @@
                 attacker.style.transform = 'scale(1.0)';
             }, 100);
             
-            // 冲锋
+            // 技能特效
             setTimeout(() => {
-                attacker.style.transform = 'translateX(100px)';
-            }, 300);
+                showSkillEffect('🔥🔥🔥', window.innerWidth / 2, window.innerHeight / 2 - 50);
+                defender.classList.add('hit');
+                const damage = Math.floor(Math.random() * 15) + 20;
+                defenderHP = Math.max(0, defenderHP - damage);
+                updateHP('defender', defenderHP);
+                showDamagePopup('defender', damage, false);
+                log(`🔥 火系技能造成 ${damage} 点伤害！`);
+            }, 400);
             
-            // 受击
             setTimeout(() => {
-                defender.style.transform = 'translateX(-10px)';
-                setTimeout(() => {
-                    defender.style.transform = 'translateX(10px)';
-                    setTimeout(() => {
-                        defender.style.transform = 'translateX(-10px)';
-                        setTimeout(() => {
-                            defender.style.transform = 'translateX(0)';
-                            defenderHP -= 10;
-                            updateHP();
-                            log('造成 10 点伤害！');
-                        }, 50);
-                    }, 50);
-                }, 50);
-            }, 500);
-            
-            // 返回
-            setTimeout(() => {
-                attacker.style.transform = 'translateX(0)';
-                log('攻击动画完成！');
+                defender.classList.remove('hit');
             }, 800);
         }
         
-        function testFireSkill() {
-            log('🔥 火系技能！');
-            testAttack();
+        function testWaterSkill() {
+            log('💧 水系技能！');
+            const defender = document.getElementById('defender');
+            
+            setTimeout(() => {
+                showSkillEffect('💧💧💧', window.innerWidth / 2, window.innerHeight / 2 - 50);
+                defender.classList.add('hit');
+                const damage = Math.floor(Math.random() * 12) + 15;
+                defenderHP = Math.max(0, defenderHP - damage);
+                updateHP('defender', defenderHP);
+                showDamagePopup('defender', damage, false);
+                log(`💧 水系技能造成 ${damage} 点伤害！`);
+            }, 200);
+            
+            setTimeout(() => {
+                defender.classList.remove('hit');
+            }, 600);
         }
         
         function testCrit() {
             log('💥 暴击测试！');
-            defenderHP -= 25;
-            updateHP();
-            log('暴击！造成 25 点伤害！');
+            const defender = document.getElementById('defender');
+            
+            defender.classList.add('hit');
+            const damage = Math.floor(Math.random() * 20) + 30;
+            defenderHP = Math.max(0, defenderHP - damage);
+            updateHP('defender', defenderHP);
+            showDamagePopup('defender', damage, true);
+            log(`💥 暴击！造成 ${damage} 点伤害！`);
+            
+            setTimeout(() => {
+                defender.classList.remove('hit');
+            }, 500);
         }
         
         function testDodge() {
             log('💨 闪避！');
-            log('攻击未命中！');
+            const defender = document.getElementById('defender');
+            
+            defender.style.transform = 'translateX(30px)';
+            setTimeout(() => {
+                defender.style.transform = 'translateX(0)';
+            }, 200);
+            
+            showSkillEffect('💨', window.innerWidth / 2 + 100, window.innerHeight / 2 - 50);
+            log('💨 攻击被闪避！');
+        }
+        
+        function testCombo() {
+            log('🎬 开始连招演示...');
+            let combo = 0;
+            
+            const interval = setInterval(() => {
+                combo++;
+                if (combo === 1) {
+                    testAttack();
+                } else if (combo === 2) {
+                    testFireSkill();
+                } else if (combo === 3) {
+                    testCrit();
+                } else {
+                    clearInterval(interval);
+                    log('🎬 连招演示结束！');
+                }
+            }, 1500);
         }
         
         function resetTest() {
             attackerHP = 100;
             defenderHP = 100;
-            updateHP();
+            updateHP('attacker', attackerHP);
+            updateHP('defender', defenderHP);
             document.getElementById('log').innerHTML = '';
-            log('测试已重置');
+            log('🔄 测试已重置');
         }
         
-        log('测试页面已加载，点击按钮测试动画！');
-        log('📝 注意：完整动画需要在 Cocos Creator 中运行');
+        // 初始化
+        log('⚔️ 战斗动画测试页面已加载！');
+        log('💡 点击按钮测试各种动画效果');
     </script>
 </body>
 </html>
